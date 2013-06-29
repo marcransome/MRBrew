@@ -1,0 +1,193 @@
+//
+//  MRBrew.m
+//  MRBrew
+//
+//  Copyright (c) 2013 Marc Ransome <marc.ransome@fidgetbox.co.uk>
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to
+//  deal in the Software without restriction, including without limitation the
+//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+//  DEALINGS IN THE SOFTWARE.
+//
+
+#import "MRBrew.h"
+#import "MRBrewDelegate.h"
+#import "MRBrewOperation.h"
+#import "MRBrewFormula.h"
+
+extern NSString* const MRBrewOperationUpdateIdentifier;
+extern NSString* const MRBrewOperationListIdentifier;
+extern NSString* const MRBrewOperationSearchIdentifier;
+extern NSString* const MRBrewOperationInstallIdentifier;
+extern NSString* const MRBrewOperationInfoIdentifier;
+extern NSString* const MRBrewOperationRemoveIdentifier;
+extern NSString* const MRBrewOperationOptionsIdentifier;
+
+static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
+static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
+static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
+static NSMutableArray *taskQueue;
+
+@implementation MRBrew
+
++ (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
+{    
+    if (!taskQueue) {
+        taskQueue = [NSMutableArray array];
+    }
+
+    // construct command-line arguments for brew command
+    NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation operation]];
+    if ([operation parameters])
+        [arguments addObjectsFromArray:[operation parameters]];
+    if ([operation formula])
+        [arguments addObject:[[operation formula] name]];
+    
+    NSString *command = [NSString string];
+    for (NSString *argument in arguments) {
+        command = [command stringByAppendingFormat:@"%@ ", argument];
+    }
+    
+    // add a new task to the task queue
+    NSTask *currentTask = [[NSTask alloc] init];
+    NSMutableDictionary *taskWithOperation = [NSMutableDictionary dictionary];
+    [taskWithOperation setObject:currentTask forKey:MRBrewTaskIdentifier];
+    [taskWithOperation setObject:operation forKey:MRBrewOperationIdentifier];
+    [taskQueue addObject:taskWithOperation];
+    
+    // create a file handle for extracting task output
+    NSPipe *outputPipe = [NSPipe pipe];
+    NSFileHandle *readHandle = [outputPipe fileHandleForReading];
+    
+    // configure and launch a brew task instance
+    [currentTask setLaunchPath:@"/usr/local/bin/brew"];
+    [currentTask setArguments:arguments];
+    [currentTask setStandardOutput:outputPipe];
+    [currentTask launch];
+    
+    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
+    [backgroundQueue addOperationWithBlock:^{        
+        NSData *readData;
+        
+        if ([[operation operation] isEqualToString:MRBrewOperationInstallIdentifier]) {
+            // delegate callback for line output from brew
+            if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
+                while ((readData = [readHandle availableData]) && [readData length] > 0) {
+                    NSString *output = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
+                    if (![output isEqualToString:@"\n"]) {                    
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            [delegate brewOperation:operation didGenerateOutput:output];
+                        }];
+                    }
+                }
+            }
+
+            [currentTask waitUntilExit];
+        }
+        else {
+            NSData *data = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+            NSString *stringOutput = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            [currentTask waitUntilExit];
+            
+            if ([stringOutput length] > 0 && ![stringOutput isEqualToString:@"\n"]) {
+                    if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        [delegate brewOperation:operation didGenerateOutput:stringOutput];
+                    }];
+                }
+            }
+        }
+        
+        if ([currentTask terminationStatus] == 0)
+        {
+            if ([delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [delegate brewOperationDidFinish:operation];
+                }];
+            }
+        }
+        else {
+            NSInteger errorCode = [currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown;
+            NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
+            
+            if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [delegate brewOperation:operation didFailWithError:error];
+                }];
+            }
+        }
+        
+        [taskQueue removeObject:taskWithOperation];
+    }];
+}
+
++ (void)cancelAllOperations
+{
+    if ([taskQueue count] > 0) {
+        for (NSDictionary *task in taskQueue) {
+            [[task objectForKey:MRBrewTaskIdentifier] interrupt];
+        }
+    }
+}
+
++ (void)cancelOperation:(MRBrewOperation *)operation
+{
+    if ([taskQueue count] > 0) {
+        for (NSDictionary *task in taskQueue) {
+            if ([[task objectForKey:MRBrewOperationIdentifier] isEqualTo:operation]) {
+                [[task objectForKey:MRBrewTaskIdentifier] interrupt];
+            }
+        }
+    }
+}
+
++ (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType
+{
+    if ([taskQueue count] > 0) {   
+        NSString *operationString;
+        switch (operationType) {
+            case MRBrewOperationInfo:
+                operationString = MRBrewOperationInfoIdentifier;
+                break;
+            case MRBrewOperationList:
+                operationString = MRBrewOperationListIdentifier;
+                break;
+            case MRBrewOperationInstall:
+                operationString = MRBrewOperationInstallIdentifier;
+                break;
+            case MRBrewOperationOptions:
+                operationString = MRBrewOperationOptionsIdentifier;
+                break;
+            case MRBrewOperationRemove:
+                operationString = MRBrewOperationRemoveIdentifier;
+                break;
+            case MRBrewOperationSearch:
+                operationString = MRBrewOperationSearchIdentifier;
+                break;
+            case MRBrewOperationUpdate:
+                operationString = MRBrewOperationUpdateIdentifier;
+                break;
+        }
+        
+        for (NSDictionary *task in taskQueue) {
+            if ([[[task objectForKey:MRBrewOperationIdentifier] operation] isEqualToString: operationString])
+            [[task objectForKey:MRBrewTaskIdentifier] interrupt];
+        }
+    }
+}
+
+@end
