@@ -21,7 +21,7 @@ Then install the dependency into your project:
 `$ pod install`
 
 ##Prerequisites
-`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path (/usr/local/bin/brew).
+`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path `/usr/local/bin/brew`.
 
 ##General Usage
 To perform a Homebrew operation, pass an instance of `MRBrewOperation` to the `MRBrew` class method `performOperation:delegate:`.  The `MRBrewOperation` class provides a number of convenience methods for creating instances that represent common Homebrew operations:
