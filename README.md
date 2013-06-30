@@ -56,7 +56,7 @@ Each call to `performOperation:delegate:` spawns a subprocess that won't interru
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output;
 ```
 
-Now, whenver you perform an operation by calling `performOperation:delegate:`, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or produced output:
+Now, whenever you perform an operation by calling `performOperation:delegate:`, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or produced output:
 
 ```objc
 [MRBrew performOperation:[MRBrewOperation updateOperation] delegate:controllerObject];
@@ -77,6 +77,9 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
 }
 ```
 The constants referenced in the above snippet are part of the `MRBrewOperationType` enumerated type (see `MRBrewOperation.h`) and can be used to determine the type of operation received by your delegate methods.
+
+##Advanced
+Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/1.0.0/) for additional documentation, or alternatively inspect the header files directly.
 
 ##Caveats
 Please note that the source code uses ARC (Automatic Reference Counting) and has only been tested against 10.7 and 10.8 deployment targets.
