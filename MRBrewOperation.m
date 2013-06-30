@@ -109,6 +109,11 @@ NSString* const MRBrewOperationOptionsIdentifier = @"options";
     return [[self alloc] initWithOperation:MRBrewOperationSearch formula:nil parameters:nil];
 }
 
++ (id)searchOperation:(MRBrewFormula *)formula
+{
+    return [[self alloc] initWithOperation:MRBrewOperationSearch formula:formula parameters:nil];
+}
+
 + (id)installOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithOperation:MRBrewOperationInstall formula:formula parameters:nil];
