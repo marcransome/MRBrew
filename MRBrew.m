@@ -148,7 +148,7 @@ static NSMutableArray *taskQueue;
 {
     if ([taskQueue count] > 0) {
         for (NSDictionary *task in taskQueue) {
-            if ([[task objectForKey:MRBrewOperationIdentifier] isEqualTo:operation]) {
+            if ([[task objectForKey:MRBrewOperationIdentifier] isEqual:operation]) {
                 [[task objectForKey:MRBrewTaskIdentifier] interrupt];
             }
         }
