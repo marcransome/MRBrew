@@ -78,6 +78,14 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
 ```
 The constants referenced in the above snippet are part of the `MRBrewOperationType` enumerated type (see `MRBrewOperation.h`) and can be used to determine the type of operation received by your delegate methods.
 
+Operations can be cancelled using one of the following `MRBrew` class methods:
+
+```objc
++ (void)cancelAllOperations;
++ (void)cancelOperation:(MRBrewOperation *)operation;
++ (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
+```
+
 ##Advanced
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/1.0.0/) for additional documentation, or alternatively inspect the header files directly.
 
