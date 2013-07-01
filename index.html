@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>MRBrew by marcransome</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/marcransome/MRBrew">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>MRBrew</h1>
+            <h2>An Objective-C wrapper library for the Homebrew package manager.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/marcransome/MRBrew/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/marcransome/MRBrew/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h2>
+<a name="mrbrew" class="anchor" href="#mrbrew"><span class="octicon octicon-link"></span></a>MRBrew</h2>
+
+<p>MRBrew is a simple Objective-C wrapper library for the <a href="http://mxcl.github.io/homebrew/">Homebrew</a> package manager.  It makes performing Homebrew operations from your apps a breeze:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">installOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"emacs"</span><span class="p">]]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+</pre></div>
+
+<p>Now you have a powerful text editor installed. ;)</p>
+
+<h2>
+<a name="project-integration" class="anchor" href="#project-integration"><span class="octicon octicon-link"></span></a>Project integration</h2>
+
+<p>MRBrew can be integrated into an existing project using <a href="http://cocoapods.org">CocoaPods</a>. Simply add the necessary dependency to your <code>Podfile</code> as follows:</p>
+
+<div class="highlight"><pre><span class="n">platform</span> <span class="ss">:osx</span><span class="p">,</span> <span class="s1">'10.7'</span>
+<span class="n">pod</span> <span class="s1">'MRBrew'</span>
+<span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</pre></div>
+
+<p>Then install the dependency into your project:</p>
+
+<p><code>$ pod install</code></p>
+
+<h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p><code>MRBrew</code> depends on Homebrew for the heavy lifting, and assumes the default installation path of <code>/usr/local/bin/brew</code>.  If you don't already have Homebrew installed, follow the <a href="http://mxcl.github.io/homebrew/">official instructions</a> to get setup.</p>
+
+<h2>
+<a name="general-usage" class="anchor" href="#general-usage"><span class="octicon octicon-link"></span></a>General Usage</h2>
+
+<p>To perform a Homebrew operation, pass an instance of <code>MRBrewOperation</code> to the <code>MRBrew</code> class method <code>performOperation:delegate:</code>.  The <code>MRBrewOperation</code> class provides a number of convenience methods for creating instances that represent common Homebrew operations:</p>
+
+<div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">updateOperation</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">listOperation</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">searchOperation</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">installOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">infoOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">removeOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">optionsOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
+</pre></div>
+
+<p>For example, the following code would perform a Homebrew update operation:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
+</pre></div>
+
+<p>Homebrew operations that involve a specific formula require an instance of <code>MRBrewFormula</code>, which is just as easy to create:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"appledoc"</span><span class="p">]</span>
+</pre></div>
+
+<p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following methods:</p>
+
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperationDidFinish:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didFailWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span><span class="p">;</span>
+</pre></div>
+
+<p>Now, whenever you perform an operation by calling <code>performOperation:delegate:</code>, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or produced output:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">controllerObject</span><span class="p">];</span>
+</pre></div>
+
+<p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to react:</p>
+
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationUpdateIdentifier</span><span class="p">])</span> <span class="p">{</span>
+        <span class="c1">// an update operation produced output</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationInstallIdentifier</span><span class="p">])</span> <span class="p">{</span>
+        <span class="c1">// an install operation produced output</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>The constants referenced in the above snippet are part of the <code>MRBrewOperationType</code> enumerated type (see <code>MRBrewOperation.h</code>) and can be used to determine the type of operation received by your delegate methods.</p>
+
+<p>Operations can be cancelled using one of the following <code>MRBrew</code> class methods:</p>
+
+<div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">cancelAllOperations</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">cancelOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">cancelAllOperationsOfType:</span><span class="p">(</span><span class="n">MRBrewOperationType</span><span class="p">)</span><span class="nv">operationType</span><span class="p">;</span>
+</pre></div>
+
+<h2>
+<a name="advanced" class="anchor" href="#advanced"><span class="octicon octicon-link"></span></a>Advanced</h2>
+
+<p>Visit <a href="http://cocoadocs.org/docsets/MRBrew/1.0.0/">CocoaDocs</a> for additional documentation, or alternatively inspect the header files directly.</p>
+
+<h2>
+<a name="caveats" class="anchor" href="#caveats"><span class="octicon octicon-link"></span></a>Caveats</h2>
+
+<p>Please note that the source code uses ARC (Automatic Reference Counting) and has only been tested against 10.7 and 10.8 deployment targets.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><code>MRBrew</code> is provided under the terms of the <a href="http://opensource.org/licenses/mit-license.php">MIT License</a>.</p>
+
+<h2>
+<a name="comments-or-suggestions" class="anchor" href="#comments-or-suggestions"><span class="octicon octicon-link"></span></a>Comments or suggestions?</h2>
+
+<p>Email me at <a href="mailto://marc.ransome@fidgetbox.co.uk">marc.ransome@fidgetbox.co.uk</a> with bugs, feature requests or general comments and follow <a href="http://www.twitter.com/marcransome">@marcransome</a> for updates.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/marcransome">marcransome</a> can be found on <a href="https://github.com/marcransome/MRBrew">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31478860-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
