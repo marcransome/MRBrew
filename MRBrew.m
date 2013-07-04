@@ -39,16 +39,20 @@ extern NSString* const MRBrewOperationOptionsIdentifier;
 static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
 static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
+
 static NSMutableArray *taskQueue;
+static NSOperationQueue *backgroundQueue;
 
 @implementation MRBrew
 
++ (void)initialize
+{
+    taskQueue = [[NSMutableArray alloc] init];
+    backgroundQueue = [[NSOperationQueue alloc] init];
+}
+
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    
-    if (!taskQueue) {
-        taskQueue = [NSMutableArray array];
-    }
-
     // construct command-line arguments for brew command
     NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation operation]];
     if ([operation parameters])
@@ -78,7 +82,6 @@ static NSMutableArray *taskQueue;
     [currentTask setStandardOutput:outputPipe];
     [currentTask launch];
     
-    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
     [backgroundQueue addOperationWithBlock:^{        
         NSData *readData;
         
