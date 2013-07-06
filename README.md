@@ -48,7 +48,7 @@ Homebrew operations that involve a specific formula require an instance of `MRBr
 [MRBrewFormula formulaWithName:@"appledoc"]
 ```
 
-Each call to `performOperation:delegate:` spawns a subprocess that won't interrupt processing in the rest of your app.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the `MRBrewDelegate` protocol in your controller and specifying the following methods:
+Each call to `performOperation:delegate:` spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to `performOperation:delegate:`.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the `MRBrewDelegate` protocol in your controller and specifying the following methods:
 
 ```objc
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation;
