@@ -41,6 +41,7 @@ static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
 static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
 
 static NSMutableArray *taskArray;
+static NSLock *taskArrayLock;
 static NSOperationQueue *backgroundQueue;
 
 @implementation MRBrew
@@ -48,6 +49,7 @@ static NSOperationQueue *backgroundQueue;
 + (void)initialize
 {
     taskArray = [[NSMutableArray alloc] init];
+    taskArrayLock = [[NSLock alloc] init];
     backgroundQueue = [[NSOperationQueue alloc] init];
 }
 
@@ -64,13 +66,16 @@ static NSOperationQueue *backgroundQueue;
     for (NSString *argument in arguments) {
         command = [command stringByAppendingFormat:@"%@ ", argument];
     }
-    
-    // add a new task to the task queue
+
+    // add a new task to the task array
     NSTask *currentTask = [[NSTask alloc] init];
     NSMutableDictionary *taskWithOperation = [NSMutableDictionary dictionary];
     [taskWithOperation setObject:currentTask forKey:MRBrewTaskIdentifier];
     [taskWithOperation setObject:operation forKey:MRBrewOperationIdentifier];
+    
+    [taskArrayLock lock];
     [taskArray addObject:taskWithOperation];
+    [taskArrayLock unlock];
 
     // create a file handle for extracting task output
     NSPipe *outputPipe = [NSPipe pipe];
@@ -134,21 +139,29 @@ static NSOperationQueue *backgroundQueue;
             }
         }
 
+        [taskArrayLock lock];
         [taskArray removeObject:taskWithOperation];
+        [taskArrayLock unlock];
     }];
 }
 
 + (void)cancelAllOperations
 {
+    [taskArrayLock lock];
+    
     if ([taskArray count] > 0) {
         for (NSDictionary *task in taskArray) {
             [[task objectForKey:MRBrewTaskIdentifier] interrupt];
         }
     }
+    
+    [taskArrayLock unlock];
 }
 
 + (void)cancelOperation:(MRBrewOperation *)operation
 {
+    [taskArrayLock lock];
+    
     if ([taskArray count] > 0) {
         for (NSDictionary *task in taskArray) {
             if ([[task objectForKey:MRBrewOperationIdentifier] isEqual:operation]) {
@@ -156,10 +169,14 @@ static NSOperationQueue *backgroundQueue;
             }
         }
     }
+    
+    [taskArrayLock unlock];
 }
 
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType
 {
+    [taskArrayLock lock];
+    
     if ([taskArray count] > 0) {   
         NSString *operationString;
         switch (operationType) {
@@ -191,6 +208,8 @@ static NSOperationQueue *backgroundQueue;
             [[task objectForKey:MRBrewTaskIdentifier] interrupt];
         }
     }
+    
+    [taskArrayLock unlock];
 }
 
 @end
