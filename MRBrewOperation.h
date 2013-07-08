@@ -42,7 +42,7 @@ typedef enum {
  
  Methods are provided for creating an MRBrewOperation object with an NSString representing
  the operation name as defined by homebrew (e.g. `@"search"`) or alternavitely an
- MRBrewoperationType constant:
+ MRBrewOperationType constant:
  
     typedef enum {
         MRBrewOperationUpdate,
