@@ -87,7 +87,7 @@ Operations can be cancelled using one of the following `MRBrew` class methods:
 ```
 
 ##Advanced
-Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/1.0.0/) for additional documentation, or alternatively inspect the header files directly.
+Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
 
 ##Caveats
 Please note that the source code uses ARC (Automatic Reference Counting) and has only been tested against 10.7 and 10.8 deployment targets.
