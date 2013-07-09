@@ -17,7 +17,7 @@
         $('#main_content').headsmart()
       })
     </script>
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
   </head>
 
   <body>
@@ -99,7 +99,7 @@
 <div class="highlight"><pre><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"appledoc"</span><span class="p">]</span>
 </pre></div>
 
-<p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following methods:</p>
+<p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to <code>performOperation:delegate:</code>.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following methods:</p>
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperationDidFinish:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span><span class="p">;</span>
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didFailWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span><span class="p">;</span>
@@ -137,7 +137,7 @@
 <h2>
 <a name="advanced" class="anchor" href="#advanced"><span class="octicon octicon-link"></span></a>Advanced</h2>
 
-<p>Visit <a href="http://cocoadocs.org/docsets/MRBrew/1.0.0/">CocoaDocs</a> for additional documentation, or alternatively inspect the header files directly.</p>
+<p>Visit <a href="http://cocoadocs.org/docsets/MRBrew/">CocoaDocs</a> for additional documentation, or alternatively inspect the header files directly.</p>
 
 <h2>
 <a name="caveats" class="anchor" href="#caveats"><span class="octicon octicon-link"></span></a>Caveats</h2>
