@@ -62,11 +62,6 @@ static NSOperationQueue *backgroundQueue;
     if ([operation formula])
         [arguments addObject:[[operation formula] name]];
     
-    NSString *command = [NSString string];
-    for (NSString *argument in arguments) {
-        command = [command stringByAppendingFormat:@"%@ ", argument];
-    }
-
     // add a new task to the task array
     NSTask *currentTask = [[NSTask alloc] init];
     NSMutableDictionary *taskWithOperation = [NSMutableDictionary dictionary];
