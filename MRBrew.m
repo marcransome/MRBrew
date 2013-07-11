@@ -89,7 +89,7 @@ static NSOperationQueue *backgroundQueue;
     NSFileHandle *readHandle = [outputPipe fileHandleForReading];
     
     // configure and launch a brew task instance
-    [currentTask setLaunchPath:@"/usr/local/bin/brew"];
+    [currentTask setLaunchPath:MRBrewPath];
     [currentTask setArguments:arguments];
     [currentTask setStandardOutput:outputPipe];
     [currentTask launch];
