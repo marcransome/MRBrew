@@ -41,12 +41,15 @@ declared in MRBrewError.h:
 
     enum {
         MRBrewErrorUnknown = 1,
-        MRBrewErrorCancelled = 103
+        MRBrewErrorCancelled = 103,
+        MRBrewErrorInvalidPath = 200
     }
  
 `MRBrewErrorUnknown` - An unknown error occured for which no details are available.
  
 `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt (SIGINT).
+
+`MRBrewErrorInvalidPath` - The Homebrew executable path is invalid.
 */
 @protocol MRBrewDelegate <NSObject>
 

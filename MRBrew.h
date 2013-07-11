@@ -28,7 +28,8 @@
 
 enum {
     MRBrewErrorUnknown = 1,
-    MRBrewErrorCancelled = 130
+    MRBrewErrorCancelled = 130,
+    MRBrewErrorInvalidPath = 200
 };
 
 @class MRBrewOperation;

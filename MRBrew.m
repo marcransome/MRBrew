@@ -92,9 +92,21 @@ static NSOperationQueue *backgroundQueue;
     [currentTask setLaunchPath:MRBrewPath];
     [currentTask setArguments:arguments];
     [currentTask setStandardOutput:outputPipe];
-    [currentTask launch];
     
-    [backgroundQueue addOperationWithBlock:^{        
+    @try {
+        [currentTask launch];
+    }
+    @catch (NSException *exception) {
+        NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:MRBrewErrorInvalidPath userInfo:nil];
+        if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [delegate brewOperation:operation didFailWithError:error];
+            }];
+        }
+        return;
+    }
+    
+    [backgroundQueue addOperationWithBlock:^{
         NSData *readData;
         
         if ([[operation operation] isEqualToString:MRBrewOperationInstallIdentifier]) {
