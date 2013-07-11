@@ -40,6 +40,8 @@ static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
 static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
 
+static NSString* MRBrewPath = @"/usr/local/bin/brew";
+
 static NSMutableArray *taskArray;
 static NSLock *taskArrayLock;
 static NSOperationQueue *backgroundQueue;
@@ -51,6 +53,16 @@ static NSOperationQueue *backgroundQueue;
     taskArray = [[NSMutableArray alloc] init];
     taskArrayLock = [[NSLock alloc] init];
     backgroundQueue = [[NSOperationQueue alloc] init];
+}
+
++ (NSString *)brewPath
+{
+    return MRBrewPath;
+}
+
++ (void)setBrewPath:(NSString *)path
+{
+    MRBrewPath = path;
 }
 
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate

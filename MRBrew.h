@@ -43,6 +43,20 @@ enum {
 @interface MRBrew : NSObject
 
 /**---------------------------------------------------------------------------------------
+ * @name Accessing and setting the Homebrew executable path
+ * ---------------------------------------------------------------------------------------
+ */
+
+/** Returns the absolute path to the Homebrew executable. */
++ (NSString *)brewPath;
+
+/** Sets the absolute path to the Homebrew executable.
+ *
+ * @param path The absolute path to the Homebrew executable.
+ */
++ (void)setBrewPath:(NSString *)path;
+
+/**---------------------------------------------------------------------------------------
  * @name Performing an Operation
  * ---------------------------------------------------------------------------------------
  */
