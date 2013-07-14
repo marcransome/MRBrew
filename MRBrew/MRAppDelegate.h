@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MRBrew.h"
 
-@interface MRAppDelegate : NSObject <NSApplicationDelegate>
+@interface MRAppDelegate : NSObject <NSApplicationDelegate, MRBrewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 

@@ -12,7 +12,23 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    
 }
+
+- (void)brewOperationDidFinish:(MRBrewOperation *)operation
+{
+    
+}
+
+- (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error
+{
+    
+}
+
+- (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
+{
+    
+}
+
 
 @end
