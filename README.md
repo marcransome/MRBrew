@@ -21,7 +21,7 @@ Then install the dependency into your project:
 `$ pod install`
 
 ##Prerequisites
-`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew`.  If you don't already have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get setup.
+`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified in cases where the `brew` executable resides in a different location).  If you don't already have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get setup.
 
 ##General Usage
 To perform a Homebrew operation, pass an instance of `MRBrewOperation` to the `MRBrew` class method `performOperation:delegate:`.  The `MRBrewOperation` class provides a number of convenience methods for creating instances that represent common Homebrew operations:
@@ -84,6 +84,12 @@ Operations can be cancelled using one of the following `MRBrew` class methods:
 + (void)cancelAllOperations;
 + (void)cancelOperation:(MRBrewOperation *)operation;
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
+```
+
+If the `brew` executable has been moved outside of the default `/usr/local/bin/` directory, specify its location before performing any operations:
+
+```objc
+[MRBrew setBrewPath:@"/usr/bin/brew"];
 ```
 
 ##Advanced
