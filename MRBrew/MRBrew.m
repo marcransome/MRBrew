@@ -186,6 +186,8 @@ static NSOperationQueue *backgroundQueue;
             if ([[task objectForKey:MRBrewOperationIdentifier] isEqual:operation]) {
                 [[task objectForKey:MRBrewTaskIdentifier] interrupt];
             }
+            
+            break;
         }
     }
     
