@@ -34,7 +34,8 @@ typedef enum {
     MRBrewOperationInstall,
     MRBrewOperationInfo,
     MRBrewOperationRemove,
-    MRBrewOperationOptions
+    MRBrewOperationOptions,
+    MRBrewOperationOutdated
 } MRBrewOperationType;
 
 /** The MRBrewOperation class encapsulates the arguments associated with a single homebrew
@@ -50,7 +51,9 @@ typedef enum {
         MRBrewOperationSearch,
         MRBrewOperationInstall,
         MRBrewOperationInfo,
-        MRBrewOperationRemove
+        MRBrewOperationRemove,
+        MRBrewOperationOptions,
+        MRBrewOperationOutdated
     } MRBrewOperationType;
  
  Once an operation object has been created its operation property returns an NSString
@@ -167,5 +170,8 @@ typedef enum {
  * @param formula The formula.
  */
 + (id)optionsOperation:(MRBrewFormula *)formula;
+
+/* Returns an outdated operation. */
++ (id)outdatedOperation;
 
 @end

@@ -35,6 +35,7 @@ extern NSString* const MRBrewOperationInstallIdentifier;
 extern NSString* const MRBrewOperationInfoIdentifier;
 extern NSString* const MRBrewOperationRemoveIdentifier;
 extern NSString* const MRBrewOperationOptionsIdentifier;
+extern NSString* const MRBrewOperationOutdatedIdentifier;
 
 static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
@@ -221,6 +222,9 @@ static NSOperationQueue *backgroundQueue;
                 break;
             case MRBrewOperationUpdate:
                 operationString = MRBrewOperationUpdateIdentifier;
+                break;
+            case MRBrewOperationOutdated:
+                operationString = MRBrewOperationOutdatedIdentifier;
                 break;
         }
 

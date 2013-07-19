@@ -33,6 +33,7 @@ NSString* const MRBrewOperationInstallIdentifier = @"install";
 NSString* const MRBrewOperationInfoIdentifier = @"info";
 NSString* const MRBrewOperationRemoveIdentifier = @"remove";
 NSString* const MRBrewOperationOptionsIdentifier = @"options";
+NSString* const MRBrewOperationOutdatedIdentifier = @"outdated";
 
 @implementation MRBrewOperation
 
@@ -62,6 +63,9 @@ NSString* const MRBrewOperationOptionsIdentifier = @"options";
                 break;
             case MRBrewOperationOptions:
                 _operation = MRBrewOperationOptionsIdentifier;
+                break;
+            case MRBrewOperationOutdated:
+                _operation = MRBrewOperationOutdatedIdentifier;
                 break;
         }
         _formula = formula;
@@ -132,6 +136,11 @@ NSString* const MRBrewOperationOptionsIdentifier = @"options";
 + (id)optionsOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithOperation:MRBrewOperationOptions formula:formula parameters:nil];
+}
+
++ (id)outdatedOperation
+{
+    return [[self alloc] initWithOperation:MRBrewOperationOutdated formula:nil parameters:nil];
 }
 
 @end
