@@ -76,7 +76,7 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
     ...
 }
 ```
-The constants referenced in the above snippet are part of the `MRBrewOperationType` enumerated type (see `MRBrewOperation.h`) and can be used to determine the type of operation received by your delegate methods.
+The constants referenced in the above snippet can be found in the `MRBrewConstants.h` header file and used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.
 
 Operations can be cancelled using one of the following `MRBrew` class methods:
 
