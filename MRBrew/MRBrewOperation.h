@@ -87,7 +87,7 @@ typedef enum {
  * @param operation The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional dictionary containing parameters to the operation.
+ * @param parameters An optional array of NSStrings containing parameters to the operation.
  * Specify `nil` if no additional parameters are required or accepted for the operation type
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
@@ -99,7 +99,7 @@ typedef enum {
  * @param operation The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional dictionary containing parameters to the operation.
+ * @param parameters An optional array of NSStrings containing parameters to the operation.
  * Specify `nil` if no additional parameters are required or accepted for the operation type
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
@@ -116,7 +116,7 @@ typedef enum {
  * @param operation The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional dictionary containing parameters to the operation.
+ * @param parameters An optional array of NSStrings containing parameters to the operation.
  * Specify `nil` if no additional parameters are required or accepted for the operation type
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
@@ -128,7 +128,7 @@ typedef enum {
  * @param operation The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional dictionary containing parameters to the operation.
+ * @param parameters An optional array of NSStrings containing parameters to the operation.
  * Specify `nil` if no additional parameters are required or accepted for the operation type
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
