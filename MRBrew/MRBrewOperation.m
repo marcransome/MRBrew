@@ -25,15 +25,7 @@
 
 #import "MRBrewOperation.h"
 #import "MRBrewFormula.h"
-
-NSString* const MRBrewOperationUpdateIdentifier = @"update";
-NSString* const MRBrewOperationListIdentifier = @"list";
-NSString* const MRBrewOperationSearchIdentifier = @"search";
-NSString* const MRBrewOperationInstallIdentifier = @"install";
-NSString* const MRBrewOperationInfoIdentifier = @"info";
-NSString* const MRBrewOperationRemoveIdentifier = @"remove";
-NSString* const MRBrewOperationOptionsIdentifier = @"options";
-NSString* const MRBrewOperationOutdatedIdentifier = @"outdated";
+#import "MRBrewConstants.h"
 
 @implementation MRBrewOperation
 

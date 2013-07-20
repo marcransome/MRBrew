@@ -17,6 +17,7 @@
 		19453D8917901C3700064BC7 /* MRBrewFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8317901C3700064BC7 /* MRBrewFormula.m */; };
 		19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8517901C3700064BC7 /* MRBrewInstallOption.m */; };
 		19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
+		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		19453D8517901C3700064BC7 /* MRBrewInstallOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewInstallOption.m; sourceTree = "<group>"; };
 		19453D8617901C3700064BC7 /* MRBrewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOperation.h; sourceTree = "<group>"; };
 		19453D8717901C3700064BC7 /* MRBrewOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperation.m; sourceTree = "<group>"; };
+		195EE912179A37A800CB1B04 /* MRBrewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewConstants.h; sourceTree = "<group>"; };
+		195EE913179A37A800CB1B04 /* MRBrewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				19453D8717901C3700064BC7 /* MRBrewOperation.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
+				195EE912179A37A800CB1B04 /* MRBrewConstants.h */,
+				195EE913179A37A800CB1B04 /* MRBrewConstants.m */,
 			);
 			path = MRBrew;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				19453D8917901C3700064BC7 /* MRBrewFormula.m in Sources */,
 				19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */,
 				19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */,
+				195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

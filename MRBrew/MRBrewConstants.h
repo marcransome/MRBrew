@@ -1,5 +1,5 @@
 //
-//  MRAppDelegate.m
+//  MRBrewConstants.h
 //  MRBrew
 //
 //  Copyright (c) 2013 Marc Ransome <marc.ransome@fidgetbox.co.uk>
@@ -23,30 +23,14 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import "MRAppDelegate.h"
-#import "MRBrewConstants.h"
+#import <Foundation/Foundation.h>
 
-@implementation MRAppDelegate
+extern NSString* const MRBrewOperationUpdateIdentifier;
+extern NSString* const MRBrewOperationListIdentifier;
+extern NSString* const MRBrewOperationSearchIdentifier;
+extern NSString* const MRBrewOperationInstallIdentifier;
+extern NSString* const MRBrewOperationInfoIdentifier;
+extern NSString* const MRBrewOperationRemoveIdentifier;
+extern NSString* const MRBrewOperationOptionsIdentifier;
+extern NSString* const MRBrewOperationOutdatedIdentifier;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    
-}
-
-- (void)brewOperationDidFinish:(MRBrewOperation *)operation
-{
-    // Use this method to respond to an operation completing successfully.
-}
-
-- (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error
-{
-    // Test the error code against the anonymous enums MRBrewErrorUnknown, MRBrewErrorCancelled and MRBrewErrorInvalidPath and respond accordingly.
-}
-
-- (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
-{
-    // Called when an operation generates output.  In the case of MRBrewOperationInstall operations this method may be called several times during the lifetime of the operation.
-}
-
-
-@end

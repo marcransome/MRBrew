@@ -27,15 +27,7 @@
 #import "MRBrewDelegate.h"
 #import "MRBrewOperation.h"
 #import "MRBrewFormula.h"
-
-extern NSString* const MRBrewOperationUpdateIdentifier;
-extern NSString* const MRBrewOperationListIdentifier;
-extern NSString* const MRBrewOperationSearchIdentifier;
-extern NSString* const MRBrewOperationInstallIdentifier;
-extern NSString* const MRBrewOperationInfoIdentifier;
-extern NSString* const MRBrewOperationRemoveIdentifier;
-extern NSString* const MRBrewOperationOptionsIdentifier;
-extern NSString* const MRBrewOperationOutdatedIdentifier;
+#import "MRBrewConstants.h"
 
 static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";

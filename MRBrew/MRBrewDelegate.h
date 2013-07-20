@@ -50,6 +50,10 @@ declared in MRBrewError.h:
 `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt (SIGINT).
 
 `MRBrewErrorInvalidPath` - The Homebrew executable path is invalid.
+ 
+In all three methods, the MRBrewOperation object's operation property can be compared to the
+constants defined in MRBrewConstants.h to determine the type of operation that initiated
+the method call.
 */
 @protocol MRBrewDelegate <NSObject>
 
