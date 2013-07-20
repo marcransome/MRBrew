@@ -26,7 +26,7 @@
 #import <Cocoa/Cocoa.h>
 
 /** An MRBrewFormula object represents a formula in the Homebrew package manager. */
-@interface MRBrewFormula : NSObject
+@interface MRBrewFormula : NSObject <NSCopying>
 
 /** The name of the formula. */
 @property (strong) NSString *name;
@@ -79,5 +79,7 @@
  * @return A formula with the specified name and status.
  */
 + (id)formulaWithName:(NSString *)name newFormula:(BOOL)newFlag;
+
+- (id)copyWithZone:(NSZone *)zone;
 
 @end

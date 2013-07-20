@@ -66,4 +66,15 @@
     return [[self alloc] initWithName:name newFormula:newFlag];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    MRBrewFormula *copy = [[MRBrewFormula alloc] init];
+    [copy setName:[[self name] copy]];
+    [copy setUpdated:[self updated]];
+    [copy setNewFormula:[self newFormula]];
+    [copy setInstalled:[self installed]];
+    
+    return copy;
+}
+
 @end
