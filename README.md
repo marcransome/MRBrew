@@ -62,7 +62,7 @@ Now, whenever you perform an operation by calling `performOperation:delegate:`, 
 [MRBrew performOperation:[MRBrewOperation updateOperation] delegate:controllerObject];
 ```
 
-If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the `MRBrewOperation` object in your delegate methods to determine how to react:
+If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the `MRBrewOperation` object in your delegate methods to determine how to respond:
 
 ```objc
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
