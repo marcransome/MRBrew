@@ -60,7 +60,7 @@
                 _operation = MRBrewOperationOutdatedIdentifier;
                 break;
         }
-        _formula = formula;
+        _formula = [formula copy];
         _parameters = [parameters copy];
     }
     
@@ -73,7 +73,7 @@
 {
     if (self = [super init]) {
         _operation = [operation copy];
-        _formula = formula;
+        _formula = [formula copy];
         _parameters = [parameters copy];
     }
     
