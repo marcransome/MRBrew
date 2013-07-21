@@ -95,9 +95,9 @@ The constants referenced in the above snippet can be found in the `MRBrewConstan
 If you are performing custom operations that do not already have a constant defined, simply provide your own:
 
 ```objc
-    if ([[operation operation] isEqualToString:@"cat"]) {
-        // a cat operation produced output
-    }
+if ([[operation operation] isEqualToString:@"cat"]) {
+    // a cat operation produced output
+}
 ```
 
 ####Cancelling operations
