@@ -147,7 +147,10 @@ typedef enum {
 /** Returns a search operation. */
 + (id)searchOperation;
 
-/** Returns a search operation with the specified formula. */
+/** Returns a search operation with the specified formula.
+ *
+ * @param formula The formula.
+ */
 + (id)searchOperation:(MRBrewFormula *)formula;
 
 /** Returns an install operation with the specified formula.
