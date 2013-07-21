@@ -41,16 +41,13 @@ declared in MRBrewError.h:
 
     enum {
         MRBrewErrorUnknown = 1,
-        MRBrewErrorCancelled = 103,
-        MRBrewErrorInvalidPath = 200
+        MRBrewErrorCancelled = 103
     }
  
 `MRBrewErrorUnknown` - An unknown error occured for which no details are available.
  
 `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt (SIGINT).
 
-`MRBrewErrorInvalidPath` - The Homebrew executable path is invalid.
- 
 In all three methods, the MRBrewOperation object's operation property can be compared to the
 constants defined in MRBrewConstants.h to determine the type of operation that initiated
 the method call.

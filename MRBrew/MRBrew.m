@@ -55,7 +55,10 @@ static NSOperationQueue *backgroundQueue;
 
 + (void)setBrewPath:(NSString *)path
 {
-    MRBrewPath = path;
+    if (path)
+        MRBrewPath = path;
+    else
+        MRBrewPath = @"/usr/local/bin/brew";
 }
 
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
@@ -86,18 +89,7 @@ static NSOperationQueue *backgroundQueue;
     [currentTask setArguments:arguments];
     [currentTask setStandardOutput:outputPipe];
     
-    @try {
-        [currentTask launch];
-    }
-    @catch (NSException *exception) {
-        NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:MRBrewErrorInvalidPath userInfo:nil];
-        if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [delegate brewOperation:operation didFailWithError:error];
-            }];
-        }
-        return;
-    }
+    [currentTask launch];
     
     [backgroundQueue addOperationWithBlock:^{
         NSData *readData;

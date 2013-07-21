@@ -28,8 +28,7 @@
 
 enum {
     MRBrewErrorUnknown = 1,
-    MRBrewErrorCancelled = 130,
-    MRBrewErrorInvalidPath = 200
+    MRBrewErrorCancelled = 130
 };
 
 @class MRBrewOperation;
@@ -53,7 +52,8 @@ enum {
 
 /** Sets the absolute path to the Homebrew executable.
  *
- * @param path The absolute path to the Homebrew executable.
+ * @param path The absolute path to the Homebrew executable, or /usr/local/bin/brew
+ * if nil.
  */
 + (void)setBrewPath:(NSString *)path;
 
