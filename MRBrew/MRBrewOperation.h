@@ -180,4 +180,11 @@ typedef enum {
 /* Returns an outdated operation. */
 + (id)outdatedOperation;
 
+/** Compares the receiver to another operation.
+ *
+ * @param operation The operation with which to compare the receiver.
+ * @return YES if the receiver is equal to _operation_, otherwise NO.
+ */
+- (BOOL)isEqualToOperation:(MRBrewOperation *)operation;
+
 @end

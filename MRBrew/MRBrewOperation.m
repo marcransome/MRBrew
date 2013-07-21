@@ -135,4 +135,36 @@
     return [[self alloc] initWithOperation:MRBrewOperationOutdated formula:nil parameters:nil];
 }
 
+- (BOOL)isEqualToOperation:(MRBrewOperation *)operation
+{
+    if (self == operation)
+        return YES;
+    
+    if (!operation || ![operation isKindOfClass:[self class]])
+        return NO;
+    
+    if ([self operation] != [operation operation])
+        return NO;
+
+    if ([self formula] && [operation formula]) {
+        if (![[self formula] isEqualToFormula:[operation formula]]) {
+            return NO;
+        }
+    }
+    else if (![self formula] ^ ![operation formula]) {
+        return NO;
+    }
+
+    if ([self parameters] && [operation parameters]) {
+        if (![[self parameters] isEqualToArray:[operation parameters]]) {
+            return NO;
+        }
+    }
+    else if (![self parameters] ^ ![operation parameters]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end
