@@ -109,7 +109,7 @@ Operations can be cancelled using one of the following `MRBrew` class methods:
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
 ```
 
-The delegate object for each operation that is cancelled will receive a message indicating operation failure (`brewOperation:didFailWithError:`) along with an `NSError` object whose code matches the `MRBrewErrorCancelled` constant.
+The delegate object for each operation that is cancelled will receive a message indicating operation failure &mdash; `brewOperation:didFailWithError:` &mdash; along with an `NSError` object whose code matches the `MRBrewErrorCancelled` constant.
 
 ####Miscellaneous
 If the `brew` executable has been moved outside of the default `/usr/local/bin/` directory (generally not advisable), specify its location before performing any operations:
