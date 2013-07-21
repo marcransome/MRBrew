@@ -92,7 +92,7 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
 ```
 The constants referenced in the above snippet can be found in the `MRBrewConstants.h` header and used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.
 
-If you are performing custom operations that do not already have a constant defined, simply provide your own:
+If you are performing a custom operation that does not already have a constant defined simply provide your own, or use a literal:
 
 ```objc
 if ([[operation operation] isEqualToString:@"cat"]) {
