@@ -82,4 +82,11 @@
 
 - (id)copyWithZone:(NSZone *)zone;
 
+/** Compares the receiver to another formula.
+ *
+ * @param formula The formula with which to compare the receiver.
+ * @return YES if the receiver is equal to _formula_, otherwise NO.
+ */
+- (BOOL)isEqualToFormula:(MRBrewFormula *)formula;
+
 @end

@@ -77,4 +77,24 @@
     return copy;
 }
 
+- (BOOL)isEqualToFormula:(MRBrewFormula *)formula
+{
+    if (self == formula)
+        return YES;
+    
+    if (!formula || ![formula isKindOfClass:[self class]])
+        return NO;
+    
+    if (![[self name] isEqualToString:[formula name]])
+        return NO;
+    if ([self updated] != [formula updated])
+        return NO;
+    if ([self newFormula] != [formula newFormula])
+        return NO;
+    if ([self installed] != [formula installed])
+        return NO;
+    
+    return YES;
+}
+
 @end
