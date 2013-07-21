@@ -102,6 +102,8 @@
 				19453D7517901C1100064BC7 /* MRAppDelegate.m */,
 				19453D7F17901C3700064BC7 /* MRBrew.h */,
 				19453D8017901C3700064BC7 /* MRBrew.m */,
+				195EE912179A37A800CB1B04 /* MRBrewConstants.h */,
+				195EE913179A37A800CB1B04 /* MRBrewConstants.m */,
 				19453D8117901C3700064BC7 /* MRBrewDelegate.h */,
 				19453D8217901C3700064BC7 /* MRBrewFormula.h */,
 				19453D8317901C3700064BC7 /* MRBrewFormula.m */,
@@ -111,8 +113,6 @@
 				19453D8717901C3700064BC7 /* MRBrewOperation.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
-				195EE912179A37A800CB1B04 /* MRBrewConstants.h */,
-				195EE913179A37A800CB1B04 /* MRBrewConstants.m */,
 			);
 			path = MRBrew;
 			sourceTree = "<group>";
