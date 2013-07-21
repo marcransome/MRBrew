@@ -24,31 +24,45 @@ Then install the dependency into your project:
 `MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified in cases where the `brew` executable resides in a different location).  If you don't already have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get setup.
 
 ##General Usage
-To perform a Homebrew operation, pass an instance of `MRBrewOperation` to the `MRBrew` class method `performOperation:delegate:`.  The `MRBrewOperation` class provides a number of convenience methods for creating instances that represent common Homebrew operations:
+
+####Performing operations
+To perform an operation, create and pass an instance of `MRBrewOperation` to the `MRBrew` class method `performOperation:delegate:`.  The `MRBrewOperation` class provides a number of convenience methods for creating instances that represent common Homebrew operations:
 
 ```objc
 + (id)updateOperation;
 + (id)listOperation;
-+ (id)searchOperation;
++ (id)searchOperation:(MRBrewFormula *)formula;
 + (id)installOperation:(MRBrewFormula *)formula;
 + (id)infoOperation:(MRBrewFormula *)formula;
 + (id)removeOperation:(MRBrewFormula *)formula;
 + (id)optionsOperation:(MRBrewFormula *)formula;
 ```
 
-For example, the following code would perform a Homebrew update operation:
+For example, the following code would perform a Homebrew `update` operation:
 
 ```objc
 [MRBrew performOperation:[MRBrewOperation updateOperation] delegate:nil];
 ```
 
-Homebrew operations that involve a specific formula require an instance of `MRBrewFormula`, which is just as easy to create:
+Operations that require a formula to be specified should be passed an instance of `MRBrewFormula`, which is just as easy to create. For example:
 
 ```objc
-[MRBrewFormula formulaWithName:@"appledoc"]
+[MRBrew performOperation:[MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"appledoc"]] delegate:nil];
 ```
 
-Each call to `performOperation:delegate:` spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to `performOperation:delegate:`.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the `MRBrewDelegate` protocol in your controller and specifying the following methods:
+Each call to `performOperation:delegate:` spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to `performOperation:delegate:`.
+
+####Custom operations
+The convenience methods provided by `MRBrewOperation` cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined use the following `MRBrewOperation` class method when creating your operation object:
+
+```objc
++ (id)operationWithStringOperation:(NSString *)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
+```
+
+Specify the operation name exactly as defined by Homebrew (e.g. `@"upgrade"`). Both `formula` and `parameters` may be optional dependent upon the operation being performed (see *man brew* for more details).
+
+####Handling operation output
+You'll probably want to be notified when an operation has finished, errored, or generated output.  This can be achieved using the delegate pattern by implementing the `MRBrewDelegate` protocol in your controller and specifying the following optional methods:
 
 ```objc
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation;
@@ -56,10 +70,10 @@ Each call to `performOperation:delegate:` spawns a subprocess that won't interru
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output;
 ```
 
-Now, whenever you perform an operation by calling `performOperation:delegate:`, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or produced output:
+Now, whenever you perform an operation with `performOperation:delegate:`, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or generated output:
 
 ```objc
-[MRBrew performOperation:[MRBrewOperation updateOperation] delegate:controllerObject];
+[MRBrew performOperation:[MRBrewOperation updateOperation] delegate:controller];
 ```
 
 If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the `MRBrewOperation` object in your delegate methods to determine how to respond:
@@ -76,8 +90,17 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
     ...
 }
 ```
-The constants referenced in the above snippet can be found in the `MRBrewConstants.h` header file and used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.
+The constants referenced in the above snippet can be found in the `MRBrewConstants.h` header and used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.
 
+If you are performing custom operations that do not already have a constant defined, simply provide your own:
+
+```objc
+    if ([[operation operation] isEqualToString:@"cat"]) {
+        // a cat operation produced output
+    }
+```
+
+####Cancelling operations
 Operations can be cancelled using one of the following `MRBrew` class methods:
 
 ```objc
@@ -86,11 +109,16 @@ Operations can be cancelled using one of the following `MRBrew` class methods:
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
 ```
 
-If the `brew` executable has been moved outside of the default `/usr/local/bin/` directory, specify its location before performing any operations:
+The delegate object for each operation that is cancelled will receive a message indicating operation failure (`brewOperation:didFailWithError:`) along with an `NSError` object whose code matches the `MRBrewErrorCancelled` constant.
+
+####Miscellaneous
+If the `brew` executable has been moved outside of the default `/usr/local/bin/` directory (generally not advisable), specify its location before performing any operations:
 
 ```objc
 [MRBrew setBrewPath:@"/usr/bin/brew"];
 ```
+
+This call only needs to be made once per project.
 
 ##Advanced
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
