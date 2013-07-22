@@ -64,7 +64,7 @@ static NSOperationQueue *backgroundQueue;
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    
     // construct command-line arguments for brew command
-    NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation operation]];
+    NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation name]];
     if ([operation parameters])
         [arguments addObjectsFromArray:[operation parameters]];
     if ([operation formula])
@@ -94,7 +94,7 @@ static NSOperationQueue *backgroundQueue;
     [backgroundQueue addOperationWithBlock:^{
         NSData *readData;
         
-        if ([[operation operation] isEqualToString:MRBrewOperationInstallIdentifier]) {
+        if ([[operation name] isEqualToString:MRBrewOperationInstallIdentifier]) {
             // delegate callback for line output from brew
             if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
                 while ((readData = [readHandle availableData]) && [readData length] > 0) {
@@ -184,36 +184,36 @@ static NSOperationQueue *backgroundQueue;
     [taskArrayLock lock];
     
     if ([taskArray count] > 0) {   
-        NSString *operationString;
+        NSString *operationName;
         switch (operationType) {
             case MRBrewOperationInfo:
-                operationString = MRBrewOperationInfoIdentifier;
+                operationName = MRBrewOperationInfoIdentifier;
                 break;
             case MRBrewOperationList:
-                operationString = MRBrewOperationListIdentifier;
+                operationName = MRBrewOperationListIdentifier;
                 break;
             case MRBrewOperationInstall:
-                operationString = MRBrewOperationInstallIdentifier;
+                operationName = MRBrewOperationInstallIdentifier;
                 break;
             case MRBrewOperationOptions:
-                operationString = MRBrewOperationOptionsIdentifier;
+                operationName = MRBrewOperationOptionsIdentifier;
                 break;
             case MRBrewOperationRemove:
-                operationString = MRBrewOperationRemoveIdentifier;
+                operationName = MRBrewOperationRemoveIdentifier;
                 break;
             case MRBrewOperationSearch:
-                operationString = MRBrewOperationSearchIdentifier;
+                operationName = MRBrewOperationSearchIdentifier;
                 break;
             case MRBrewOperationUpdate:
-                operationString = MRBrewOperationUpdateIdentifier;
+                operationName = MRBrewOperationUpdateIdentifier;
                 break;
             case MRBrewOperationOutdated:
-                operationString = MRBrewOperationOutdatedIdentifier;
+                operationName = MRBrewOperationOutdatedIdentifier;
                 break;
         }
 
         for (NSDictionary *task in taskArray) {
-            if ([[[task objectForKey:MRBrewOperationIdentifier] operation] isEqualToString: operationString])
+            if ([[[task objectForKey:MRBrewOperationIdentifier] name] isEqualToString: operationName])
             [[task objectForKey:MRBrewTaskIdentifier] interrupt];
         }
     }
