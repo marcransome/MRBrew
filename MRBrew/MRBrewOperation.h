@@ -65,7 +65,7 @@ typedef enum {
 
 /** The operation name.
  */
-@property (strong, readonly) NSString *operation;
+@property (strong, readonly) NSString *name;
 
 /** A formula associated with the operation, where a formula is permitted (see _man brew_ for
  * details).
@@ -84,7 +84,7 @@ typedef enum {
 
 /** Initialises a newly allocated operation with a specified type, formula, and parameters.
  *
- * @param operation The type of operation.
+ * @param type The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
  * @param parameters An optional array of NSStrings containing parameters to the operation.
@@ -92,11 +92,11 @@ typedef enum {
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-- (id)initWithOperation:(MRBrewOperationType)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
+- (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Initialises a newly allocated operation with a specified type, formula, and parameters.
  *
- * @param operation The type of operation.
+ * @param name The name of the operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
  * @param parameters An optional array of NSStrings containing parameters to the operation.
@@ -105,7 +105,7 @@ typedef enum {
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-- (id)initWithOperationString:(NSString *)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
+- (id)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating an Operation
@@ -114,7 +114,7 @@ typedef enum {
 
 /** Returns an operation with the specified type, formula, and parameters.
  *
- * @param operation The type of operation.
+ * @param type The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
  * @param parameters An optional array of NSStrings containing parameters to the operation.
@@ -123,11 +123,11 @@ typedef enum {
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-+ (id)operationWithOperation:(MRBrewOperationType)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Returns an operation with the specified type, formula, and parameters.
  *
- * @param operation The type of operation.
+ * @param name The name of the operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
  * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
  * @param parameters An optional array of NSStrings containing parameters to the operation.
@@ -136,7 +136,7 @@ typedef enum {
  * (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-+ (id)operationWithStringOperation:(NSString *)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Returns an update operation. */
 + (id)updateOperation;
