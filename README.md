@@ -120,7 +120,10 @@ If the `brew` executable has been moved outside of the default `/usr/local/bin/`
 
 This call only needs to be made once per project.
 
-##Advanced
+##Contributions
+If you plan to contribute to the MRBrew project [fork the repository](https://help.github.com/articles/fork-a-repo), make your code changes, then submit a pull request with a brief description of your feature or bug fix.  Test suites and unit tests are provided for the `MRBrewTests` target, and additional test methods should be added where necessary.
+
+##Documentation
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
 
 ##Caveats
