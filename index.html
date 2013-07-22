@@ -17,7 +17,7 @@
         $('#main_content').headsmart()
       })
     </script>
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
   </head>
 
   <body>
@@ -73,45 +73,60 @@
 <h2>
 <a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
 
-<p><code>MRBrew</code> depends on Homebrew for the heavy lifting, and assumes the default installation path of <code>/usr/local/bin/brew</code>.  If you don't already have Homebrew installed, follow the <a href="http://mxcl.github.io/homebrew/">official instructions</a> to get setup.</p>
+<p><code>MRBrew</code> depends on Homebrew for the heavy lifting, and assumes the default installation path of <code>/usr/local/bin/brew</code> (though this can be specified in cases where the <code>brew</code> executable resides in a different location).  If you don't already have Homebrew installed, follow the <a href="http://mxcl.github.io/homebrew/">official instructions</a> to get setup.</p>
 
 <h2>
-<a name="general-usage" class="anchor" href="#general-usage"><span class="octicon octicon-link"></span></a>General Usage</h2>
+<a name="performing-operations" class="anchor" href="#performing-operations"><span class="octicon octicon-link"></span></a>Performing operations</h2>
 
-<p>To perform a Homebrew operation, pass an instance of <code>MRBrewOperation</code> to the <code>MRBrew</code> class method <code>performOperation:delegate:</code>.  The <code>MRBrewOperation</code> class provides a number of convenience methods for creating instances that represent common Homebrew operations:</p>
+<p>To perform an operation, create and pass an instance of <code>MRBrewOperation</code> to the <code>MRBrew</code> class method <code>performOperation:delegate:</code>.  The <code>MRBrewOperation</code> class provides a number of convenience methods for creating instances that represent common Homebrew operations:</p>
 
 <div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">updateOperation</span><span class="p">;</span>
 <span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">listOperation</span><span class="p">;</span>
-<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">searchOperation</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">searchOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
 <span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">installOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
 <span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">infoOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
 <span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">removeOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
 <span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">optionsOperation:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span><span class="p">;</span>
 </pre></div>
 
-<p>For example, the following code would perform a Homebrew update operation:</p>
+<p>For example, the following code would perform a Homebrew <code>update</code> operation:</p>
 
 <div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
 </pre></div>
 
-<p>Homebrew operations that involve a specific formula require an instance of <code>MRBrewFormula</code>, which is just as easy to create:</p>
+<p>Operations that require a formula to be specified should be passed an instance of <code>MRBrewFormula</code>, which is just as easy to create. For example:</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"appledoc"</span><span class="p">]</span>
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">installOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"appledoc"</span><span class="p">]]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
 </pre></div>
 
-<p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to <code>performOperation:delegate:</code>.  You'll probably want to be notified when an operation has finished or errored however, which can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following methods:</p>
+<p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to <code>performOperation:delegate:</code>.</p>
+
+<h2>
+<a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h2>
+
+<p>The convenience methods provided by <code>MRBrewOperation</code> cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined use the following <code>MRBrewOperation</code> class method when creating your operation object:</p>
+
+<div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">operationWithStringOperation:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">formula:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span> <span class="nf">parameters:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">parameters</span><span class="p">;</span>
+</pre></div>
+
+<p>Specify the operation name exactly as defined by Homebrew (e.g. <code>@"upgrade"</code>). Both <code>formula</code> and <code>parameters</code> may be optional dependent upon the operation being performed (see <em>man brew</em> for more details).</p>
+
+<h2>
+<a name="handling-operation-output" class="anchor" href="#handling-operation-output"><span class="octicon octicon-link"></span></a>Handling operation output</h2>
+
+<p>You'll probably want to be notified when an operation has finished, errored, or generated output.  This can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following optional methods:</p>
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperationDidFinish:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span><span class="p">;</span>
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didFailWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span><span class="p">;</span>
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span><span class="p">;</span>
 </pre></div>
 
-<p>Now, whenever you perform an operation by calling <code>performOperation:delegate:</code>, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or produced output:</p>
+<p>Now, whenever you perform an operation with <code>performOperation:delegate:</code>, specify your controller object as the delegate in order to receive callbacks when an operation has finished, errored, or generated output:</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">controllerObject</span><span class="p">];</span>
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">controller</span><span class="p">];</span>
 </pre></div>
 
-<p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to react:</p>
+<p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to respond:</p>
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span>
 <span class="p">{</span>
@@ -125,7 +140,17 @@
 <span class="p">}</span>
 </pre></div>
 
-<p>The constants referenced in the above snippet are part of the <code>MRBrewOperationType</code> enumerated type (see <code>MRBrewOperation.h</code>) and can be used to determine the type of operation received by your delegate methods.</p>
+<p>The constants referenced in the above snippet can be found in the <code>MRBrewConstants.h</code> header and used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.</p>
+
+<p>If you are performing a custom operation that does not already have a constant defined simply provide your own, or use a literal:</p>
+
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="s">@"cat"</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// a cat operation produced output</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h2>
 
 <p>Operations can be cancelled using one of the following <code>MRBrew</code> class methods:</p>
 
@@ -134,8 +159,25 @@
 <span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">cancelAllOperationsOfType:</span><span class="p">(</span><span class="n">MRBrewOperationType</span><span class="p">)</span><span class="nv">operationType</span><span class="p">;</span>
 </pre></div>
 
+<p>The delegate object for each operation that is cancelled will receive a message indicating operation failure — <code>brewOperation:didFailWithError:</code> — along with an <code>NSError</code> object whose code matches the <code>MRBrewErrorCancelled</code> constant.</p>
+
+<h4>
+<a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h4>
+
+<p>If the <code>brew</code> executable has been moved outside of the default <code>/usr/local/bin/</code> directory (generally not advisable), specify its location before performing any operations:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">setBrewPath</span><span class="o">:</span><span class="s">@"/usr/bin/brew"</span><span class="p">];</span>
+</pre></div>
+
+<p>This call only needs to be made once per project.</p>
+
 <h2>
-<a name="advanced" class="anchor" href="#advanced"><span class="octicon octicon-link"></span></a>Advanced</h2>
+<a name="contributions" class="anchor" href="#contributions"><span class="octicon octicon-link"></span></a>Contributions</h2>
+
+<p>If you plan to contribute to the MRBrew project <a href="https://help.github.com/articles/fork-a-repo">fork the repository</a>, make your code changes, then submit a pull request with a brief description of your feature or bug fix.  Test suites and unit tests are provided for the <code>MRBrewTests</code> target, and additional test methods should be added where necessary.</p>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>Visit <a href="http://cocoadocs.org/docsets/MRBrew/">CocoaDocs</a> for additional documentation, or alternatively inspect the header files directly.</p>
 
