@@ -28,29 +28,30 @@
 @implementation MRBrewFormula
 
 - (id)init {
-    
-    if (self = [super init]) {
-        _name = @"";
-        _updated = NO;
-        _newFormula = NO;
-        _installed = NO;
-    }
-    
-    return self;
+    return [self initWithName:nil
+                        isNew:NO
+                    isUpdated:NO
+                  isInstalled:NO];
 }
 
 - (id)initWithName:(NSString *)name
 {
-    return [self initWithName:name newFormula:NO];
+    return [self initWithName:name
+                        isNew:NO
+                    isUpdated:NO
+                  isInstalled:NO];
 }
 
-- (id)initWithName:(NSString *)name newFormula:(BOOL)newFlag
+- (id)initWithName:(NSString *)name
+             isNew:(BOOL)isNew
+         isUpdated:(BOOL)isUpdated
+       isInstalled:(BOOL)isInstalled
 {
     if (self = [super init]) {
-        _name = [name copy];
-        _updated = NO;
-        _newFormula = NO;
-        _installed = NO;
+        _name = name == nil ? @"" : [name copy];  // replace nil with empty string
+        _isUpdated = isUpdated;
+        _isNew = isNew;
+        _isInstalled = isInstalled;
     }
     
     return self;
@@ -58,21 +59,30 @@
 
 + (id)formulaWithName:(NSString *)name
 {
-    return [[self alloc] initWithName:name];
+    return [[self alloc] initWithName:name
+                                isNew:NO
+                            isUpdated:NO
+                          isInstalled:NO];
 }
 
-+ (id)formulaWithName:(NSString *)name newFormula:(BOOL)newFlag
++ (id)formulaWithName:(NSString *)name
+                isNew:(BOOL)isNew
+            isUpdated:(BOOL)isUpdated
+          isInstalled:(BOOL)isInstalled
 {
-    return [[self alloc] initWithName:name newFormula:newFlag];
+    return [[self alloc] initWithName:name
+                                isNew:isNew
+                            isUpdated:isUpdated
+                          isInstalled:isInstalled];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
     MRBrewFormula *copy = [[MRBrewFormula alloc] init];
     [copy setName:[[self name] copy]];
-    [copy setUpdated:[self updated]];
-    [copy setNewFormula:[self newFormula]];
-    [copy setInstalled:[self installed]];
+    [copy setIsUpdated:[self isUpdated]];
+    [copy setIsNew:[self isNew]];
+    [copy setIsInstalled:[self isInstalled]];
     
     return copy;
 }
@@ -87,11 +97,11 @@
     
     if (![[self name] isEqualToString:[formula name]])
         return NO;
-    if ([self updated] != [formula updated])
+    if ([self isUpdated] != [formula isUpdated])
         return NO;
-    if ([self newFormula] != [formula newFormula])
+    if ([self isNew] != [formula isNew])
         return NO;
-    if ([self installed] != [formula installed])
+    if ([self isInstalled] != [formula isInstalled])
         return NO;
     
     return YES;

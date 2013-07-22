@@ -32,13 +32,13 @@
 @property (strong) NSString *name;
 
 /** A boolean value representing whether the formula has been updated. */
-@property (assign) BOOL updated;
+@property (assign) BOOL isUpdated;
 
 /** A boolean value representing whether the formula is new.*/
-@property (assign) BOOL newFormula;
+@property (assign) BOOL isNew;
 
 /** A boolean value representing whether the formula is installed. */
-@property (assign) BOOL installed;
+@property (assign) BOOL isInstalled;
 
 /**---------------------------------------------------------------------------------------
  * @name Initialising a Formula
@@ -55,10 +55,12 @@
 /** Initialises a newly allocated formula with the specified name and status.
  *
  * @param name The name of the formula.
- * @param newFlag A boolean value representing whether the formula is new.
- * @return A formula with the specified name.
+ * @param isNew A boolean value representing whether the formula is new.
+ * @param isUpdated A boolean value representing whether the formula is updated.
+ * @param isInstalled A boolean value representing whether the formula is installed.
+ * @return A formula with the specified properties.
  */
-- (id)initWithName:(NSString *)name newFormula:(BOOL)newFlag;
+- (id)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a Formula
@@ -75,10 +77,12 @@
 /** Returns a formula with the specified name and status.
  *
  * @param name The name of the formula.
- * @param newFlag A boolean value representing whether the formula is new.
- * @return A formula with the specified name and status.
+ * @param isNew A boolean value representing whether the formula is new.
+ * @param isUpdated A boolean value representing whether the formula is updated.
+ * @param isInstalled A boolean value representing whether the formula is installed.
+ * @return A formula with the specified properties.
  */
-+ (id)formulaWithName:(NSString *)name newFormula:(BOOL)newFlag;
++ (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated  isInstalled:(BOOL)isInstalled;
 
 - (id)copyWithZone:(NSZone *)zone;
 
