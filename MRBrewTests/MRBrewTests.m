@@ -28,6 +28,8 @@
 
 @implementation MRBrewTests
 
+static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
+
 - (void)setUp
 {
     [super setUp];
@@ -40,6 +42,36 @@
     // Tear-down code here.
     
     [super tearDown];
+}
+
+- (void)testDefaultBrewPath
+{
+    // launching an NSTask with a nil path raises an exception so we guard against this
+    // by initialising brewPath to the default brew path during +(void)initialise
+    
+    STAssertTrue([[MRBrew brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"should equal default brew path");
+}
+
+- (void)testNilBrewPath
+{
+    // launching an NSTask with a nil path raises an exception so we guard against this
+    // by reverting brewPath to the default brew path whenever setBrewPath: is passed nil
+    
+    [MRBrew setBrewPath:nil];
+    STAssertNotNil([MRBrew brewPath], @"path is required or an exception will be raised when launching an NSTask with nil path");
+    STAssertTrue([[MRBrew brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"setting path to nil should assume default location %@", MRBrewTestsDefaultBrewPath);
+    
+    // cleanup
+    [MRBrew setBrewPath:MRBrewTestsDefaultBrewPath];
+}
+
+- (void)testSetBrewPath
+{
+    [MRBrew setBrewPath:@"/usr/bin/brew"];
+    STAssertTrue([[MRBrew brewPath] isEqualToString:@"/usr/bin/brew"], @"should equal previously set path");
+    
+    // cleanup
+    [MRBrew setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
 @end
