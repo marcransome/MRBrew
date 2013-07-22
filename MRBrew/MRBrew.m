@@ -116,7 +116,7 @@ static NSOperationQueue *backgroundQueue;
             [currentTask waitUntilExit];
             
             if ([stringOutput length] > 0 && ![stringOutput isEqualToString:@"\n"]) {
-                    if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
+                if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         [delegate brewOperation:operation didGenerateOutput:stringOutput];
                     }];
