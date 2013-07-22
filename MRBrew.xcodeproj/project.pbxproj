@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193A0B62179D3C6C00C65291 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193A0B61179D3C6C00C65291 /* SenTestingKit.framework */; };
+		193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19453D6217901C1100064BC7 /* Cocoa.framework */; };
+		193A0B69179D3C6C00C65291 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 193A0B67179D3C6C00C65291 /* InfoPlist.strings */; };
+		193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B6B179D3C6C00C65291 /* MRBrewTests.m */; };
+		193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8017901C3700064BC7 /* MRBrew.m */; };
+		193A0B72179D3C7E00C65291 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
+		193A0B73179D3C7E00C65291 /* MRBrewFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8317901C3700064BC7 /* MRBrewFormula.m */; };
+		193A0B74179D3C7E00C65291 /* MRBrewInstallOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8517901C3700064BC7 /* MRBrewInstallOption.m */; };
+		193A0B75179D3C7E00C65291 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
+		193A0B78179D3F2F00C65291 /* MRBrewOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */; };
+		193A0B7B179D3F5900C65291 /* MRBrewFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */; };
 		19453D6317901C1100064BC7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19453D6217901C1100064BC7 /* Cocoa.framework */; };
 		19453D6D17901C1100064BC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19453D6B17901C1100064BC7 /* InfoPlist.strings */; };
 		19453D6F17901C1100064BC7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D6E17901C1100064BC7 /* main.m */; };
@@ -21,6 +32,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		193A0B60179D3C6C00C65291 /* MRBrewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		193A0B61179D3C6C00C65291 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRBrewTests-Info.plist"; sourceTree = "<group>"; };
+		193A0B68179D3C6C00C65291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		193A0B6A179D3C6C00C65291 /* MRBrewTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRBrewTests.h; sourceTree = "<group>"; };
+		193A0B6B179D3C6C00C65291 /* MRBrewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRBrewTests.m; sourceTree = "<group>"; };
+		193A0B6D179D3C6C00C65291 /* MRBrewTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MRBrewTests-Prefix.pch"; sourceTree = "<group>"; };
+		193A0B76179D3F2F00C65291 /* MRBrewOperationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOperationTests.h; sourceTree = "<group>"; };
+		193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperationTests.m; sourceTree = "<group>"; };
+		193A0B79179D3F5900C65291 /* MRBrewFormulaTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewFormulaTests.h; sourceTree = "<group>"; };
+		193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewFormulaTests.m; sourceTree = "<group>"; };
 		19453D5F17901C1100064BC7 /* MRBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MRBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19453D6217901C1100064BC7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		19453D6517901C1100064BC7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -48,6 +70,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		193A0B5C179D3C6C00C65291 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				193A0B62179D3C6C00C65291 /* SenTestingKit.framework in Frameworks */,
+				193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19453D5C17901C1100064BC7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,10 +90,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		193A0B64179D3C6C00C65291 /* MRBrewTests */ = {
+			isa = PBXGroup;
+			children = (
+				193A0B6A179D3C6C00C65291 /* MRBrewTests.h */,
+				193A0B6B179D3C6C00C65291 /* MRBrewTests.m */,
+				193A0B79179D3F5900C65291 /* MRBrewFormulaTests.h */,
+				193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */,
+				193A0B76179D3F2F00C65291 /* MRBrewOperationTests.h */,
+				193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */,
+				193A0B65179D3C6C00C65291 /* Supporting Files */,
+			);
+			path = MRBrewTests;
+			sourceTree = "<group>";
+		};
+		193A0B65179D3C6C00C65291 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */,
+				193A0B67179D3C6C00C65291 /* InfoPlist.strings */,
+				193A0B6D179D3C6C00C65291 /* MRBrewTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		19453D5617901C1100064BC7 = {
 			isa = PBXGroup;
 			children = (
 				19453D6817901C1100064BC7 /* MRBrew */,
+				193A0B64179D3C6C00C65291 /* MRBrewTests */,
 				19453D6117901C1100064BC7 /* Frameworks */,
 				19453D6017901C1100064BC7 /* Products */,
 			);
@@ -72,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				19453D5F17901C1100064BC7 /* MRBrew.app */,
+				193A0B60179D3C6C00C65291 /* MRBrewTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				19453D6217901C1100064BC7 /* Cocoa.framework */,
+				193A0B61179D3C6C00C65291 /* SenTestingKit.framework */,
 				19453D6417901C1100064BC7 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -132,6 +190,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		193A0B5F179D3C6C00C65291 /* MRBrewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 193A0B70179D3C6C00C65291 /* Build configuration list for PBXNativeTarget "MRBrewTests" */;
+			buildPhases = (
+				193A0B5B179D3C6C00C65291 /* Sources */,
+				193A0B5C179D3C6C00C65291 /* Frameworks */,
+				193A0B5D179D3C6C00C65291 /* Resources */,
+				193A0B5E179D3C6C00C65291 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MRBrewTests;
+			productName = MRBrewTests;
+			productReference = 193A0B60179D3C6C00C65291 /* MRBrewTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		19453D5E17901C1100064BC7 /* MRBrew */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19453D7C17901C1100064BC7 /* Build configuration list for PBXNativeTarget "MRBrew" */;
@@ -172,11 +248,20 @@
 			projectRoot = "";
 			targets = (
 				19453D5E17901C1100064BC7 /* MRBrew */,
+				193A0B5F179D3C6C00C65291 /* MRBrewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		193A0B5D179D3C6C00C65291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				193A0B69179D3C6C00C65291 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19453D5D17901C1100064BC7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,7 +274,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		193A0B5E179D3C6C00C65291 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		193A0B5B179D3C6C00C65291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */,
+				193A0B72179D3C7E00C65291 /* MRBrewConstants.m in Sources */,
+				193A0B73179D3C7E00C65291 /* MRBrewFormula.m in Sources */,
+				193A0B74179D3C7E00C65291 /* MRBrewInstallOption.m in Sources */,
+				193A0B75179D3C7E00C65291 /* MRBrewOperation.m in Sources */,
+				193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */,
+				193A0B78179D3F2F00C65291 /* MRBrewOperationTests.m in Sources */,
+				193A0B7B179D3F5900C65291 /* MRBrewFormulaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19453D5B17901C1100064BC7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +323,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		193A0B67179D3C6C00C65291 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				193A0B68179D3C6C00C65291 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		19453D6B17901C1100064BC7 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -234,6 +358,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		193A0B6E179D3C6C00C65291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MRBrewTests/MRBrewTests-Prefix.pch";
+				INFOPLIST_FILE = "MRBrewTests/MRBrewTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		193A0B6F179D3C6C00C65291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MRBrewTests/MRBrewTests-Prefix.pch";
+				INFOPLIST_FILE = "MRBrewTests/MRBrewTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		19453D7A17901C1100064BC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -320,6 +472,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		193A0B70179D3C6C00C65291 /* Build configuration list for PBXNativeTarget "MRBrewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				193A0B6E179D3C6C00C65291 /* Debug */,
+				193A0B6F179D3C6C00C65291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		19453D5A17901C1100064BC7 /* Build configuration list for PBXProject "MRBrew" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
