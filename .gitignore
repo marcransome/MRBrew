@@ -18,3 +18,6 @@ DerivedData
 
 #CocoaPods
 Pods
+
+#AppleDoc
+doc-output/docset-installed.txt
