@@ -56,7 +56,7 @@ Each call to `performOperation:delegate:` spawns a subprocess that won't interru
 The convenience methods provided by `MRBrewOperation` cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined use the following `MRBrewOperation` class method when creating your operation object:
 
 ```objc
-+ (id)operationWithStringOperation:(NSString *)operation formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 ```
 
 Specify the operation name exactly as defined by Homebrew (e.g. `@"upgrade"`). Both `formula` and `parameters` may be optional dependent upon the operation being performed (see *man brew* for more details).
@@ -81,10 +81,10 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
 ```objc
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
 {
-    if ([[operation operation] isEqualToString:MRBrewOperationUpdateIdentifier]) {
+    if ([[operation name] isEqualToString:MRBrewOperationUpdateIdentifier]) {
         // an update operation produced output
     }
-    else if ([[operation operation] isEqualToString:MRBrewOperationInstallIdentifier]) {
+    else if ([[operation name] isEqualToString:MRBrewOperationInstallIdentifier]) {
         // an install operation produced output
     }
     ...
@@ -95,8 +95,8 @@ The constants referenced in the above snippet can be found in the `MRBrewConstan
 If you are performing a custom operation that does not already have a constant defined simply provide your own, or use a literal:
 
 ```objc
-if ([[operation operation] isEqualToString:@"cat"]) {
-    // a cat operation produced output
+if ([[operation name] isEqualToString:@"audit"]) {
+    // an audit operation produced output
 }
 ```
 
