@@ -2,10 +2,10 @@
 MRBrew is a simple Objective-C wrapper library for the [Homebrew](http://mxcl.github.io/homebrew/) package manager.  It makes performing Homebrew operations from your apps a breeze:
 
 ```objc
-[MRBrew performOperation:[MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"emacs"]] delegate:self];
+[MRBrew performOperation:[MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"vim"]] delegate:self];
 ```
 
-Now you have a powerful text editor installed. ;)
+Now you have a powerful text editor installed. :beer:
 
 ##Project integration
 MRBrew can be integrated into an existing project using [CocoaPods](http://cocoapods.org). Simply add the necessary dependency to your `Podfile` as follows:
