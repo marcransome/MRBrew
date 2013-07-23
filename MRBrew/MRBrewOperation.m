@@ -67,12 +67,12 @@
     return self;
 }
 
-- (id)initWithName:(NSString *)operation
+- (id)initWithName:(NSString *)name
            formula:(MRBrewFormula *)formula
         parameters:(NSArray *)parameters
 {
     if (self = [super init]) {
-        _name = [operation copy];
+        _name = [name copy];
         _formula = [formula copy];
         _parameters = [parameters copy];
     }
