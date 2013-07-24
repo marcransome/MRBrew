@@ -23,6 +23,7 @@
 //  DEALINGS IN THE SOFTWARE.
 
 #import "MRBrewFormulaTests.h"
+#import "MRBRewFormula.h"
 
 @implementation MRBrewFormulaTests
 
@@ -38,6 +39,56 @@
     // Tear-down code here.
     
     [super tearDown];
+}
+
+- (void)testSingleFormulaEquality
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+
+    STAssertTrue([formula1 isEqualToFormula:formula1], @"Comparison of a formula with itself should be equal.");
+}
+
+- (void)testIdenticalFormulaeEquality
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    
+    STAssertTrue([formula1 isEqualToFormula:formula2], @"Formulae that have the same properties should be equal.");
+}
+
+- (void)testDifferentFormulaeEqualityForNameProperty
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
+    
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing name property should not be equal.");
+}
+
+- (void)testDifferentFormulaeEqualityForUpdatedProperty
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    [formula2 setIsUpdated:YES];
+    
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing updated property should not be equal.");
+}
+
+- (void)testDifferentFormulaeEqualityForNewProperty
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    [formula2 setIsNew:YES];
+    
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing new property should not be equal.");
+}
+
+- (void)testDifferentFormulaeEqualityForInstalledProperty
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    [formula2 setIsInstalled:YES];
+    
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing installed property should not be equal.");
 }
 
 @end
