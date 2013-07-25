@@ -17,7 +17,7 @@
         $('#main_content').headsmart()
       })
     </script>
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
   </head>
 
   <body>
@@ -51,10 +51,10 @@
 
 <p>MRBrew is a simple Objective-C wrapper library for the <a href="http://mxcl.github.io/homebrew/">Homebrew</a> package manager.  It makes performing Homebrew operations from your apps a breeze:</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">installOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"emacs"</span><span class="p">]]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+<div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">installOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewFormula</span> <span class="n">formulaWithName</span><span class="o">:</span><span class="s">@"vim"</span><span class="p">]]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
 </pre></div>
 
-<p>Now you have a powerful text editor installed. ;)</p>
+<p>Now you have a powerful text editor installed.</p>
 
 <h2>
 <a name="project-integration" class="anchor" href="#project-integration"><span class="octicon octicon-link"></span></a>Project integration</h2>
@@ -76,7 +76,10 @@
 <p><code>MRBrew</code> depends on Homebrew for the heavy lifting, and assumes the default installation path of <code>/usr/local/bin/brew</code> (though this can be specified in cases where the <code>brew</code> executable resides in a different location).  If you don't already have Homebrew installed, follow the <a href="http://mxcl.github.io/homebrew/">official instructions</a> to get setup.</p>
 
 <h2>
-<a name="performing-operations" class="anchor" href="#performing-operations"><span class="octicon octicon-link"></span></a>Performing operations</h2>
+<a name="general-usage" class="anchor" href="#general-usage"><span class="octicon octicon-link"></span></a>General Usage</h2>
+
+<h4>
+<a name="performing-operations" class="anchor" href="#performing-operations"><span class="octicon octicon-link"></span></a>Performing operations</h4>
 
 <p>To perform an operation, create and pass an instance of <code>MRBrewOperation</code> to the <code>MRBrew</code> class method <code>performOperation:delegate:</code>.  The <code>MRBrewOperation</code> class provides a number of convenience methods for creating instances that represent common Homebrew operations:</p>
 
@@ -101,18 +104,18 @@
 
 <p>Each call to <code>performOperation:delegate:</code> spawns a subprocess that won't interrupt processing in the rest of your app.  Multiple operations can be performed concurrently by making repeated calls to <code>performOperation:delegate:</code>.</p>
 
-<h2>
-<a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h2>
+<h4>
+<a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h4>
 
 <p>The convenience methods provided by <code>MRBrewOperation</code> cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined use the following <code>MRBrewOperation</code> class method when creating your operation object:</p>
 
-<div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">operationWithStringOperation:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">formula:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span> <span class="nf">parameters:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">parameters</span><span class="p">;</span>
+<div class="highlight"><pre><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">operationWithName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span> <span class="nf">formula:</span><span class="p">(</span><span class="n">MRBrewFormula</span> <span class="o">*</span><span class="p">)</span><span class="nv">formula</span> <span class="nf">parameters:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">parameters</span><span class="p">;</span>
 </pre></div>
 
 <p>Specify the operation name exactly as defined by Homebrew (e.g. <code>@"upgrade"</code>). Both <code>formula</code> and <code>parameters</code> may be optional dependent upon the operation being performed (see <em>man brew</em> for more details).</p>
 
-<h2>
-<a name="handling-operation-output" class="anchor" href="#handling-operation-output"><span class="octicon octicon-link"></span></a>Handling operation output</h2>
+<h4>
+<a name="handling-operation-output" class="anchor" href="#handling-operation-output"><span class="octicon octicon-link"></span></a>Handling operation output</h4>
 
 <p>You'll probably want to be notified when an operation has finished, errored, or generated output.  This can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following optional methods:</p>
 
@@ -130,10 +133,10 @@
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span>
 <span class="p">{</span>
-    <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationUpdateIdentifier</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">name</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationUpdateIdentifier</span><span class="p">])</span> <span class="p">{</span>
         <span class="c1">// an update operation produced output</span>
     <span class="p">}</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationInstallIdentifier</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">name</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="n">MRBrewOperationInstallIdentifier</span><span class="p">])</span> <span class="p">{</span>
         <span class="c1">// an install operation produced output</span>
     <span class="p">}</span>
     <span class="p">...</span>
@@ -144,13 +147,13 @@
 
 <p>If you are performing a custom operation that does not already have a constant defined simply provide your own, or use a literal:</p>
 
-<div class="highlight"><pre><span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">operation</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="s">@"cat"</span><span class="p">])</span> <span class="p">{</span>
-    <span class="c1">// a cat operation produced output</span>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([[</span><span class="n">operation</span> <span class="n">name</span><span class="p">]</span> <span class="n">isEqualToString</span><span class="o">:</span><span class="s">@"audit"</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// an audit operation produced output</span>
 <span class="p">}</span>
 </pre></div>
 
-<h2>
-<a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h2>
+<h4>
+<a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h4>
 
 <p>Operations can be cancelled using one of the following <code>MRBrew</code> class methods:</p>
 
@@ -161,8 +164,8 @@
 
 <p>The delegate object for each operation that is cancelled will receive a message indicating operation failure — <code>brewOperation:didFailWithError:</code> — along with an <code>NSError</code> object whose code matches the <code>MRBrewErrorCancelled</code> constant.</p>
 
-<h2>
-<a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h2>
+<h4>
+<a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h4>
 
 <p>If the <code>brew</code> executable has been moved outside of the default <code>/usr/local/bin/</code> directory (generally not advisable), specify its location before performing any operations:</p>
 
