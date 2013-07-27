@@ -62,7 +62,7 @@
     MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
     
-    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing name property should not be equal.");
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different name property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForUpdatedProperty
@@ -71,7 +71,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsUpdated:YES];
     
-    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing updated property should not be equal.");
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different updated property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForNewProperty
@@ -80,7 +80,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsNew:YES];
     
-    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing new property should not be equal.");
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different new property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForInstalledProperty
@@ -89,7 +89,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsInstalled:YES];
     
-    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with differing installed property should not be equal.");
+    STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different installed property should not be equal.");
 }
 
 @end
