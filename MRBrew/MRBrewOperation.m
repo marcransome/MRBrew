@@ -143,7 +143,7 @@
     if (!operation || ![operation isKindOfClass:[self class]])
         return NO;
     
-    if ([self name] != [operation name])
+    if (![[self name] isEqualToString:[operation name]])
         return NO;
 
     if ([self formula] && [operation formula]) {
