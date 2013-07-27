@@ -24,6 +24,8 @@
 //
 
 #import "MRBrewOperationTests.h"
+#import "MRBrewOperation.h"
+#import "MRBrewFormula.h"
 
 @implementation MRBrewOperationTests
 
@@ -39,6 +41,68 @@
     // Tear-down code here.
     
     [super tearDown];
+}
+
+- (void)testSingleOperationEquality
+{
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
+    
+    STAssertTrue([operation1 isEqualToOperation:operation1], @"Comparison of a operation with itself should be equal.");
+}
+
+- (void)testIdenticalOperationsEquality
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    
+    STAssertTrue([operation1 isEqualToOperation:operation2], @"Operations that have the same properties should be equal.");
+}
+
+- (void)testDifferentOperationsEqualityForNameProperty
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"different" formula:formula parameters:@[]];
+    
+    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different name property should not be equal.");
+}
+
+- (void)testDifferentOperationsEqualityForFormulaProperty
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula1 parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula2 parameters:@[]];
+    
+    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
+}
+
+- (void)testDifferentOperationsEqualityForFormulaPropertyOneNilValue
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
+    
+    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
+}
+
+- (void)testDifferentOperationsEqualityForParametersProperty
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[@"different"]];
+    
+    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
+}
+
+- (void)testDifferentOperationsEqualityForParametersPropertyOneNilValue
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:nil];
+    
+    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
 
 @end
