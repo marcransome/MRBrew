@@ -84,8 +84,6 @@
  */
 + (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated  isInstalled:(BOOL)isInstalled;
 
-- (id)copyWithZone:(NSZone *)zone;
-
 /** Compares the receiver to another formula.
  *
  * @param formula The formula with which to compare the receiver.
