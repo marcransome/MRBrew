@@ -80,12 +80,24 @@ enum {
  * active operations.  The delegate object for each operation that is cancelled will
  * receive a message indicating operation failure along with an NSError object whose
  * code matches the MRBrewErrorCancelled constant.
+ *
+ * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
+ * may not cancel the operation as expected. In practice, it is unlikely that this method
+ * will be called so soon after starting an operation and so there should be sufficient time
+ * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * operation will be cancelled as expected).
  */
 + (void)cancelAllOperations;
 
 /** Cancels a specific operation.  After cancellation, the delegate object for the
  * operation will receive a message indicating operation failure along with an NSError
  * object whose code matches the MRBrewErrorCancelled constant.
+ *
+ * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
+ * may not cancel the operation as expected. In practice, it is unlikely that this method
+ * will be called so soon after starting an operation and so there should be sufficient time
+ * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * operation will be cancelled as expected).
  *
  * @param operation The operation to cancel.
  */
@@ -95,6 +107,12 @@ enum {
  * currently no active operations of the specified type.  The delegate object for each
  * operation that is cancelled will receive a message indicating operation failure along
  * with an NSError object whose code matches the MRBrewErrorCancelled constant.
+ *
+ * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
+ * may not cancel the operation as expected. In practice, it is unlikely that this method
+ * will be called so soon after starting an operation and so there should be sufficient time
+ * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * operation will be cancelled as expected).
  *
  * @param operationType The type of operations to cancel.
  */
