@@ -72,7 +72,6 @@ typedef enum {
  */
 @property (strong, readonly) MRBrewFormula *formula;
 
-
 /** An array of optional parameters for the operation (see _man brew_ for details).
  */
 @property (strong, readonly) NSArray *parameters;
