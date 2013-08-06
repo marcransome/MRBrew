@@ -76,7 +76,7 @@ Now, whenever you perform an operation with `performOperation:delegate:`, specif
 [MRBrew performOperation:[MRBrewOperation updateOperation] delegate:controller];
 ```
 
-If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the `MRBrewOperation` object in your delegate methods to determine how to respond:
+If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the `MRBrewOperation` object in your delegate methods to determine how to respond particular types of operation:
 
 ```objc
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
@@ -99,6 +99,8 @@ if ([[operation name] isEqualToString:@"audit"]) {
     // an audit operation produced output
 }
 ```
+
+Alternatively, if you need to respond in a certain way to a specific operation then you should retain the operation object and use the `isEqualToOperation:` method of the `MRBrewOperation` class to confirm the operation that generated the callback, and respond accordingly in your delegate methods.
 
 #### Cancelling operations
 Operations can be cancelled using one of the following `MRBrew` class methods:
