@@ -17,7 +17,7 @@
         $('#main_content').headsmart()
       })
     </script>
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
   </head>
 
   <body>
@@ -129,7 +129,7 @@
 <div class="highlight"><pre><span class="p">[</span><span class="n">MRBrew</span> <span class="n">performOperation</span><span class="o">:</span><span class="p">[</span><span class="n">MRBrewOperation</span> <span class="n">updateOperation</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="n">controller</span><span class="p">];</span>
 </pre></div>
 
-<p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to respond:</p>
+<p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to respond particular types of operation:</p>
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">brewOperation:</span><span class="p">(</span><span class="n">MRBrewOperation</span> <span class="o">*</span><span class="p">)</span><span class="nv">operation</span> <span class="nf">didGenerateOutput:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">output</span>
 <span class="p">{</span>
@@ -151,6 +151,8 @@
     <span class="c1">// an audit operation produced output</span>
 <span class="p">}</span>
 </pre></div>
+
+<p>Alternatively, if you need to respond in a certain way to a specific operation then you should retain the operation object and use the <code>isEqualToOperation:</code> method of the <code>MRBrewOperation</code> class to confirm the operation that generated the callback, and respond accordingly in your delegate methods.</p>
 
 <h4>
 <a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h4>
