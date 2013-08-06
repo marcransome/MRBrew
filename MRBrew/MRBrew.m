@@ -27,8 +27,8 @@
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
 
-#ifndef __has_builtin
-    #define __has_builtin(x) 0  // for compatibility with non-clang compilers
+#ifndef __has_feature
+    #define __has_feature(x) 0 // for compatibility with non-clang compilers
 #endif
 
 #if !__has_feature(objc_arc)
