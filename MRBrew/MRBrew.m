@@ -27,6 +27,14 @@
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
 
+#ifndef __has_builtin
+    #define __has_builtin(x) 0  // for compatibility with non-clang compilers
+#endif
+
+#if !__has_feature(objc_arc)
+    #error MRBrew must be built with ARC.
+#endif
+
 static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
 static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
