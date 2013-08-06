@@ -29,9 +29,11 @@
 		19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8517901C3700064BC7 /* MRBrewInstallOption.m */; };
 		19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
 		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
+		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190B080417B18AAA002F8E20 /* MRBrewWatcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcherDelegate.h; sourceTree = "<group>"; };
 		193A0B60179D3C6C00C65291 /* MRBrewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		193A0B61179D3C6C00C65291 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRBrewTests-Info.plist"; sourceTree = "<group>"; };
@@ -67,6 +69,8 @@
 		19453D8717901C3700064BC7 /* MRBrewOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperation.m; sourceTree = "<group>"; };
 		195EE912179A37A800CB1B04 /* MRBrewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewConstants.h; sourceTree = "<group>"; };
 		195EE913179A37A800CB1B04 /* MRBrewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewConstants.m; sourceTree = "<group>"; };
+		196FEF1417B0510100E97597 /* MRBrewWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcher.h; sourceTree = "<group>"; };
+		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		190B080517B1B89C002F8E20 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				19453D8117901C3700064BC7 /* MRBrewDelegate.h */,
+				190B080417B18AAA002F8E20 /* MRBrewWatcherDelegate.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		193A0B64179D3C6C00C65291 /* MRBrewTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,14 +175,16 @@
 				19453D8017901C3700064BC7 /* MRBrew.m */,
 				195EE912179A37A800CB1B04 /* MRBrewConstants.h */,
 				195EE913179A37A800CB1B04 /* MRBrewConstants.m */,
-				19453D8117901C3700064BC7 /* MRBrewDelegate.h */,
 				19453D8217901C3700064BC7 /* MRBrewFormula.h */,
 				19453D8317901C3700064BC7 /* MRBrewFormula.m */,
 				19453D8417901C3700064BC7 /* MRBrewInstallOption.h */,
 				19453D8517901C3700064BC7 /* MRBrewInstallOption.m */,
 				19453D8617901C3700064BC7 /* MRBrewOperation.h */,
 				19453D8717901C3700064BC7 /* MRBrewOperation.m */,
+				196FEF1417B0510100E97597 /* MRBrewWatcher.h */,
+				196FEF1517B0510100E97597 /* MRBrewWatcher.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
+				190B080517B1B89C002F8E20 /* Protocols */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
 			);
 			path = MRBrew;
@@ -317,6 +332,7 @@
 				19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */,
 				19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */,
 				195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */,
+				196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +495,7 @@
 				193A0B6F179D3C6C00C65291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19453D5A17901C1100064BC7 /* Build configuration list for PBXProject "MRBrew" */ = {
 			isa = XCConfigurationList;
