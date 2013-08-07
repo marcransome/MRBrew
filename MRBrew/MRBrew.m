@@ -62,7 +62,7 @@ static NSOperationQueue *backgroundQueue;
 + (void)setBrewPath:(NSString *)path
 {
     if (path)
-        MRBrewPath = path;
+        MRBrewPath = [path copy];
     else
         MRBrewPath = @"/usr/local/bin/brew";
 }
