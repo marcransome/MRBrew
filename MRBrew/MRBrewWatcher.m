@@ -25,12 +25,18 @@
 
 #import "MRBrewWatcher.h"
 
+NSString* const MRBrewLibraryLocationPath = @"/usr/local/Library/";
+NSString* const MRBrewFormulaLocationPath = @"/usr/local/Library/Formula";
+NSString* const MRBrewTapsLocationPath = @"/usr/local/Library/Taps";
+NSString* const MRBrewAliasesLocationPath = @"/usr/local/Library/Aliases";
+NSString* const MRBrewLinkedKegsLocationPath = @"/usr/local/Library/LinkedKegs";
+NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
+
 @interface MRBrewWatcher ()
 {
     @private
     NSFileManager *_fileManager;
     FSEventStreamRef _eventStream;
-    NSArray *_pathsToWatch;
 }
 
 @end
@@ -38,28 +44,33 @@
 @implementation MRBrewWatcher
 
 - (id)init {
-    return [self initWithPaths:nil delegate:nil];
+    return [self initWithLocation:0 delegate:nil];
 }
 
-- (id)initWithPaths:(NSArray *)paths delegate:(id<MRBrewWatcherDelegate>)delegate
+- (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
 {
     self = [super init];
     
     if (self) {
-        _pathsToWatch = [paths copy];
+        _brewWatcherLocation = location;
         _delegate = delegate;
     }
     
     return self;
 }
 
-+ (id)watcherWithPaths:(NSArray *)paths delegate:(id<MRBrewWatcherDelegate>)delegate
++ (id)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
 {
-    return [[self alloc] initWithPaths:paths delegate:delegate];
+    return [[self alloc] initWithLocation:location delegate:delegate];
 }
 
 - (void)startWatching
 {
+    // stop existing event stream if one exists
+    if (_eventStream) {
+		[self stopWatching];
+	}
+    
     _fileManager = [NSFileManager defaultManager];
     
     // create an event stream context with a reference to this
@@ -71,12 +82,42 @@
     eventStreamContext.release = NULL;
     eventStreamContext.copyDescription = NULL;
     
+    // test bitmask for paths to use
+    NSMutableArray *pathsToWatch = [NSMutableArray array];
+    if (_brewWatcherLocation & MRBrewLibraryLocationWatcher) {
+        [pathsToWatch addObject:MRBrewLibraryLocationPath];
+    }
+    // since the library path contains all other paths we test
+    // this exclusively and only test for other options in the
+    // else clause if the library location bit has not been set
+    else {
+        if (_brewWatcherLocation & MRBrewFormulaLocationWatcher) {
+            [pathsToWatch addObject:MRBrewFormulaLocationPath];
+        }
+        
+        if (_brewWatcherLocation & MRBrewTapsLocationWatcher) {
+            [pathsToWatch addObject:MRBrewTapsLocationPath];
+        }
+        
+        if (_brewWatcherLocation & MRBrewAliasesLocationWatcher) {
+            [pathsToWatch addObject:MRBrewAliasesLocationPath];
+        }
+        
+        if (_brewWatcherLocation & MRBrewLinkedKegsLocationWatcher) {
+            [pathsToWatch addObject:MRBrewLinkedKegsLocationPath];
+        }
+        
+        if (_brewWatcherLocation & MRBrewPinnedKegsLocationWatcher) {
+            [pathsToWatch addObject:MRBrewPinnedKegsLocationPath];
+        }
+    }
+    
     // create an event stream and register a callback
     NSTimeInterval latency = 3.0;
     _eventStream = FSEventStreamCreate(NULL,
                                        &fileSystemEventsCallback,
                                        &eventStreamContext,
-                                       (__bridge CFArrayRef) _pathsToWatch,
+                                       (__bridge CFArrayRef) pathsToWatch,
                                        kFSEventStreamEventIdSinceNow,
                                        (CFAbsoluteTime) latency,
                                        kFSEventStreamCreateFlagUseCFTypes);

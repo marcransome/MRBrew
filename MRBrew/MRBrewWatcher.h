@@ -26,13 +26,23 @@
 #import <Foundation/Foundation.h>
 #import "MRBrewWatcherDelegate.h"
 
+typedef enum {
+    MRBrewLibraryLocationWatcher    = 0,
+    MRBrewFormulaLocationWatcher    = 1 << 1,
+    MRBrewTapsLocationWatcher       = 1 << 2,
+    MRBrewAliasesLocationWatcher    = 1 << 3,
+    MRBrewLinkedKegsLocationWatcher = 1 << 4,
+    MRBrewPinnedKegsLocationWatcher = 1 << 5
+} MRBrewWatcherLocation;
+
 @interface MRBrewWatcher : NSObject
 
 @property (weak) id<MRBrewWatcherDelegate> delegate;
+@property (assign) MRBrewWatcherLocation brewWatcherLocation;
 
-- (id)initWithPaths:(NSArray *)paths delegate:(id<MRBrewWatcherDelegate>)delegate;
+- (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
-+ (id)watcherWithPaths:(NSArray *)paths delegate:(id<MRBrewWatcherDelegate>)delegate;
++ (id)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
 - (void)startWatching;
 - (void)stopWatching;
