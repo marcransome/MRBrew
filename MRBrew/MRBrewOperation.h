@@ -39,7 +39,7 @@ typedef enum {
 } MRBrewOperationType;
 
 /** The MRBrewOperation class encapsulates the arguments associated with a single homebrew
- task.
+ operation.
  
  Methods are provided for creating an MRBrewOperation object with an NSString representing
  the operation name as defined by homebrew (e.g. `@"search"`) or alternavitely an
@@ -81,7 +81,8 @@ typedef enum {
  * ---------------------------------------------------------------------------------------
  */
 
-/** Initialises a newly allocated operation with a specified type, formula, and parameters.
+/** Returns an initialized MRBrewOperation object with the specified type, formula, and
+ * parameters.
  *
  * @param type The type of operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify
@@ -93,7 +94,8 @@ typedef enum {
  */
 - (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
-/** Initialises a newly allocated operation with a specified type, formula, and parameters.
+/** Returns an initialized MRBrewOperation object with the specified name, formula, and
+ * and parameters.
  *
  * @param name The name of the operation.
  * @param formula The formula (for operations that accept a formula parameter).  Specify

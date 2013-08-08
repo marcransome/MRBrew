@@ -45,14 +45,15 @@
  * ---------------------------------------------------------------------------------------
  */
 
-/** Initialises a newly allocated formula with the specified name.
+/** Returns an initialized MRBrewFormula object with the specified name.
  *
  * @param name The name of the formula.
  * @return A formula with the specified name.
  */
 - (id)initWithName:(NSString *)name;
 
-/** Initialises a newly allocated formula with the specified name and status.
+/** Returns an initialized MRBrewFormula object with the specified name, isNew, isUpdated,
+ * and isInstalled properties.
  *
  * @param name The name of the formula.
  * @param isNew A boolean value representing whether the formula is new.

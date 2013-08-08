@@ -47,7 +47,7 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 - (void)testDefaultBrewPath
 {
     // launching an NSTask with a nil path raises an exception so we guard against this
-    // by initialising brewPath to the default brew path during +(void)initialise
+    // by initialising brewPath to the default brew path during +(void)initialize
     
     STAssertTrue([[MRBrew brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
 }

@@ -35,16 +35,57 @@ typedef enum {
     MRBrewPinnedKegsLocationWatcher = 1 << 5
 } MRBrewWatcherLocation;
 
+/** A watcher waits until a file system event occurs at one or more Homebrew locations and then sends a message to the delegate object informing it of the change. For example, you could create a watcher object that sends a message to your controller when a change is made in the Homebrew formula directory, and then respond accordingly.
+ */
 @interface MRBrewWatcher : NSObject
 
+/** The delegate object for this watcher. */
 @property (weak) id<MRBrewWatcherDelegate> delegate;
+
+/** The location to watch for file system events. */
 @property (assign) MRBrewWatcherLocation brewWatcherLocation;
 
+/**---------------------------------------------------------------------------------------
+ * @name Initialising a Watcher
+ * ---------------------------------------------------------------------------------------
+ */
+
+/** Returns an initialized MRBrewWatcher object with the specified location and delegate.
+ *
+ * @param location The location to watch for file system changes.  See MRBrewWatcherLocation for
+ * the options. Multiple locations can be watched by combining constants using the C-Bitwise OR
+ * operator.
+ * @param delegate The delegate object for this watcher. The delegate will receive a message
+ * when file system events occur at the watcher's location.
+ * @return A watcher with the specified location and delegate.
+ */
 - (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
+/**---------------------------------------------------------------------------------------
+ * @name Creating a Watcher
+ * ---------------------------------------------------------------------------------------
+ */
+
+/** Returns a watcher with the specified location and delegate.
+ *
+ * @param location The location to watch for file system changes.  See MRBrewWatcherLocation for
+ * the options. Multiple locations can be watched by combining constants using the C-Bitwise OR
+ * operator.
+ * @param delegate The delegate object for this watcher. The delegate will receive a message
+ * when file system events occur at the watcher's location.
+ * @return A watcher with the specified location and delegate.
+ */
 + (id)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
+/**---------------------------------------------------------------------------------------
+ * @name Starting and Stopping a Watcher
+ * ---------------------------------------------------------------------------------------
+ */
+
+/** Causes the receiver to start watching its location for file system events. */
 - (void)startWatching;
+
+/** Causes the receiver to stop watching its location for file system events. */
 - (void)stopWatching;
 
 @end
