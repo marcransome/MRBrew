@@ -29,7 +29,7 @@
 @interface MRBrewFormula : NSObject <NSCopying>
 
 /** The name of the formula. */
-@property (strong) NSString *name;
+@property (copy) NSString *name;
 
 /** A boolean value representing whether the formula has been updated. */
 @property (assign) BOOL isUpdated;

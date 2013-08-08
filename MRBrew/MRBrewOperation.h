@@ -65,16 +65,16 @@ typedef enum {
 
 /** The operation name.
  */
-@property (strong, readonly) NSString *name;
+@property (readonly) NSString *name;
 
 /** A formula associated with the operation, where a formula is permitted (see _man brew_ for
  * details).
  */
-@property (strong, readonly) MRBrewFormula *formula;
+@property (readonly) MRBrewFormula *formula;
 
 /** An array of optional parameters for the operation (see _man brew_ for details).
  */
-@property (strong, readonly) NSArray *parameters;
+@property (readonly) NSArray *parameters;
 
 /**---------------------------------------------------------------------------------------
  * @name Initialising an Operation
