@@ -27,6 +27,9 @@
 
 @protocol MRBrewWatcherDelegate <NSObject>
 
+@optional
+
+/** This method is called when a file system event occurs at a watched location. */
 - (void)brewChangeDidOccur;
 
 @end
