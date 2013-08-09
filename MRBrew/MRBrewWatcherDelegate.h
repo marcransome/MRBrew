@@ -26,15 +26,15 @@
 #import <Foundation/Foundation.h>
 
 /** The `MRBrewWatcherDelegate` protocol defines the optional methods
- implemented by delegates of the MRBrewWatcher class.
- 
- MRBrew operations that generate output call the delegate method
- brewOperation:didGenerateOutput: _after_ completing an operation and
- immediately before calling brewOperationDidFinish:. In the case of
- MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
- called several times during the lifetime of the operation as output is received
- from brew one line at a time.
-*/
+ * implemented by delegates of the MRBrewWatcher class.
+ *
+ * MRBrew operations that generate output call the delegate method
+ * brewOperation:didGenerateOutput: _after_ completing an operation and
+ * immediately before calling brewOperationDidFinish:. In the case of
+ * MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
+ * called several times during the lifetime of the operation as output is
+ * received from brew one line at a time.
+ */
 @protocol MRBrewWatcherDelegate <NSObject>
 
 @optional
