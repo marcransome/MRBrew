@@ -25,6 +25,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MRBrew.h"
+#import "MRBrewDelegate.h"
 
 @interface MRAppDelegate : NSObject <NSApplicationDelegate, MRBrewDelegate>
 
