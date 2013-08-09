@@ -25,20 +25,50 @@
 
 #import <Foundation/Foundation.h>
 
-/** An MRBrewInstallOption object represents a single install option for a homebrew formula. */
+/** An `MRBrewInstallOption` object represents a single install option for a
+ * homebrew formula.
+ */
 @interface MRBrewInstallOption : NSObject
 
-/** The option string, as passed to homebrew (e.g. _--use-clang_). */
+/** The install option string, as passed to homebrew (e.g. `--use-clang`). */
 @property (copy) NSString *option;
 
-/** The option description. */
+/** The install option description. */
 @property (copy) NSString *description;
 
-/** A boolean value representing whether the option is to be used during an install operation. */
+/** A boolean value representing whether the install option is selected. */
 @property (assign) BOOL selected;
 
-- (id)initWithName:(NSString *)option description:(NSString *)description selected:(BOOL)selected;
+/**-----------------------------------------------------------------------------
+ * @name Initialising an Install Option
+ * -----------------------------------------------------------------------------
+ */
 
-+ (id)installOptionWithName:(NSString *)option description:(NSString *)description selected:(BOOL)selected;
+/** Returns an initialized `MRBrewInstallOption` object with the specified name,
+ * description, and selected properties.
+ *
+ * @param name The name of the install option.
+ * @param description The install option description.
+ * @param selected A boolean value representing whether the install option is
+ * selected.
+ * @return An install option with the specified properties.
+ */
+- (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
+
+/**-----------------------------------------------------------------------------
+ * @name Creating an Install Option
+ * -----------------------------------------------------------------------------
+ */
+
+/** Returns an install option with the specified name, description, and selected
+ * properties.
+ *
+ * @param name The name of the install option.
+ * @param description The install option description.
+ * @param selected A boolean value representing whether the install option is
+ * selected.
+ * @return An install option with the specified properties.
+ */
++ (id)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
 
 @end

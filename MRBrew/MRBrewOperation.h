@@ -38,90 +38,96 @@ typedef enum {
     MRBrewOperationOutdated
 } MRBrewOperationType;
 
-/** The MRBrewOperation class encapsulates the arguments associated with a single homebrew
- operation.
- 
- Methods are provided for creating an MRBrewOperation object with an NSString representing
- the operation name as defined by homebrew (e.g. `@"search"`) or alternavitely an
- MRBrewOperationType constant:
- 
-    typedef enum {
-        MRBrewOperationUpdate,
-        MRBrewOperationList,
-        MRBrewOperationSearch,
-        MRBrewOperationInstall,
-        MRBrewOperationInfo,
-        MRBrewOperationRemove,
-        MRBrewOperationOptions,
-        MRBrewOperationOutdated
-    } MRBrewOperationType;
- 
- Once an operation object has been created its operation property returns an NSString
- representing the operation name, regardless of how it was created (i.e. the
- MRBrewOperationType enumerated type is used for convenience when creating objects
- of this class, and is not stored by MRBrewOperation objects).
-*/
+/** The `MRBrewOperation` class encapsulates the arguments associated with a
+ * single homebrew operation.
+ *
+ * Methods are provided for creating an `MRBrewOperation` object with an
+ * NSString representing the operation name as defined by homebrew (e.g.
+ * `@"search"`) or alternavitely an MRBrewOperationType constant:
+ *
+ *   typedef enum {
+ *       MRBrewOperationUpdate,
+ *       MRBrewOperationList,
+ *       MRBrewOperationSearch,
+ *       MRBrewOperationInstall,
+ *       MRBrewOperationInfo,
+ *       MRBrewOperationRemove,
+ *       MRBrewOperationOptions,
+ *       MRBrewOperationOutdated
+ *   } MRBrewOperationType;
+ *
+ * Once an operation object has been created its operation property returns an
+ * NSString representing the operation name, regardless of how it was created
+ * (i.e. the MRBrewOperationType enumerated type is used for convenience when
+ * creating objects of this class, and is not stored by `MRBrewOperation`
+ * objects).
+ */
 @interface MRBrewOperation : NSObject
 
 /** The operation name.
  */
 @property (readonly) NSString *name;
 
-/** A formula associated with the operation, where a formula is permitted (see _man brew_ for
- * details).
+/** A formula associated with the operation, where a formula is permitted
+ * (see `man brew` for details).
  */
 @property (readonly) MRBrewFormula *formula;
 
-/** An array of optional parameters for the operation (see _man brew_ for details).
+/** An array of optional parameters for the operation (see _man brew_ for
+ * details).
  */
 @property (readonly) NSArray *parameters;
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Initialising an Operation
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
-/** Returns an initialized MRBrewOperation object with the specified type, formula, and
- * parameters.
+/** Returns an initialized `MRBrewOperation` object with the specified type,
+ * formula, and parameters.
  *
  * @param type The type of operation.
- * @param formula The formula (for operations that accept a formula parameter).  Specify
- * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional array of NSStrings containing parameters to the operation.
- * Specify `nil` if no additional parameters are required or accepted for the operation type
- * (see _man brew_ for details).
+ * @param formula The formula (for operations that accept a formula parameter).
+ * Specify `nil` if the operation does not require or accept a formula (see _man
+ * brew_ for details).
+ * @param parameters An optional array of NSStrings containing parameters to the
+ * operation. Parameters should be specified exactly as expected by Homebrew
+ * (e.g. @"--parameter_name"). Specify `nil` if no additional parameters are
+ * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
 - (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
-/** Returns an initialized MRBrewOperation object with the specified name, formula, and
- * and parameters.
+/** Returns an initialized `MRBrewOperation` object with the specified name,
+ * formula, and and parameters.
  *
  * @param name The name of the operation.
- * @param formula The formula (for operations that accept a formula parameter).  Specify
- * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional array of NSStrings containing parameters to the operation.
- * Parameters should be specified exactly as expected by Homebrew (e.g. @"--parameter_name").
- * Specify `nil` if no additional parameters are required or accepted for the operation type
- * (see _man brew_ for details).
+ * @param formula The formula (for operations that accept a formula parameter).
+ * Specify `nil` if the operation does not require or accept a formula (see _man
+ * brew_ for details).
+ * @param parameters An optional array of NSStrings containing parameters to the
+ * operation. Parameters should be specified exactly as expected by Homebrew
+ * (e.g. @"--parameter_name"). Specify `nil` if no additional parameters are
+ * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
 - (id)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Creating an Operation
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 /** Returns an operation with the specified type, formula, and parameters.
  *
  * @param type The type of operation.
- * @param formula The formula (for operations that accept a formula parameter).  Specify
- * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional array of NSStrings containing parameters to the operation.
- * Parameters should be specified exactly as expected by Homebrew (e.g. @"--parameter_name").
- * Specify `nil` if no additional parameters are required or accepted for the operation type
- * (see _man brew_ for details).
+ * @param formula The formula (for operations that accept a formula parameter).
+ * Specify `nil` if the operation does not require or accept a formula (see _man
+ * brew_ for details).
+ * @param parameters An optional array of NSStrings containing parameters to the
+ * operation. Parameters should be specified exactly as expected by Homebrew
+ * (e.g. @"--parameter_name"). Specify `nil` if no additional parameters are
+ * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
 + (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
@@ -129,12 +135,13 @@ typedef enum {
 /** Returns an operation with the specified type, formula, and parameters.
  *
  * @param name The name of the operation.
- * @param formula The formula (for operations that accept a formula parameter).  Specify
- * `nil` if the operation does not require or accept a formula (see _man brew_ for details).
- * @param parameters An optional array of NSStrings containing parameters to the operation.
- * Parameters should be specified exactly as expected by Homebrew (e.g. @"--parameter_name").
- * Specify `nil` if no additional parameters are required or accepted for the operation type
- * (see _man brew_ for details).
+ * @param formula The formula (for operations that accept a formula parameter).
+ * Specify `nil` if the operation does not require or accept a formula (see _man
+ * brew_ for details).
+ * @param parameters An optional array of NSStrings containing parameters to the
+ * operation. Parameters should be specified exactly as expected by Homebrew
+ * (e.g. @"--parameter_name"). Specify `nil` if no additional parameters are
+ * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
 + (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;

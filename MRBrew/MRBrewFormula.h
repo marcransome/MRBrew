@@ -1,5 +1,5 @@
 //
-//  MRFormula.h
+//  MRBrewFormula.h
 //  MRBrew
 //
 //  Copyright (c) 2013 Marc Ransome <marc.ransome@fidgetbox.co.uk>
@@ -25,7 +25,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-/** An MRBrewFormula object represents a formula in the Homebrew package manager. */
+/** An `MRBrewFormula` object represents a formula in the Homebrew package
+ * manager.
+ */
 @interface MRBrewFormula : NSObject <NSCopying>
 
 /** The name of the formula. */
@@ -40,32 +42,33 @@
 /** A boolean value representing whether the formula is installed. */
 @property (assign) BOOL isInstalled;
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Initialising a Formula
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
-/** Returns an initialized MRBrewFormula object with the specified name.
+/** Returns an initialized `MRBrewFormula` object with the specified name.
  *
  * @param name The name of the formula.
  * @return A formula with the specified name.
  */
 - (id)initWithName:(NSString *)name;
 
-/** Returns an initialized MRBrewFormula object with the specified name, isNew, isUpdated,
- * and isInstalled properties.
+/** Returns an initialized `MRBrewFormula` object with the specified name,
+ * isNew, isUpdated, and isInstalled properties.
  *
  * @param name The name of the formula.
  * @param isNew A boolean value representing whether the formula is new.
  * @param isUpdated A boolean value representing whether the formula is updated.
- * @param isInstalled A boolean value representing whether the formula is installed.
+ * @param isInstalled A boolean value representing whether the formula is
+ * installed.
  * @return A formula with the specified properties.
  */
 - (id)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Creating a Formula
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 /** Returns a formula with the specified name.
@@ -80,7 +83,8 @@
  * @param name The name of the formula.
  * @param isNew A boolean value representing whether the formula is new.
  * @param isUpdated A boolean value representing whether the formula is updated.
- * @param isInstalled A boolean value representing whether the formula is installed.
+ * @param isInstalled A boolean value representing whether the formula is
+ * installed.
  * @return A formula with the specified properties.
  */
 + (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated  isInstalled:(BOOL)isInstalled;

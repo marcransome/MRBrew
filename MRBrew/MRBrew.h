@@ -35,15 +35,15 @@ enum {
 
 /** The MRBrew class provides an interface to the Homebrew package manager.
  *
- * MRBrew's delegate methods—defined by the MRBrewDelegate protocol—allow
- * an object to receive callbacks regarding the success or failure of an operation and output
- * from the _brew_ program as it occurs.
+ * `MRBrew`'s delegate methods—defined by the MRBrewDelegate protocol—allow
+ * an object to receive callbacks regarding the success or failure of an
+ * operation and output from Homebrew as it occurs.
  */
 @interface MRBrew : NSObject
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Accessing and setting the Homebrew executable path
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 /** Returns the absolute path to the Homebrew executable. */
@@ -51,66 +51,72 @@ enum {
 
 /** Sets the absolute path to the Homebrew executable.
  *
- * @param path The absolute path to the Homebrew executable, or /usr/local/bin/brew
- * if nil.
+ * @param path The absolute path to the Homebrew executable, or
+ * `/usr/local/bin/brew` if nil.
  */
 + (void)setBrewPath:(NSString *)path;
 
-/**---------------------------------------------------------------------------------------
++ (void)setBrewWatcher:(MRBrewWatcher *)watcher;
+
+/**-----------------------------------------------------------------------------
  * @name Performing an Operation
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 /** Performs an operation.
  *
  * @param operation The operation to perform.
- * @param delegate The delegate object for the operation. The delegate will receive delegate
- * messages during the operation if output for the operation is generated and at the end of
- * a completed operation.
+ * @param delegate The delegate object for the operation. The delegate will
+ * receive delegate messages during the operation if output for the operation is
+ * generated and at the end of a completed operation.
  */
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate;
 
-/**---------------------------------------------------------------------------------------
+/**-----------------------------------------------------------------------------
  * @name Stopping an Operation
- * ---------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
-/** Cancels all active operations.  This method has no effect if there are currently no
- * active operations.  The delegate object for each operation that is cancelled will
- * receive a message indicating operation failure along with an NSError object whose
- * code matches the MRBrewErrorCancelled constant.
+/** Cancels all active operations.  This method has no effect if there are
+ * currently no active operations.  The delegate object for each operation that
+ * is cancelled will receive a message indicating operation failure along with
+ * an NSError object whose code matches the MRBrewErrorCancelled constant.
  *
- * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
- * may not cancel the operation as expected. In practice, it is unlikely that this method
- * will be called so soon after starting an operation and so there should be sufficient time
- * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * @warning Calling this method *immediately* after a call to
+ * `performOperation:delegate:` may not cancel the operation as expected. In
+ * practice, it is unlikely that this method will be called so soon after
+ * starting an operation and so there should be sufficient time to start the
+ * operation correctly and respond with the desired behaviour (i.e. the
  * operation will be cancelled as expected).
  */
 + (void)cancelAllOperations;
 
-/** Cancels a specific operation.  After cancellation, the delegate object for the
- * operation will receive a message indicating operation failure along with an NSError
- * object whose code matches the MRBrewErrorCancelled constant.
+/** Cancels a specific operation.  After cancellation, the delegate object for
+ * the operation will receive a message indicating operation failure along with
+ * an NSError object whose code matches the MRBrewErrorCancelled constant.
  *
- * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
- * may not cancel the operation as expected. In practice, it is unlikely that this method
- * will be called so soon after starting an operation and so there should be sufficient time
- * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * @warning Calling this method *immediately* after a call to
+ * `performOperation:delegate:` may not cancel the operation as expected. In
+ * practice, it is unlikely that this method will be called so soon after
+ * starting an operation and so there should be sufficient time to start the
+ * operation correctly and respond with the desired behaviour (i.e. the
  * operation will be cancelled as expected).
  *
  * @param operation The operation to cancel.
  */
 + (void)cancelOperation:(MRBrewOperation *)operation;
 
-/** Cancels all operations of a given type.  This method has no effect if there are
- * currently no active operations of the specified type.  The delegate object for each
- * operation that is cancelled will receive a message indicating operation failure along
- * with an NSError object whose code matches the MRBrewErrorCancelled constant.
+/** Cancels all operations of a given type.  This method has no effect if there
+ * are currently no active operations of the specified type.  The delegate
+ * object for each operation that is cancelled will receive a message indicating
+ * operation failure along with an NSError object whose code matches the
+ * MRBrewErrorCancelled constant.
  *
- * @warning Calling this method *immediately* after a call to `performOperation:delegate:`
- * may not cancel the operation as expected. In practice, it is unlikely that this method
- * will be called so soon after starting an operation and so there should be sufficient time
- * to start the operation correctly and respond with the desired behaviour (i.e. the
+ * @warning Calling this method *immediately* after a call to
+ * `performOperation:delegate:` may not cancel the operation as expected. In
+ * practice, it is unlikely that this method will be called so soon after
+ * starting an operation and so there should be sufficient time to start the
+ * operation correctly and respond with the desired behaviour (i.e. the
  * operation will be cancelled as expected).
  *
  * @param operationType The type of operations to cancel.

@@ -26,32 +26,35 @@
 #import <Foundation/Foundation.h>
 #import "MRBrewOperation.h"
 
-/** The MRBrewDelegate protocol defines the optional methods implemented by delegates
-of the MRBrew class.
-
-MRBrew operations that generate output call the delegate method brewOperation:didGenerateOutput:
-_after_ completing an operation and immediately before calling brewOperationDidFinish:.
-In the case of MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
-called several times during the lifetime of the operation as output is received from
-brew one line at a time.
-
-The brewOperation:didFailWithError: method is called at most once if an error occurs
-performing an operation.  The NSError object's code will correspond to a constant
-declared in MRBrewError.h:
-
-    enum {
-        MRBrewErrorUnknown = 1,
-        MRBrewErrorCancelled = 103
-    }
- 
-`MRBrewErrorUnknown` - An unknown error occured for which no details are available.
- 
-`MRBrewErrorCancelled` - The operation was cancelled by an external interrupt (SIGINT).
-
-In all three methods, the MRBrewOperation object's operation property can be compared to the
-constants defined in MRBrewConstants.h to determine the type of operation that initiated
-the method call.
-*/
+/** The `MRBrewDelegate` protocol defines the optional methods implemented by
+ * delegates of the MRBrew class.
+ *
+ * MRBrew operations that generate output call the delegate method
+ * brewOperation:didGenerateOutput: _after_ completing an operation and
+ * immediately before calling brewOperationDidFinish:. In the case of
+ * MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
+ * called several times during the lifetime of the operation as output is
+ * received from brew one line at a time.
+ *
+ * The brewOperation:didFailWithError: method is called at most once if an error
+ * occurs performing an operation. The NSError object's code will correspond to
+ * a constant declared in MRBrewError.h:
+ *
+ *    enum {
+ *        MRBrewErrorUnknown = 1,
+ *        MRBrewErrorCancelled = 103
+ *    }
+ *
+ * `MRBrewErrorUnknown` - An unknown error occured for which no details are
+ * available.
+ *
+ * `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
+ * (SIGINT).
+ *
+ * In all three methods, the MRBrewOperation object's operation property can be
+ * compared to the constants defined in MRBrewConstants.h to determine the type
+ * of operation that initiated the method call.
+ */
 @protocol MRBrewDelegate <NSObject>
 
 @optional
@@ -69,10 +72,11 @@ the method call.
  */
 - (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error;
 
-/** This method is called each time a single line of output is received from brew, allowing
- * the delegate to parse or display output at it is received.  In the case of MRBrewOperationInstall
- * operations this method may be called several times.  For other operations this method
- * is called at most once, after an operation has completed and only if output was generated.
+/** This method is called each time a single line of output is received from
+ * brew, allowing the delegate to parse or display output at it is received. In
+ * the case of MRBrewOperationInstall operations this method may be called
+ * several times. For other operations this method is called at most once,
+ * after an operation has completed and only if output was generated.
  *
  * @param operation The type of operation that generated the output.
  * @param output The output string.

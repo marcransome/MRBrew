@@ -27,10 +27,10 @@
 
 @implementation MRBrewInstallOption
 
-- (id)initWithName:(NSString *)option description:(NSString *)description selected:(BOOL)selected
+- (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
     if (self = [super init]) {
-        _option = [option copy];
+        _option = [name copy];
         _description = [description copy];
         _selected = selected;
     }
@@ -38,9 +38,9 @@
     return self;
 }
 
-+ (id)installOptionWithName:(NSString *)option description:(NSString *)description selected:(BOOL)selected
++ (id)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
-    return [[self alloc] initWithName:option description:description selected:selected];
+    return [[self alloc] initWithName:name description:description selected:selected];
 }
 
 @end
