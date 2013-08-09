@@ -35,7 +35,6 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 @interface MRBrewWatcher ()
 {
     @private
-    NSFileManager *_fileManager;
     FSEventStreamRef _eventStream;
 }
 
@@ -84,8 +83,6 @@ static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef,
     if (_eventStream) {
 		[self stopWatching];
 	}
-    
-    _fileManager = [NSFileManager defaultManager];
     
     // create an event stream context with a reference to this
     // watcher object for use by our callback method
