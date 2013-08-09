@@ -56,8 +56,6 @@ enum {
  */
 + (void)setBrewPath:(NSString *)path;
 
-+ (void)setBrewWatcher:(MRBrewWatcher *)watcher;
-
 /**-----------------------------------------------------------------------------
  * @name Performing an Operation
  * -----------------------------------------------------------------------------
