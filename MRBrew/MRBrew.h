@@ -24,14 +24,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MRBrewDelegate.h"
+#import "MRBrewOperation.h"
 
 enum {
     MRBrewErrorUnknown = 1,
     MRBrewErrorCancelled = 130
 };
 
-@class MRBrewOperation;
 @protocol MRBrewDelegate;
 
 /** The MRBrew class provides an interface to the Homebrew package manager.
