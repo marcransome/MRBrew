@@ -64,6 +64,20 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return [[self alloc] initWithLocation:location delegate:delegate];
 }
 
+static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef,
+        void *userData,
+        size_t numEvents,
+        void *eventPaths,
+        const FSEventStreamEventFlags eventFlags[],
+        const FSEventStreamEventId eventIds[])
+{
+    MRBrewWatcher *informer = (__bridge MRBrewWatcher *)userData;
+
+    if ([[informer delegate] respondsToSelector:@selector(brewChangeDidOccur)]) {
+        [[informer delegate] performSelector:@selector(brewChangeDidOccur)];
+    }
+}
+
 - (void)startWatching
 {
     // stop existing event stream if one exists
@@ -138,20 +152,6 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 	FSEventStreamInvalidate(_eventStream);
 	FSEventStreamRelease(_eventStream);
 	_eventStream = NULL;
-}
-
-static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef,
-                       void *userData,
-                       size_t numEvents,
-                       void *eventPaths,
-                       const FSEventStreamEventFlags eventFlags[],
-                       const FSEventStreamEventId eventIds[])
-{
-    MRBrewWatcher *informer = (__bridge MRBrewWatcher *)userData;
-    
-    if ([[informer delegate] respondsToSelector:@selector(brewChangeDidOccur)]) {
-        [[informer delegate] performSelector:@selector(brewChangeDidOccur)];
-    }
 }
 
 @end
