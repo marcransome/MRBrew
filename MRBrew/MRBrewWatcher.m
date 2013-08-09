@@ -63,12 +63,7 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return [[self alloc] initWithLocation:location delegate:delegate];
 }
 
-static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef,
-        void *userData,
-        size_t numEvents,
-        void *eventPaths,
-        const FSEventStreamEventFlags eventFlags[],
-        const FSEventStreamEventId eventIds[])
+static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef, void *userData, size_t numEvents, void *eventPaths, const FSEventStreamEventFlags eventFlags[], const FSEventStreamEventId eventIds[])
 {
     MRBrewWatcher *informer = (__bridge MRBrewWatcher *)userData;
 

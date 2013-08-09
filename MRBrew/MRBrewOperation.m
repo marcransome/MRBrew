@@ -29,9 +29,7 @@
 
 @implementation MRBrewOperation
 
-- (id)initWithType:(MRBrewOperationType)type
-           formula:(MRBrewFormula *)formula
-        parameters:(NSArray *)parameters
+- (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     if (self = [super init]) {
         switch (type) {
@@ -67,9 +65,7 @@
     return self;
 }
 
-- (id)initWithName:(NSString *)name
-           formula:(MRBrewFormula *)formula
-        parameters:(NSArray *)parameters
+- (id)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     if (self = [super init]) {
         _name = [name copy];
@@ -80,9 +76,7 @@
     return self;
 }
 
-+ (id)operationWithType:(MRBrewOperationType)type
-                formula:(MRBrewFormula *)formula
-             parameters:(NSArray *)parameters;
++ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 {
     return [[self alloc] initWithType:type formula:formula parameters:parameters];
 }
