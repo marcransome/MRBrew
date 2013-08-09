@@ -24,6 +24,7 @@
 //
 
 #import "MRBrew.h"
+#import "MRBrewDelegate.h"
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
 
