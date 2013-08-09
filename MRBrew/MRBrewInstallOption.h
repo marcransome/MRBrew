@@ -31,7 +31,7 @@
 @interface MRBrewInstallOption : NSObject
 
 /** The install option string, as passed to homebrew (e.g. `--use-clang`). */
-@property (copy) NSString *option;
+@property (copy) NSString *name;
 
 /** The install option description. */
 @property (copy) NSString *description;

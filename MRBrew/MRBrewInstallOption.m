@@ -30,7 +30,7 @@
 - (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
     if (self = [super init]) {
-        _option = [name copy];
+        _name = [name copy];
         _description = [description copy];
         _selected = selected;
     }
