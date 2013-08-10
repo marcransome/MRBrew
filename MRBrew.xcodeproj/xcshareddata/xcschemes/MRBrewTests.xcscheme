@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19453D5E17901C1100064BC7"
-               BuildableName = "MRBrew.app"
-               BlueprintName = "MRBrew"
+               BlueprintIdentifier = "193A0B5F179D3C6C00C65291"
+               BuildableName = "MRBrewTests.octest"
+               BlueprintName = "MRBrewTests"
                ReferencedContainer = "container:MRBrew.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -39,15 +39,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19453D5E17901C1100064BC7"
-            BuildableName = "MRBrew.app"
-            BlueprintName = "MRBrew"
-            ReferencedContainer = "container:MRBrew.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -58,15 +49,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19453D5E17901C1100064BC7"
-            BuildableName = "MRBrew.app"
-            BlueprintName = "MRBrew"
-            ReferencedContainer = "container:MRBrew.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -76,15 +58,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19453D5E17901C1100064BC7"
-            BuildableName = "MRBrew.app"
-            BlueprintName = "MRBrew"
-            ReferencedContainer = "container:MRBrew.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
