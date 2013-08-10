@@ -27,6 +27,7 @@
 #import "MRBrewDelegate.h"
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
+#import "MRBrewWatcher.h"
 
 #ifndef __has_feature
     #define __has_feature(x) 0 // for compatibility with non-clang compilers
@@ -41,6 +42,8 @@ static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
 static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
 
 static NSString* MRBrewPath = @"/usr/local/bin/brew";
+
+static MRBrewWatcher *brewWatcher = nil;
 
 static NSMutableArray *taskArray;
 static NSLock *taskArrayLock;
@@ -68,8 +71,18 @@ static NSOperationQueue *backgroundQueue;
         MRBrewPath = @"/usr/local/bin/brew";
 }
 
++ (void)setBrewWatcher:(MRBrewWatcher *)watcher
+{
+    brewWatcher = watcher;
+}
+
++ (MRBrewWatcher *)brewWatcher
+{
+    return brewWatcher;
+}
+
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
-{    
+{
     // construct command-line arguments for brew command
     NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation name]];
     if ([operation parameters])
@@ -140,7 +153,7 @@ static NSOperationQueue *backgroundQueue;
             }
         }
         else {
-            NSInteger errorCode = [currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown;
+            NSInteger errorCode = ([currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown);
             NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
             
             if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
