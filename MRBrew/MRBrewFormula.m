@@ -45,7 +45,7 @@
 - (id)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled
 {
     if (self = [super init]) {
-        _name = name == nil ? @"" : [name copy];  // replace nil with empty string
+        _name = (name == nil ? @"" : [name copy]);  // replace nil with empty string
         _isUpdated = isUpdated;
         _isNew = isNew;
         _isInstalled = isInstalled;
