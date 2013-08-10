@@ -43,7 +43,7 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 @implementation MRBrewWatcher
 
 - (id)init {
-    return [self initWithLocation:0 delegate:nil];
+    return [self initWithLocation:(MRBrewWatcherLocation)0 delegate:nil];
 }
 
 - (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
