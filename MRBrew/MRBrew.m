@@ -140,7 +140,7 @@ static NSOperationQueue *backgroundQueue;
             }
         }
         else {
-            NSInteger errorCode = [currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown;
+            NSInteger errorCode = ([currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown);
             NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
             
             if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
