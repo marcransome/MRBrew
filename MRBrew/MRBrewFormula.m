@@ -26,6 +26,10 @@
 #import "MRBrewFormula.h"
 
 @implementation MRBrewFormula
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark -
+#pragma mark Lifecycle
 
 - (id)init {
     return [self initWithName:nil
@@ -70,16 +74,8 @@
                           isInstalled:isInstalled];
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    MRBrewFormula *copy = [[MRBrewFormula alloc] init];
-    [copy setName:[[self name] copy]];
-    [copy setIsUpdated:[self isUpdated]];
-    [copy setIsNew:[self isNew]];
-    [copy setIsInstalled:[self isInstalled]];
-    
-    return copy;
-}
+#pragma mark -
+#pragma mark Equality
 
 - (BOOL)isEqualToFormula:(MRBrewFormula *)formula
 {
@@ -99,6 +95,20 @@
         return NO;
     
     return YES;
+}
+
+#pragma mark -
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MRBrewFormula *copy = [[MRBrewFormula alloc] init];
+    [copy setName:[[self name] copy]];
+    [copy setIsUpdated:[self isUpdated]];
+    [copy setIsNew:[self isNew]];
+    [copy setIsInstalled:[self isInstalled]];
+    
+    return copy;
 }
 
 @end

@@ -47,6 +47,10 @@ static NSLock *taskArrayLock;
 static NSOperationQueue *backgroundQueue;
 
 @implementation MRBrew
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark -
+#pragma mark Lifecycle
 
 + (void)initialize
 {
@@ -54,6 +58,9 @@ static NSOperationQueue *backgroundQueue;
     taskArrayLock = [[NSLock alloc] init];
     backgroundQueue = [[NSOperationQueue alloc] init];
 }
+
+#pragma mark -
+#pragma mark Brew Path
 
 + (NSString *)brewPath
 {
@@ -67,6 +74,9 @@ static NSOperationQueue *backgroundQueue;
     else
         MRBrewPath = @"/usr/local/bin/brew";
 }
+
+#pragma mark -
+#pragma mark Operation Methods
 
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    

@@ -41,6 +41,10 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 @end
 
 @implementation MRBrewWatcher
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark -
+#pragma mark Lifecycle
 
 - (id)init {
     return [self initWithLocation:(MRBrewWatcherLocation)0 delegate:nil];
@@ -63,6 +67,9 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return [[self alloc] initWithLocation:location delegate:delegate];
 }
 
+#pragma mark -
+#pragma mark FSEvents Callback
+
 static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef, void *userData, size_t numEvents, void *eventPaths, const FSEventStreamEventFlags eventFlags[], const FSEventStreamEventId eventIds[])
 {
     MRBrewWatcher *informer = (__bridge MRBrewWatcher *)userData;
@@ -71,6 +78,9 @@ static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef, void *user
         [[informer delegate] performSelector:@selector(brewChangeDidOccur)];
     }
 }
+
+#pragma mark -
+#pragma mark Control
 
 - (void)startWatching
 {

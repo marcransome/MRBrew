@@ -28,6 +28,10 @@
 #import "MRBrewConstants.h"
 
 @implementation MRBrewOperation
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark -
+#pragma mark Lifecycle
 
 - (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
@@ -130,6 +134,9 @@
 {
     return [[self alloc] initWithType:MRBrewOperationOutdated formula:nil parameters:nil];
 }
+
+#pragma mark -
+#pragma mark Equality
 
 - (BOOL)isEqualToOperation:(MRBrewOperation *)operation
 {

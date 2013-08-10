@@ -26,6 +26,10 @@
 #import "MRBrewInstallOption.h"
 
 @implementation MRBrewInstallOption
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark -
+#pragma mark Lifecycle
 
 - (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
