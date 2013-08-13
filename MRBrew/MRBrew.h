@@ -78,7 +78,7 @@ enum {
 /** Cancels all active operations.  This method has no effect if there are
  * currently no active operations.  The delegate object for each operation that
  * is cancelled will receive a message indicating operation failure along with
- * an NSError object whose code matches the MRBrewErrorCancelled constant.
+ * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
  *
  * @warning Calling this method *immediately* after a call to
  * `performOperation:delegate:` may not cancel the operation as expected. In
@@ -91,7 +91,7 @@ enum {
 
 /** Cancels a specific operation.  After cancellation, the delegate object for
  * the operation will receive a message indicating operation failure along with
- * an NSError object whose code matches the MRBrewErrorCancelled constant.
+ * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
  *
  * @warning Calling this method *immediately* after a call to
  * `performOperation:delegate:` may not cancel the operation as expected. In
@@ -107,8 +107,8 @@ enum {
 /** Cancels all operations of a given type.  This method has no effect if there
  * are currently no active operations of the specified type.  The delegate
  * object for each operation that is cancelled will receive a message indicating
- * operation failure along with an NSError object whose code matches the
- * MRBrewErrorCancelled constant.
+ * operation failure along with an NSError object whose `code` matches the
+ * `MRBrewErrorCancelled` constant.
  *
  * @warning Calling this method *immediately* after a call to
  * `performOperation:delegate:` may not cancel the operation as expected. In

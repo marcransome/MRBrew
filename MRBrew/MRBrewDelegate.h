@@ -32,13 +32,13 @@
  * MRBrew operations that generate output call the delegate method
  * brewOperation:didGenerateOutput: _after_ completing an operation and
  * immediately before calling brewOperationDidFinish:. In the case of
- * MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
+ * `MRBrewOperationInstall` operations brewOperation:didGenerateOutput: may be
  * called several times during the lifetime of the operation as output is
- * received from brew one line at a time.
+ * received from Homebrew one line at a time.
  *
  * The brewOperation:didFailWithError: method is called at most once if an error
- * occurs performing an operation. The NSError object's code will correspond to
- * a constant declared in MRBrewError.h:
+ * occurs performing an operation. The NSError object's `code` will correspond
+ * to a constant declared in MRBrewError.h:
  *
  *    enum {
  *        MRBrewErrorUnknown = 1,
@@ -51,9 +51,14 @@
  * `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
  * (SIGINT).
  *
- * In all three methods, the MRBrewOperation object's operation property can be
+ * In all three methods, the MRBrewOperation object's `name` property can be
  * compared to the constants defined in MRBrewConstants.h to determine the type
  * of operation that initiated the method call.
+ *
+ * If you need to respond in a certain way to a specific operation then you
+ * should retain the operation object and use the isEqualToOperation: method of
+ * the MRBrewOperation class to confirm the operation that generated the
+ * callback, and respond accordingly in your delegate methods.
  */
 @protocol MRBrewDelegate <NSObject>
 
@@ -72,11 +77,11 @@
  */
 - (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error;
 
-/** This method is called each time a single line of output is received from
- * brew, allowing the delegate to parse or display output at it is received. In
- * the case of MRBrewOperationInstall operations this method may be called
- * several times. For other operations this method is called at most once,
- * after an operation has completed and only if output was generated.
+/** This method is called when output is received from Homebrew. For
+ * `MRBrewOperationInstall` operations this method will be called each time
+ * Homebrew generates a single line of output. For other operations this method
+ * is called at most once, after an operation has completed and only if output
+ * was generated.
  *
  * @param operation The type of operation that generated the output.
  * @param output The output string.

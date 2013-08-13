@@ -26,11 +26,11 @@
 #import <Foundation/Foundation.h>
 
 /** An `MRBrewInstallOption` object represents a single install option for a
- * homebrew formula.
+ * Homebrew formula.
  */
 @interface MRBrewInstallOption : NSObject
 
-/** The install option string, as passed to homebrew (e.g. `--use-clang`). */
+/** The install option string, as passed to Homebrew (e.g. `--use-clang`). */
 @property (copy) NSString *name;
 
 /** The install option description. */
