@@ -27,38 +27,38 @@
 #import "MRBrewOperation.h"
 
 /** The `MRBrewDelegate` protocol defines the optional methods implemented by
- * delegates of the MRBrew class.
- *
- * MRBrew operations that generate output call the delegate method
- * brewOperation:didGenerateOutput: _after_ completing an operation and
- * immediately before calling brewOperationDidFinish:. In the case of
- * `MRBrewOperationInstall` operations brewOperation:didGenerateOutput: may be
- * called several times during the lifetime of the operation as output is
- * received from Homebrew one line at a time.
- *
- * The brewOperation:didFailWithError: method is called at most once if an error
- * occurs performing an operation. The NSError object's `code` will correspond
- * to a constant declared in MRBrewError.h:
- *
- *    enum {
- *        MRBrewErrorUnknown = 1,
- *        MRBrewErrorCancelled = 103
- *    }
- *
- * `MRBrewErrorUnknown` - An unknown error occured for which no details are
- * available.
- *
- * `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
- * (SIGINT).
- *
- * In all three methods, the MRBrewOperation object's `name` property can be
- * compared to the constants defined in MRBrewConstants.h to determine the type
- * of operation that initiated the method call.
- *
- * If you need to respond in a certain way to a specific operation then you
- * should retain the operation object and use the isEqualToOperation: method of
- * the MRBrewOperation class to confirm the operation that generated the
- * callback, and respond accordingly in your delegate methods.
+ delegates of the MRBrew class.
+ 
+ MRBrew operations that generate output call the delegate method
+ brewOperation:didGenerateOutput: _after_ completing an operation and
+ immediately before calling brewOperationDidFinish:. In the case of
+ `MRBrewOperationInstall` operations brewOperation:didGenerateOutput: may be
+ called several times during the lifetime of the operation as output is
+ received from Homebrew one line at a time.
+ 
+ The brewOperation:didFailWithError: method is called at most once, if an error
+ occurs performing an operation. The NSError object's `code` will correspond
+ to a constant declared in MRBrewError.h:
+ 
+    enum {
+        MRBrewErrorUnknown = 1,
+        MRBrewErrorCancelled = 103
+    }
+ 
+ `MRBrewErrorUnknown` - An unknown error occured for which no details are
+  available.
+ 
+ `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
+ (SIGINT).
+ 
+ In all three methods, the MRBrewOperation object's `name` property can be
+ compared to the constants defined in MRBrewConstants.h to determine the type
+ of operation that initiated the method call.
+ 
+ If you need to respond in a certain way to a specific operation then you
+ should retain the operation object and use the isEqualToOperation: method of
+ the MRBrewOperation class to confirm the operation that generated the
+ callback, and respond accordingly in your delegate methods.
  */
 @protocol MRBrewDelegate <NSObject>
 

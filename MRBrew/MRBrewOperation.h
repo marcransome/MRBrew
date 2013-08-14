@@ -39,27 +39,27 @@ typedef enum {
 } MRBrewOperationType;
 
 /** The `MRBrewOperation` class encapsulates the arguments associated with a
- * single Homebrew operation.
- *
- * Methods are provided for creating an `MRBrewOperation` object with an
- * NSString representing the operation name as defined by Homebrew (e.g.
- * `@"search"`) or alternavitely an MRBrewOperationType constant:
- *
- *   typedef enum {
- *       MRBrewOperationUpdate,
- *       MRBrewOperationList,
- *       MRBrewOperationSearch,
- *       MRBrewOperationInstall,
- *       MRBrewOperationInfo,
- *       MRBrewOperationRemove,
- *       MRBrewOperationOptions,
- *       MRBrewOperationOutdated
- *   } MRBrewOperationType;
- *
- * Once an operation object has been created its `name` property returns an
- * NSString representing the operation name, regardless of how it was created
- * (i.e. the MRBrewOperationType enumerated type is used for convenience when
- * creating objects of this class, and is not retained).
+ single Homebrew operation.
+ 
+ Methods are provided for creating an `MRBrewOperation` object with an
+ NSString representing the operation name as defined by Homebrew (e.g.
+ `@"search"`) or alternavitely an MRBrewOperationType constant:
+
+    typedef enum {
+        MRBrewOperationUpdate,
+        MRBrewOperationList,
+        MRBrewOperationSearch,
+        MRBrewOperationInstall,
+        MRBrewOperationInfo,
+        MRBrewOperationRemove,
+        MRBrewOperationOptions,
+        MRBrewOperationOutdated
+    } MRBrewOperationType;
+ 
+ Once an operation object has been created its `name` property returns an
+ NSString representing the operation name, regardless of how it was created
+ (i.e. the MRBrewOperationType enumerated type is used for convenience when
+ creating objects of this class, and is not retained).
  */
 @interface MRBrewOperation : NSObject
 
