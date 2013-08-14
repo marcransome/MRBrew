@@ -63,8 +63,7 @@ typedef enum {
  */
 @interface MRBrewOperation : NSObject
 
-/** The operation name.
- */
+/** The operation name. */
 @property (readonly) NSString *name;
 
 /** A formula associated with the operation, where a formula is permitted
