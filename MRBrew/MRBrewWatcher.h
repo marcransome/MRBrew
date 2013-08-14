@@ -64,6 +64,13 @@ typedef enum {
  for file system events at a different path entirely, create your watcher object
  using either initWithPath:delegate: or watcherWithPath:delegate: and specify
  the absolute path to the directory to watch for changes.
+ 
+ @warning After starting a watcher object, calls to the MRBrew class method
+ performOperation:delegate: may result in file system events occuring at the
+ watched location which will trigger a delegate callback. If you are only
+ interested in external events then you should stop the watcher object prior to
+ calling performOperation:delegate: and restart it once the operation has
+ completed.
  */
 @interface MRBrewWatcher : NSObject
 
