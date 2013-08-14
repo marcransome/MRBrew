@@ -25,21 +25,23 @@
 
 #import <Foundation/Foundation.h>
 
-/** The `MRBrewWatcherDelegate` protocol defines the optional methods
- * implemented by delegates of the MRBrewWatcher class.
+/** The `MRBrewWatcherDelegate` protocol defines the optional method
+ * brewChangeDidOccur: that is implemented by delegates of the MRBrewWatcher
+ * class.
  *
- * MRBrew operations that generate output call the delegate method
- * brewOperation:didGenerateOutput: _after_ completing an operation and
- * immediately before calling brewOperationDidFinish:. In the case of
- * MRBrewOperationInstall operations brewOperation:didGenerateOutput: may be
- * called several times during the lifetime of the operation as output is
- * received from brew one line at a time.
+ * MRBrewWatcher objects call the delegate method brewChangeDidOccur: when a
+ * file system event occurs at a watched loaction.  An array of strings
+ * representing the directory paths where changes occured is passed to this
+ * method.
  */
 @protocol MRBrewWatcherDelegate <NSObject>
 
 @optional
 
-/** This method is called when an event occurs at a watched location. */
-- (void)brewChangeDidOccur;
+/** This method is called when a file system event occurs at a watched location.
+ *
+ * @param paths An array of strings containing the paths where changes occured.
+ */
+- (void)brewChangeDidOccur:(NSArray *)paths;
 
 @end
