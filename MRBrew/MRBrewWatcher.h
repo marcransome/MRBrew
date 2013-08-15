@@ -35,17 +35,17 @@ typedef enum {
     MRBrewWatcherPinnedKegsLocation = 1 << 5
 } MRBrewWatcherLocation;
 
-/** An `MRBrewWatcher` waits until a file system event occurs in a Homebrew
- directory and then sends a message—defined by the MRBrewWatcherDelegate
- protocol—to the delegate object informing it of the change. For example, you
- could create a watcher object that sends a message to your controller when a
- change is made in the Homebrew formula directory, and respond accordingly.
+/** An `MRBrewWatcher` waits for a file system event (e.g. file modification,
+ deletion or creation) to occur in a Homebrew directory and then sends a
+ message—defined by the MRBrewWatcherDelegate protocol—to the delegate object
+ informing it of the change. For example, you could create a watcher object that
+ sends a message to your controller when a change is made in the Homebrew
+ formula directory, and respond accordingly.
  
  To create an `MRBrewWatcher` object that watches one of the default Homebrew
  directories for changes, use the initWithLocation:delegate: or
- watcherWithLocation:delegate: methods and specify one of the constants
- defined by the MRBrewWatcherLocation enumerated type as the location to watch
- for changes:
+ watcherWithLocation:delegate: methods and specify one of the
+ MRBrewWatcherLocation constants as the location to watch for changes:
  
     typedef enum {
         MRBrewWatcherLibraryLocation    = 1 << 0,
@@ -64,6 +64,9 @@ typedef enum {
  for file system events at a different path entirely, create your watcher object
  using either initWithPath:delegate: or watcherWithPath:delegate: and specify
  the absolute path to the directory to watch for changes.
+ 
+ To start watching for changes call startWatching, and to stop watching call the
+ stopWatching method.
  
  @warning After starting a watcher object, calls to the MRBrew class method
  performOperation:delegate: may result in file system events occuring at the
@@ -134,10 +137,10 @@ typedef enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Causes the receiver to start watching its location for events. */
+/** Causes the receiver to start watching for file sysetm events. */
 - (void)startWatching;
 
-/** Causes the receiver to stop watching its location for events. */
+/** Causes the receiver to stop watching for file sysetm events. */
 - (void)stopWatching;
 
 @end

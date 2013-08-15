@@ -30,9 +30,9 @@
  * class.
  *
  * MRBrewWatcher objects call the delegate method brewChangeDidOccur: when a
- * file system event occurs at a watched loaction.  An array of strings
- * representing the directory paths where changes occured is passed to this
- * method.
+ * file system event occurs at a watched loaction (e.g. file modification,
+ * deletion or creation).  An array of strings representing the directory paths
+ * where changes occured is passed to this method.
  */
 @protocol MRBrewWatcherDelegate <NSObject>
 
@@ -41,6 +41,7 @@
 /** This method is called when a file system event occurs at a watched location.
  *
  * @param paths An array of strings containing the paths where changes occured.
+ * One or more changes may have occured at each path present in the array.
  */
 - (void)brewChangeDidOccur:(NSArray *)paths;
 
