@@ -69,7 +69,7 @@ typedef enum {
  stopWatching method.
  
  @warning After starting a watcher object, calls to the MRBrew class method
- performOperation:delegate: may result in file system events occuring at the
+ performOperation:delegate: may result in file system events occurring at the
  watched location which will trigger a delegate callback. If you are only
  interested in external events then you should stop the watcher object prior to
  calling performOperation:delegate: and restart it once the operation has
@@ -137,10 +137,10 @@ typedef enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Causes the receiver to start watching for file sysetm events. */
+/** Causes the receiver to start watching for file system events. */
 - (void)startWatching;
 
-/** Causes the receiver to stop watching for file sysetm events. */
+/** Causes the receiver to stop watching for file system events. */
 - (void)stopWatching;
 
 @end

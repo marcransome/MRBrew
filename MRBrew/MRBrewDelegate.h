@@ -45,7 +45,7 @@
         MRBrewErrorCancelled = 103
     }
  
- `MRBrewErrorUnknown` - An unknown error occured for which no details are
+ `MRBrewErrorUnknown` - An unknown error occurred for which no details are
   available.
  
  `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
