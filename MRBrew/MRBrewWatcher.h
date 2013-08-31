@@ -143,4 +143,7 @@ typedef enum {
 /** Causes the receiver to stop watching for file system events. */
 - (void)stopWatching;
 
+/** Indicates whether the receiver is watching. */
+- (BOOL)isWatching;
+
 @end
