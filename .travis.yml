@@ -1,5 +1,2 @@
 language: objective-c
-before_install:
-        - brew update
-        - brew install xctool
 script: xctool -project MRBrew.xcodeproj -scheme 'MRBrew' -configuration Release build test
