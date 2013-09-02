@@ -183,7 +183,7 @@ typedef enum {
  */
 + (id)optionsOperation:(MRBrewFormula *)formula;
 
-/* Returns an outdated operation. */
+/** Returns an outdated operation. */
 + (id)outdatedOperation;
 
 /** Compares the receiver to another operation.
