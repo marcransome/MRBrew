@@ -27,6 +27,7 @@
 #import "MRBrewDelegate.h"
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
+#import "MRBrewWorker.h"
 
 #ifndef __has_feature
     #define __has_feature(x) 0 // for compatibility with non-clang compilers
@@ -38,12 +39,9 @@
 
 static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
 static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
-static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
 
 static NSString* MRBrewPath = @"/usr/local/bin/brew";
 
-static NSMutableArray *taskArray;
-static NSLock *taskArrayLock;
 static NSOperationQueue *backgroundQueue;
 
 @implementation MRBrew
@@ -54,8 +52,6 @@ static NSOperationQueue *backgroundQueue;
 
 + (void)initialize
 {
-    taskArray = [[NSMutableArray alloc] init];
-    taskArrayLock = [[NSLock alloc] init];
     backgroundQueue = [[NSOperationQueue alloc] init];
 }
 
@@ -87,120 +83,31 @@ static NSOperationQueue *backgroundQueue;
     if ([operation formula])
         [arguments addObject:[[operation formula] name]];
     
-    // add a new task to the task array
-    NSTask *currentTask = [[NSTask alloc] init];
-    NSMutableDictionary *taskWithOperation = [NSMutableDictionary dictionary];
-    [taskWithOperation setObject:currentTask forKey:MRBrewTaskIdentifier];
-    [taskWithOperation setObject:operation forKey:MRBrewOperationIdentifier];
-    
-    [taskArrayLock lock];
-    [taskArray addObject:taskWithOperation];
-    [taskArrayLock unlock];
-
-    // create a file handle for extracting task output
-    NSPipe *outputPipe = [NSPipe pipe];
-    NSFileHandle *readHandle = [outputPipe fileHandleForReading];
-    
-    // configure and launch a brew task instance
-    [currentTask setLaunchPath:MRBrewPath];
-    [currentTask setArguments:arguments];
-    [currentTask setStandardOutput:outputPipe];
-    
-    [currentTask launch];
-    
-    [backgroundQueue addOperationWithBlock:^{
-        NSData *readData;
-        
-        if ([[operation name] isEqualToString:MRBrewOperationInstallIdentifier]) {
-            // delegate callback for line output from brew
-            if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
-                while ((readData = [readHandle availableData]) && [readData length] > 0) {
-                    NSString *output = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
-                    if (![output isEqualToString:@"\n"]) {                    
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            [delegate brewOperation:operation didGenerateOutput:output];
-                        }];
-                    }
-                }
-            }
-
-            [currentTask waitUntilExit];
-        }
-        else {
-            NSData *data = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-            NSString *stringOutput = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            [currentTask waitUntilExit];
-            
-            if ([stringOutput length] > 0 && ![stringOutput isEqualToString:@"\n"]) {
-                if ([delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        [delegate brewOperation:operation didGenerateOutput:stringOutput];
-                    }];
-                }
-            }
-        }
-        
-        if ([currentTask terminationStatus] == 0)
-        {
-            if ([delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [delegate brewOperationDidFinish:operation];
-                }];
-            }
-        }
-        else {
-            NSInteger errorCode = ([currentTask terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown);
-            NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
-            
-            if ([delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [delegate brewOperation:operation didFailWithError:error];
-                }];
-            }
-        }
-
-        [taskArrayLock lock];
-        [taskArray removeObject:taskWithOperation];
-        [taskArrayLock unlock];
-    }];
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    [worker setArguments:arguments];
+    [worker setOperation:operation];
+    [worker setDelegate:delegate];
+    [backgroundQueue addOperation:worker];
 }
 
 + (void)cancelAllOperations
 {
-    [taskArrayLock lock];
-    
-    if ([taskArray count] > 0) {
-        for (NSDictionary *task in taskArray) {
-            [[task objectForKey:MRBrewTaskIdentifier] interrupt];
-        }
-    }
-    
-    [taskArrayLock unlock];
+    [backgroundQueue cancelAllOperations];
 }
 
 + (void)cancelOperation:(MRBrewOperation *)operation
 {
-    [taskArrayLock lock];
-    
-    if ([taskArray count] > 0) {
-        for (NSDictionary *task in taskArray) {
-            if ([[task objectForKey:MRBrewOperationIdentifier] isEqual:operation]) {
-                [[task objectForKey:MRBrewTaskIdentifier] interrupt];
-                
-                break;
-            }
+    for (MRBrewWorker *worker in [backgroundQueue operations]) {
+        if ([[worker operation] isEqualToOperation:operation]) {
+            [worker cancel];
+            break;
         }
     }
-    
-    [taskArrayLock unlock];
 }
 
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType
 {
-    [taskArrayLock lock];
-    
-    if ([taskArray count] > 0) {   
+    if ([backgroundQueue operationCount] > 0) {
         NSString *operationName;
         switch (operationType) {
             case MRBrewOperationInfo:
@@ -228,14 +135,13 @@ static NSOperationQueue *backgroundQueue;
                 operationName = MRBrewOperationOutdatedIdentifier;
                 break;
         }
-
-        for (NSDictionary *task in taskArray) {
-            if ([[[task objectForKey:MRBrewOperationIdentifier] name] isEqualToString: operationName])
-            [[task objectForKey:MRBrewTaskIdentifier] interrupt];
+        
+        for (MRBrewWorker *worker in [backgroundQueue operations]) {
+            if ([[[worker operation] name] isEqualToString:operationName]) {
+                [worker cancel];
+            }
         }
     }
-    
-    [taskArrayLock unlock];
 }
 
 @end

@@ -30,6 +30,7 @@
 		19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
 		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
+		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,8 @@
 		195EE913179A37A800CB1B04 /* MRBrewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewConstants.m; sourceTree = "<group>"; };
 		196FEF1417B0510100E97597 /* MRBrewWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcher.h; sourceTree = "<group>"; };
 		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
+		197B2F7817D676D1000519BF /* MRBrewWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorker.h; sourceTree = "<group>"; };
+		197B2F7917D676D1000519BF /* MRBrewWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +186,8 @@
 				19453D8717901C3700064BC7 /* MRBrewOperation.m */,
 				196FEF1417B0510100E97597 /* MRBrewWatcher.h */,
 				196FEF1517B0510100E97597 /* MRBrewWatcher.m */,
+				197B2F7817D676D1000519BF /* MRBrewWorker.h */,
+				197B2F7917D676D1000519BF /* MRBrewWorker.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				190B080517B1B89C002F8E20 /* Protocols */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
@@ -333,6 +338,7 @@
 				19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */,
 				195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */,
 				196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */,
+				197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

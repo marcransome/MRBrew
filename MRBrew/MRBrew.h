@@ -32,6 +32,7 @@ enum {
 };
 
 @protocol MRBrewDelegate;
+@class MRBrewWorker;
 
 /** The MRBrew class provides an interface to the Homebrew package manager.
  *
