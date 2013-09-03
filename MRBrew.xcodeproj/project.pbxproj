@@ -31,6 +31,7 @@
 		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
+		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -315,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */,
 				193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */,
 				193A0B72179D3C7E00C65291 /* MRBrewConstants.m in Sources */,
 				193A0B73179D3C7E00C65291 /* MRBrewFormula.m in Sources */,
