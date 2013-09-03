@@ -61,20 +61,20 @@ typedef enum {
  MRBrewOperationType constants are used for convenience when creating objects of
  this class and are not retained).
  */
-@interface MRBrewOperation : NSObject
+@interface MRBrewOperation : NSObject <NSCopying>
 
 /** The operation name. */
-@property (readonly) NSString *name;
+@property (copy) NSString *name;
 
 /** A formula associated with the operation, where a formula is permitted
  * (see `man brew` for details).
  */
-@property (readonly) MRBrewFormula *formula;
+@property (copy) MRBrewFormula *formula;
 
 /** An array of optional parameters for the operation (see _man brew_ for
  * details).
  */
-@property (readonly) NSArray *parameters;
+@property (copy) NSArray *parameters;
 
 /**-----------------------------------------------------------------------------
  * @name Initialising an Operation

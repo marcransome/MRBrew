@@ -170,4 +170,17 @@
     return YES;
 }
 
+#pragma mark -
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MRBrewOperation *copy = [[MRBrewOperation alloc] init];
+    [copy setName:[[self name] copy]];
+    [copy setFormula:[[self formula] copy]];
+    [copy setParameters:[[self parameters] copy]];
+    
+    return copy;
+}
+
 @end
