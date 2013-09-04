@@ -139,7 +139,7 @@ static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
     }
     else {
         // delegate callback for operation failure
-        NSInteger errorCode = ([_task terminationStatus] == MRBrewErrorCancelled ? MRBrewErrorCancelled : MRBrewErrorUnknown);
+        NSInteger errorCode = MRBrewErrorUnknown;
         NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
         if ([self.delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{

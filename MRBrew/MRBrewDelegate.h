@@ -41,15 +41,11 @@
  to a constant declared in MRBrewError.h:
  
     enum {
-        MRBrewErrorUnknown = 1,
-        MRBrewErrorCancelled = 103
+        MRBrewErrorUnknown = 1
     }
  
- `MRBrewErrorUnknown` - An unknown error occurred for which no details are
-  available.
- 
- `MRBrewErrorCancelled` - The operation was cancelled by an external interrupt
- (SIGINT).
+ `MRBrewErrorUnknown` - An unknown Homebrew error occurred for which no details
+ are available.
  
  In all three methods, the MRBrewOperation object's `name` property can be
  compared to the constants defined in MRBrewConstants.h to determine the type

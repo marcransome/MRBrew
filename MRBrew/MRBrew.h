@@ -27,8 +27,7 @@
 #import "MRBrewOperation.h"
 
 enum {
-    MRBrewErrorUnknown = 1,
-    MRBrewErrorCancelled = 130
+    MRBrewErrorUnknown = 1
 };
 
 @protocol MRBrewDelegate;
@@ -80,26 +79,24 @@ enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Cancels all active operations. This method has no effect if there are
- * currently no active operations. The delegate object for each operation that
- * is cancelled will receive a message indicating operation failure along with
- * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
+/** Cancels all queued and executing operations.
+ *
+ * This method has no effect if there are currently no queued operations.
  */
 + (void)cancelAllOperations;
 
-/** Cancels a specific operation. After cancellation, the delegate object for
- * the operation will receive a message indicating operation failure along with
- * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
+/** Cancels a queued or executing operation.
+ *
+ * This method has no effect if the operation has already finished executing.
  *
  * @param operation The operation to cancel.
  */
 + (void)cancelOperation:(MRBrewOperation *)operation;
 
-/** Cancels all operations of a given type. This method has no effect if there
- * are currently no active operations of the specified type. The delegate
- * object for each operation that is cancelled will receive a message indicating
- * operation failure along with an NSError object whose `code` matches the
- * `MRBrewErrorCancelled` constant.
+/** Cancels all queued and executing operations of the specified type.
+ *
+ * This method has no effect if there are currently no queued operations of the
+ * specified type.
  *
  * @param operationType The type of operations to cancel.
  */
