@@ -144,4 +144,19 @@ static NSOperationQueue *backgroundQueue;
     }
 }
 
++ (void)concurrentOperations:(BOOL)concurrency
+{
+    if (concurrency) {
+        [backgroundQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+    }
+    else {
+        [backgroundQueue setMaxConcurrentOperationCount:1];
+    }
+}
+
++ (NSUInteger)operationCount
+{
+    return [backgroundQueue operationCount];
+}
+
 @end

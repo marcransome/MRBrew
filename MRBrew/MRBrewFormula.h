@@ -87,7 +87,7 @@
  * installed.
  * @return A formula with the specified properties.
  */
-+ (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated  isInstalled:(BOOL)isInstalled;
++ (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
 
 /** Compares the receiver to another formula.
  *

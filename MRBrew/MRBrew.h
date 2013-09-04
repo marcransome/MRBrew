@@ -43,7 +43,7 @@ enum {
 @interface MRBrew : NSObject
 
 /**-----------------------------------------------------------------------------
- * @name Accessing and setting the Homebrew executable path
+ * @name Modifying the Homebrew path
  * -----------------------------------------------------------------------------
  */
 
@@ -53,7 +53,7 @@ enum {
 /** Sets the absolute path to the Homebrew executable.
  *
  * @param path The absolute path to the Homebrew executable, or
- * `/usr/local/bin/brew` if nil.
+ * `/usr/local/bin/brew` if `nil`.
  */
 + (void)setBrewPath:(NSString *)path;
 
@@ -63,6 +63,10 @@ enum {
  */
 
 /** Performs an operation.
+ *
+ * Operations are placed in a queue for execution and will always execute on a
+ * separate thread. Use concurrentOperations: to control how queued operations
+ * are executed (i.e. concurrently, or serially).
  *
  * @param operation The operation to perform.
  * @param delegate The delegate object for the operation. The delegate will
@@ -76,50 +80,51 @@ enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Cancels all active operations.  This method has no effect if there are
- * currently no active operations.  The delegate object for each operation that
+/** Cancels all active operations. This method has no effect if there are
+ * currently no active operations. The delegate object for each operation that
  * is cancelled will receive a message indicating operation failure along with
  * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
- *
- * @warning Calling this method *immediately* after a call to
- * `performOperation:delegate:` may not cancel the operation as expected. In
- * practice, it is unlikely that this method will be called so soon after
- * starting an operation and so there should be sufficient time to start the
- * operation correctly and respond with the desired behaviour (i.e. the
- * operation will be cancelled as expected).
  */
 + (void)cancelAllOperations;
 
-/** Cancels a specific operation.  After cancellation, the delegate object for
+/** Cancels a specific operation. After cancellation, the delegate object for
  * the operation will receive a message indicating operation failure along with
  * an NSError object whose `code` matches the `MRBrewErrorCancelled` constant.
- *
- * @warning Calling this method *immediately* after a call to
- * `performOperation:delegate:` may not cancel the operation as expected. In
- * practice, it is unlikely that this method will be called so soon after
- * starting an operation and so there should be sufficient time to start the
- * operation correctly and respond with the desired behaviour (i.e. the
- * operation will be cancelled as expected).
  *
  * @param operation The operation to cancel.
  */
 + (void)cancelOperation:(MRBrewOperation *)operation;
 
-/** Cancels all operations of a given type.  This method has no effect if there
- * are currently no active operations of the specified type.  The delegate
+/** Cancels all operations of a given type. This method has no effect if there
+ * are currently no active operations of the specified type. The delegate
  * object for each operation that is cancelled will receive a message indicating
  * operation failure along with an NSError object whose `code` matches the
  * `MRBrewErrorCancelled` constant.
  *
- * @warning Calling this method *immediately* after a call to
- * `performOperation:delegate:` may not cancel the operation as expected. In
- * practice, it is unlikely that this method will be called so soon after
- * starting an operation and so there should be sufficient time to start the
- * operation correctly and respond with the desired behaviour (i.e. the
- * operation will be cancelled as expected).
- *
  * @param operationType The type of operations to cancel.
  */
 + (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
+
+/**-----------------------------------------------------------------------------
+ * @name Managing Operations
+ * -----------------------------------------------------------------------------
+ */
+
+/** Sets the concurrent execution of operations.
+ *
+ * By default, operations are executed concurrently. Changing concurrency type
+ * does not affect any operations that are currently executing.
+ *
+ * @param concurrency If `YES`, operations are executed concurrently. If `NO`,
+ * operations are executed serially.
+ */
++ (void)concurrentOperations:(BOOL)concurrency;
+
+/** Returns the number of operations queued for execution 
+ *
+ * The value returned by this method represents the number of operation objects
+ * queued for execution and will change as operations are completed.
+ */
++ (NSUInteger)operationCount;
 
 @end
