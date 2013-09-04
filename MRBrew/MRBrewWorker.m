@@ -64,7 +64,7 @@ static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
     
     // configure and launch a brew task instance
     [_task setLaunchPath:@"/usr/local/bin/brew"];
-    [_task setArguments:self.arguments];
+    [_task setArguments:_arguments];
     [_task setStandardOutput:[NSPipe pipe]];
     
     // register for task termination notification
@@ -74,10 +74,10 @@ static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
     [[[_task standardOutput] fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if ([self.delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
+        if ([_delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
             if (![output isEqualToString:@"\n"]) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [self.delegate brewOperation:self.operation didGenerateOutput:output];
+                    [_delegate brewOperation:_operation didGenerateOutput:output];
                 }];
             }
         }
@@ -128,22 +128,24 @@ static NSString* const MRBrewErrorDomain = @"co.uk.fidgetbox.MRBrew";
 
 - (void)taskExited:(NSNotification *)notification
 {
+    NSUInteger cancelledOperation = 130;
+    
     if ([_task terminationStatus] == 0)
     {
         // delegate callback for operation completion
-        if ([self.delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
+        if ([_delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.delegate brewOperationDidFinish:self.operation];
+                [_delegate brewOperationDidFinish:_operation];
             }];
         }
     }
-    else {
+    else if ([_task terminationStatus] != cancelledOperation) {
         // delegate callback for operation failure
         NSInteger errorCode = MRBrewErrorUnknown;
         NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
-        if ([self.delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
+        if ([_delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.delegate brewOperation:self.operation didFailWithError:error];
+                [_delegate brewOperation:_operation didFailWithError:error];
             }];
         }
     }
