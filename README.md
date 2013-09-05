@@ -21,7 +21,7 @@ Then install the dependency into your project:
 `$ pod install`
 
 ## Prerequisites
-`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified in cases where the `brew` executable resides in a different location).  If you don't already have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get setup.
+`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified if the `brew` executable has been moved).  If you don't already have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get setup.
 
 ## General Usage
 
@@ -94,7 +94,7 @@ If you expect your controller to manage (and therefore receive callbacks for) mu
 ```
 The constants referenced above can be found in the `MRBrewConstants.h` header and are used to determine the type of operation received by your delegate methods.  Import this header in your delegate implementation if you plan to use these constants.
 
-If you are performing a custom operation that does not already have a constant defined simply provide your own, or use a string literal:
+If you are responding to a custom operation that does not already have a constant defined, simply provide your own, or use a string literal:
 
 ```objc
 if ([[operation name] isEqualToString:@"audit"]) {
@@ -102,7 +102,7 @@ if ([[operation name] isEqualToString:@"audit"]) {
 }
 ```
 
-If you need to respond in your delegate methods to a specific operation, use the `isEqualToOperation:` method of the `MRBrewOperation` class to confirm the operation that generated the callback and respond accordingly.
+Alternatively, if you need to respond in your delegate methods to a specific operation, use the `isEqualToOperation:` method of the `MRBrewOperation` class to confirm the operation that generated the callback and respond accordingly.
 
 #### Cancelling operations
 Operations can be cancelled using one of the following `MRBrew` class methods:
