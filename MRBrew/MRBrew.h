@@ -63,14 +63,14 @@ enum {
 
 /** Performs an operation.
  *
- * Operations are placed in a queue for execution and will always execute on a
- * separate thread. Use concurrentOperations: to control how queued operations
+ * Operations are placed in a queue for execution and will always execute on
+ * separate threads. Use concurrentOperations: to control how queued operations
  * are executed (i.e. concurrently, or serially).
  *
  * @param operation The operation to perform.
  * @param delegate The delegate object for the operation. The delegate will
- * receive delegate messages during the operation if output for the operation is
- * generated and at the end of a completed operation.
+ * receive delegate messages during execution of the operation when output is
+ * generated and upon completion of the operation.
  */
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate;
 
@@ -98,9 +98,9 @@ enum {
  * This method has no effect if there are currently no queued or executing
  * operations of the specified type.
  *
- * @param operationType The type of operations to cancel.
+ * @param type The type of operations to cancel.
  */
-+ (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType;
++ (void)cancelAllOperationsOfType:(MRBrewOperationType)type;
 
 /**-----------------------------------------------------------------------------
  * @name Managing Operations
