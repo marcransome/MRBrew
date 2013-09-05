@@ -95,8 +95,8 @@ enum {
 
 /** Cancels all queued and executing operations of the specified type.
  *
- * This method has no effect if there are currently no queued operations of the
- * specified type.
+ * This method has no effect if there are currently no queued or executing
+ * operations of the specified type.
  *
  * @param operationType The type of operations to cancel.
  */
