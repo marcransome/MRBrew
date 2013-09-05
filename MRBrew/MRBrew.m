@@ -37,9 +37,6 @@
     #error MRBrew must be built with ARC.
 #endif
 
-static NSString* const MRBrewTaskIdentifier = @"MRBrewTaskIdentifier";
-static NSString* const MRBrewOperationIdentifier = @"MRBrewOperationIdentifier";
-
 static NSString* MRBrewPath = @"/usr/local/bin/brew";
 
 static NSOperationQueue *backgroundQueue;
