@@ -102,11 +102,11 @@ static NSOperationQueue *backgroundQueue;
     }
 }
 
-+ (void)cancelAllOperationsOfType:(MRBrewOperationType)operationType
++ (void)cancelAllOperationsOfType:(MRBrewOperationType)type
 {
     if ([backgroundQueue operationCount] > 0) {
         NSString *operationName;
-        switch (operationType) {
+        switch (type) {
             case MRBrewOperationInfo:
                 operationName = MRBrewOperationInfoIdentifier;
                 break;
