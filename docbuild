@@ -1,2 +1,2 @@
 #!/bin/bash
-appledoc --project-name MRBrew --project-company "Fidgetbox" --company-id co.uk.fidgetbox --no-repeat-first-par --output doc-output .
+appledoc --project-name MRBrew --project-company "Fidgetbox" --company-id uk.co.fidgetbox --no-repeat-first-par --output doc-output .
