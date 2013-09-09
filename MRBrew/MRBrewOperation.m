@@ -80,7 +80,7 @@
     return self;
 }
 
-+ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     return [[self alloc] initWithType:type formula:formula parameters:parameters];
 }
