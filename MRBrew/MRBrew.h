@@ -124,14 +124,14 @@ enum {
 /** Sets the concurrent execution of operations.
  *
  * By default, operations are executed concurrently. Changing concurrency type
- * does not affect any operations that are currently executing.
+ * does not affect operations that are currently executing.
  *
  * @param concurrency If `YES`, operations are executed concurrently. If `NO`,
  * operations are executed serially.
  */
 + (void)concurrentOperations:(BOOL)concurrency;
 
-/** Returns the number of operations queued for execution 
+/** Returns the number of operations queued for execution.
  *
  * The value returned by this method represents the number of operation objects
  * queued for execution and will change as operations are completed.
