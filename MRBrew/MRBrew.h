@@ -33,11 +33,25 @@ enum {
 @protocol MRBrewDelegate;
 @class MRBrewWorker;
 
-/** The MRBrew class provides an interface to the Homebrew package manager.
+/** The `MRBrew` class manages the execution of Homebrew operations. Operation
+ * objects (defined by the MRBrewOperation class) are added to a queue and
+ * remain there until they are explicitly cancelled or finish executing.
+ *
+ * Each call to performOperation:delegate: places an operation into the queue.
+ * When an operation starts executing it will spawn a subprocess in a separate
+ * thread. Multiple operations can be performed by making repeated
+ * calls to performOperation:delegate:.
+ *
+ * By default, operations are executed concurrently, but this behaviour can be
+ * controlled by setting concurrentOperations: to either `YES` or `NO`.
  *
  * `MRBrew`'s delegate methods—defined by the MRBrewDelegate protocol—allow
  * an object to receive callbacks regarding the success or failure of an
  * operation and output from Homebrew as it occurs.
+ *
+ * @warning Attempting to perform two operations that reference the same formula
+ * concurrently may result in the failure of one of those operations. This is
+ * the default behaviour for Homebrew.
  */
 @interface MRBrew : NSObject
 
@@ -46,10 +60,10 @@ enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Returns the absolute path to the Homebrew executable. */
+/** Returns the absolute path of the Homebrew executable. */
 + (NSString *)brewPath;
 
-/** Sets the absolute path to the Homebrew executable.
+/** Sets the absolute path of the Homebrew executable.
  *
  * @param path The absolute path to the Homebrew executable, or
  * `/usr/local/bin/brew` if `nil`.
