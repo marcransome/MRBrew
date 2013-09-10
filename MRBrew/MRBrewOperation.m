@@ -183,4 +183,23 @@
     return copy;
 }
 
+- (NSString *)description
+{
+    NSMutableString *command = [NSMutableString string];
+    
+    if ([self name]) {
+        [command appendFormat:@"%@ ", [self name]];
+    }
+    
+    for (NSString *parameter in [self parameters]) {
+        [command appendFormat:@"%@ ", parameter];
+    }
+    
+    if ([self formula]) {
+        [command appendFormat:@"%@", [[self formula] name]];
+    }
+
+    return [command stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 @end
