@@ -92,4 +92,19 @@
     STAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different installed property should not be equal.");
 }
 
+- (void)testFormulaForEqualityWithNil
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+
+    STAssertFalse([formula1 isEqualToFormula:nil], @"Formulae can never be equal to nil.");
+}
+
+- (void)testFormulaForEqualityWithObjectOfAnotherClass
+{
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    id string = @"string";
+    
+    STAssertFalse([formula1 isEqualToFormula:string], @"Formulae can never be equal to objects of another class.");
+}
+
 @end

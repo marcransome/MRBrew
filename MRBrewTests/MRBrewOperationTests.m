@@ -105,4 +105,19 @@
     STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
 
+- (void)testOperationForEqualityWithNil
+{
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
+    
+    STAssertFalse([operation1 isEqualToOperation:nil], @"Operations can never be equal to nil.");
+}
+
+- (void)testOperationForEqualityWithObjectOfAnotherClass
+{
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
+    id string = @"string";
+    
+    STAssertFalse([operation1 isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
+}
+
 @end
