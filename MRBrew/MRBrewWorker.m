@@ -63,7 +63,7 @@ static NSString* const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     [self changeExecutingState:YES];
     
     // configure and launch a brew task instance
-    [_task setLaunchPath:@"/usr/local/bin/brew"];
+    [_task setLaunchPath:[MRBrew brewPath]];
     [_task setArguments:_arguments];
     [_task setStandardOutput:[NSPipe pipe]];
     
