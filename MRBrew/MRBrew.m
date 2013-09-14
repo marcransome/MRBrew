@@ -74,7 +74,9 @@ static NSOperationQueue *backgroundQueue;
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    
     // construct command-line arguments for brew command
-    NSMutableArray *arguments = [NSMutableArray arrayWithObject:[operation name]];
+    NSMutableArray *arguments = [NSMutableArray array];
+    if ([operation name])
+        [arguments addObject:[operation name]];
     if ([operation parameters])
         [arguments addObjectsFromArray:[operation parameters]];
     if ([operation formula])
