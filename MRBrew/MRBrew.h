@@ -65,8 +65,8 @@ enum {
 
 /** Sets the absolute path of the Homebrew executable.
  *
- * @param path The absolute path to the Homebrew executable, or
- * `/usr/local/bin/brew` if `nil`.
+ * @param path The absolute path of the Homebrew executable. If `nil` the
+ * default path `/usr/local/bin/brew` will be used.
  */
 + (void)setBrewPath:(NSString *)path;
 
@@ -84,7 +84,7 @@ enum {
  * @param operation The operation to perform.
  * @param delegate The delegate object for the operation. The delegate will
  * receive delegate messages during execution of the operation when output is
- * generated and upon completion of the operation.
+ * generated and upon completion or failure of the operation.
  */
 + (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate;
 
@@ -124,7 +124,8 @@ enum {
 /** Sets the concurrent execution of operations.
  *
  * By default, operations are executed concurrently. Changing concurrency type
- * does not affect operations that are currently executing.
+ * does not affect operations that are currently executing. Operations are
+ * always executed in separate threads.
  *
  * @param concurrency If `YES`, operations are executed concurrently. If `NO`,
  * operations are executed serially.
