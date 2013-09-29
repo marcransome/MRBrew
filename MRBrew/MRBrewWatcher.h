@@ -36,16 +36,16 @@ typedef enum {
 } MRBrewWatcherLocation;
 
 /** An `MRBrewWatcher` waits for a file system event (e.g. file modification,
- deletion or creation) to occur in a Homebrew directory and then sends a
- message—defined by the MRBrewWatcherDelegate protocol—to the delegate object
- informing it of the change. For example, you could create a watcher object that
- sends a message to your controller when a change is made in the Homebrew
- formula directory, and respond accordingly.
+ deletion or creation) to occur in one or more Homebrew directories and then
+ sends a message—defined by the MRBrewWatcherDelegate protocol—to the delegate
+ object informing it of the event. For example, you could create a watcher
+ object that sends a message to your controller when an event occurs in the
+ Homebrew formula directory, and respond accordingly.
  
  To create an `MRBrewWatcher` object that watches one of the default Homebrew
- directories for changes, use the initWithLocation:delegate: or
+ directories for events, use the initWithLocation:delegate: or
  watcherWithLocation:delegate: methods and specify one of the
- MRBrewWatcherLocation constants as the location to watch for changes:
+ MRBrewWatcherLocation constants as the location to watch for events:
  
     typedef enum {
         MRBrewWatcherLibraryLocation    = 1 << 0,
@@ -56,21 +56,20 @@ typedef enum {
         MRBrewWatcherPinnedKegsLocation = 1 << 5
     } MRBrewWatcherLocation;
  
- These constants represent default Homebrew paths for the named locations, and
- can be combined using the C-Bitwise OR operator in order to watch multiple
- locations for changes.
+ These constants represent the default Homebrew paths for the named locations,
+ and can be combined using the C-Bitwise OR operator in order to watch multiple
+ locations for events with a single watcher object.
  
- If you have installed Homebrew in a non-standard path, or would like to watch
- for file system events at a different path entirely, create your watcher object
- using either initWithPath:delegate: or watcherWithPath:delegate: and specify
- the absolute path to the directory to watch for changes.
+ If you have installed Homebrew outside of the default path, create your watcher
+ object using either initWithPath:delegate: or watcherWithPath:delegate: and
+ specify the absolute path to the directory to watch for events.
  
- To start watching for changes call startWatching, and to stop watching call the
- stopWatching method.
+ To start watching for events call the startWatching method, and to stop
+ watching call the stopWatching method.
  
  @warning After starting a watcher object, calls to the MRBrew class method
  performOperation:delegate: may result in file system events occurring at the
- watched location which will trigger a delegate callback. If you are only
+ watched location, which will trigger a delegate callback. If you are only
  interested in external events then you should stop the watcher object prior to
  calling performOperation:delegate: and restart it once the operation has
  completed.
@@ -88,7 +87,7 @@ typedef enum {
 /** Returns an initialized `MRBrewWatcher` object with the specified location
  * and delegate.
  *
- * @param location The location to watch for file system changes. See
+ * @param location The location to watch for file system events. See
  * MRBrewWatcherLocation for the options. Multiple locations can be watched by
  * combining constants using the C-Bitwise OR operator.
  * @param delegate The delegate object for this watcher. The delegate will
@@ -100,7 +99,7 @@ typedef enum {
 /** Returns an initialized `MRBrewWatcher` object with the specified path
  * and delegate.
  *
- * @param path The absolute path to watch for file system changes.
+ * @param path The absolute path to watch for file system events.
  * @param delegate The delegate object for this watcher. The delegate will
  * receive a message when file system events occur at the specified path.
  * @return A watcher with the specified path and delegate.
@@ -114,7 +113,7 @@ typedef enum {
 
 /** Returns a watcher with the specified location and delegate.
  *
- * @param location The location to watch for file system changes. See
+ * @param location The location to watch for file system events. See
  * MRBrewWatcherLocation for the options. Multiple locations can be watched by
  * combining constants using the C-Bitwise OR operator.
  * @param delegate The delegate object for this watcher. The delegate will
@@ -125,7 +124,7 @@ typedef enum {
 
 /** Returns a watcher with the specified path and delegate.
  *
- * @param path The absolute path to watch for file system changes.
+ * @param path The absolute path to watch for file system events.
  * @param delegate The delegate object for this watcher. The delegate will
  * receive a message when file system events occur at the specified path.
  * @return A watcher with the specified path and delegate.
