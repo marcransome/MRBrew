@@ -76,10 +76,7 @@
 <p><code>MRBrew</code> depends on Homebrew for the heavy lifting, and assumes the default installation path of <code>/usr/local/bin/brew</code> (though this can be specified if the <code>brew</code> executable has been moved).  If you don't already have Homebrew installed, follow the <a href="http://mxcl.github.io/homebrew/">official instructions</a> to get setup.</p>
 
 <h2>
-<a name="general-usage" class="anchor" href="#general-usage"><span class="octicon octicon-link"></span></a>General Usage</h2>
-
-<h4>
-<a name="performing-operations" class="anchor" href="#performing-operations"><span class="octicon octicon-link"></span></a>Performing operations</h4>
+<a name="performing-operations" class="anchor" href="#performing-operations"><span class="octicon octicon-link"></span></a>Performing operations</h2>
 
 <p>To perform an operation, pass an <code>MRBrewOperation</code> object to the <code>MRBrew</code> class method <code>performOperation:delegate:</code>.</p>
 
@@ -106,8 +103,8 @@
 
 <p>Each call to <code>performOperation:delegate:</code> spawns a subprocess in a separate thread that won't interrupt processing in the rest of your app.  Multiple operations can be performed by making repeated calls to <code>performOperation:delegate:</code>.  Operations are placed into a queue and executed concurrently by default, but can also be performed serially by setting <code>[MRBrew concurrentOperations:NO]</code>.</p>
 
-<h4>
-<a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h4>
+<h2>
+<a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h2>
 
 <p>The convenience methods provided by <code>MRBrewOperation</code> cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined, use the following <code>MRBrewOperation</code> class method when creating your operation object:</p>
 
@@ -156,8 +153,8 @@
 
 <p>Alternatively, if you need to respond in your delegate methods to a specific operation, use the <code>isEqualToOperation:</code> method of the <code>MRBrewOperation</code> class to confirm the operation that generated the callback and respond accordingly.</p>
 
-<h4>
-<a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h4>
+<h2>
+<a name="cancelling-operations" class="anchor" href="#cancelling-operations"><span class="octicon octicon-link"></span></a>Cancelling operations</h2>
 
 <p>Operations can be cancelled using one of the following <code>MRBrew</code> class methods:</p>
 
@@ -166,8 +163,8 @@
 <span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">cancelAllOperationsOfType:</span><span class="p">(</span><span class="n">MRBrewOperationType</span><span class="p">)</span><span class="nv">type</span><span class="p">;</span>
 </pre></div>
 
-<h4>
-<a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h4>
+<h2>
+<a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h2>
 
 <p>If the <code>brew</code> executable has been moved outside of the default <code>/usr/local/bin/</code> directory (generally not advisable), specify its location before performing any operations:</p>
 
