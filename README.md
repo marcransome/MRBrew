@@ -129,7 +129,7 @@ If you plan to contribute to the MRBrew project, [fork the repository](https://h
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
 
 ## Caveats
-Please note that the source code uses ARC (Automatic Reference Counting) and has only been tested against 10.7 and 10.8 deployment targets.
+The source code for `MRBrew` uses Automatic Reference Counting and has only been tested against 10.7, 10.8 and 10.9 deployment targets.
 
 ## License
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
