@@ -47,7 +47,7 @@
 {
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
     
-    STAssertTrue([operation1 isEqualToOperation:operation1], @"Comparison of a operation with itself should be equal.");
+    XCTAssertTrue([operation1 isEqualToOperation:operation1], @"Comparison of a operation with itself should be equal.");
 }
 
 - (void)testIdenticalOperationsEquality
@@ -56,7 +56,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     
-    STAssertTrue([operation1 isEqualToOperation:operation2], @"Operations that have the same properties should be equal.");
+    XCTAssertTrue([operation1 isEqualToOperation:operation2], @"Operations that have the same properties should be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForNameProperty
@@ -65,7 +65,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"different" formula:formula parameters:@[]];
     
-    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different name property should not be equal.");
+    XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different name property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForFormulaProperty
@@ -75,7 +75,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula1 parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula2 parameters:@[]];
     
-    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
+    XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForFormulaPropertyOneNilValue
@@ -84,7 +84,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
     
-    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
+    XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForParametersProperty
@@ -93,7 +93,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[@"different"]];
     
-    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
+    XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForParametersPropertyOneNilValue
@@ -102,14 +102,14 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:nil];
     
-    STAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
+    XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
 
 - (void)testOperationForEqualityWithNil
 {
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
     
-    STAssertFalse([operation1 isEqualToOperation:nil], @"Operations can never be equal to nil.");
+    XCTAssertFalse([operation1 isEqualToOperation:nil], @"Operations can never be equal to nil.");
 }
 
 - (void)testOperationForEqualityWithObjectOfAnotherClass
@@ -117,7 +117,7 @@
     MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
     id string = @"string";
     
-    STAssertFalse([operation1 isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
+    XCTAssertFalse([operation1 isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
 }
 
 @end

@@ -23,8 +23,8 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface MRBrewOperationTests : SenTestCase
+@interface MRBrewOperationTests : XCTestCase
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		193A0B62179D3C6C00C65291 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193A0B61179D3C6C00C65291 /* SenTestingKit.framework */; };
 		193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19453D6217901C1100064BC7 /* Cocoa.framework */; };
 		193A0B69179D3C6C00C65291 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 193A0B67179D3C6C00C65291 /* InfoPlist.strings */; };
 		193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B6B179D3C6C00C65291 /* MRBrewTests.m */; };
@@ -32,12 +31,12 @@
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
+		19E91B481832F44B00D7E61F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E91B061832F38C00D7E61F /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		190B080417B18AAA002F8E20 /* MRBrewWatcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcherDelegate.h; sourceTree = "<group>"; };
-		193A0B60179D3C6C00C65291 /* MRBrewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		193A0B61179D3C6C00C65291 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		193A0B60179D3C6C00C65291 /* MRBrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRBrewTests-Info.plist"; sourceTree = "<group>"; };
 		193A0B68179D3C6C00C65291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		193A0B6A179D3C6C00C65291 /* MRBrewTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRBrewTests.h; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
 		197B2F7817D676D1000519BF /* MRBrewWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorker.h; sourceTree = "<group>"; };
 		197B2F7917D676D1000519BF /* MRBrewWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorker.m; sourceTree = "<group>"; };
+		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				193A0B62179D3C6C00C65291 /* SenTestingKit.framework in Frameworks */,
 				193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */,
+				19E91B481832F44B00D7E61F /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				19453D5F17901C1100064BC7 /* MRBrew.app */,
-				193A0B60179D3C6C00C65291 /* MRBrewTests.octest */,
+				193A0B60179D3C6C00C65291 /* MRBrewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,8 +153,8 @@
 		19453D6117901C1100064BC7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19E91B061832F38C00D7E61F /* XCTest.framework */,
 				19453D6217901C1100064BC7 /* Cocoa.framework */,
-				193A0B61179D3C6C00C65291 /* SenTestingKit.framework */,
 				19453D6417901C1100064BC7 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -226,8 +226,8 @@
 			);
 			name = MRBrewTests;
 			productName = MRBrewTests;
-			productReference = 193A0B60179D3C6C00C65291 /* MRBrewTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 193A0B60179D3C6C00C65291 /* MRBrewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		19453D5E17901C1100064BC7 /* MRBrew */ = {
 			isa = PBXNativeTarget;
@@ -386,13 +386,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRBrewTests/MRBrewTests-Prefix.pch";
 				INFOPLIST_FILE = "MRBrewTests/MRBrewTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -400,13 +403,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRBrewTests/MRBrewTests-Prefix.pch";
 				INFOPLIST_FILE = "MRBrewTests/MRBrewTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -477,6 +483,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRBrew/MRBrew-Prefix.pch";
 				INFOPLIST_FILE = "MRBrew/MRBrew-Info.plist";
@@ -489,6 +499,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRBrew/MRBrew-Prefix.pch";
 				INFOPLIST_FILE = "MRBrew/MRBrew-Info.plist";
