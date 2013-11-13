@@ -41,9 +41,10 @@ typedef enum {
 /** The `MRBrewOperation` class encapsulates the arguments associated with a
  single Homebrew operation.
  
- An `MRBrewOperation` object can be created with an NSString representation of
- the Homebrew operation name (e.g. @"search"), or alternatively an
- MRBrewOperationType constant for one of the following common operations:
+ For convenience, an `MRBrewOperation` object can be created with either an
+ NSString representation of the Homebrew command name (e.g. @"search"), or
+ alternatively an MRBrewOperationType constant for one of the following common
+ operations:
  
     typedef enum {
         MRBrewOperationUpdate,
