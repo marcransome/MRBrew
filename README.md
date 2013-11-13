@@ -31,13 +31,13 @@ To perform an operation, pass an `MRBrewOperation` object to the `MRBrew` class 
 The `MRBrewOperation` class provides a number of convenience methods for creating objects that represent common Homebrew operations:
 
 ```objc
-+ (id)updateOperation;
-+ (id)listOperation;
-+ (id)searchOperation:(MRBrewFormula *)formula;
-+ (id)installOperation:(MRBrewFormula *)formula;
-+ (id)infoOperation:(MRBrewFormula *)formula;
-+ (id)removeOperation:(MRBrewFormula *)formula;
-+ (id)optionsOperation:(MRBrewFormula *)formula;
++ (instancetype)updateOperation;
++ (instancetype)listOperation;
++ (instancetype)searchOperation:(MRBrewFormula *)formula;
++ (instancetype)installOperation:(MRBrewFormula *)formula;
++ (instancetype)infoOperation:(MRBrewFormula *)formula;
++ (instancetype)removeOperation:(MRBrewFormula *)formula;
++ (instancetype)optionsOperation:(MRBrewFormula *)formula;
 ```
 
 For example, the following code would perform a Homebrew `update` operation:
@@ -58,7 +58,7 @@ Each call to `performOperation:delegate:` spawns a subprocess in a separate thre
 The convenience methods provided by `MRBrewOperation` cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined, use the following `MRBrewOperation` class method when creating your operation object:
 
 ```objc
-+ (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (instancetype)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 ```
 
 Specify the operation name exactly as defined by Homebrew (e.g. `@"upgrade"`). Both `formula` and `parameters` may be optional depending upon the operation being performed (see *man brew* for more details).
