@@ -31,14 +31,14 @@
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)init {
+- (instancetype)init {
     return [self initWithName:nil
                         isNew:NO
                     isUpdated:NO
                   isInstalled:NO];
 }
 
-- (id)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name
 {
     return [self initWithName:name
                         isNew:NO
@@ -46,7 +46,7 @@
                   isInstalled:NO];
 }
 
-- (id)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled
+- (instancetype)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled
 {
     if (self = [super init]) {
         _name = (name == nil ? @"" : [name copy]);  // replace nil with empty string
@@ -58,7 +58,7 @@
     return self;
 }
 
-+ (id)formulaWithName:(NSString *)name
++ (instancetype)formulaWithName:(NSString *)name
 {
     return [[self alloc] initWithName:name
                                 isNew:NO
@@ -66,7 +66,7 @@
                           isInstalled:NO];
 }
 
-+ (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled
++ (instancetype)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled
 {
     return [[self alloc] initWithName:name
                                 isNew:isNew

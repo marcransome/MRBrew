@@ -33,7 +33,7 @@
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
+- (instancetype)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     if (self = [super init]) {
         switch (type) {
@@ -69,7 +69,7 @@
     return self;
 }
 
-- (id)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
+- (instancetype)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     if (self = [super init]) {
         _name = [name copy];
@@ -80,57 +80,57 @@
     return self;
 }
 
-+ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
++ (instancetype)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     return [[self alloc] initWithType:type formula:formula parameters:parameters];
 }
 
-+ (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
++ (instancetype)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
     return [[self alloc] initWithName:name formula:formula parameters:parameters];
 }
 
-+ (id)updateOperation
++ (instancetype)updateOperation
 {
     return [[self alloc] initWithType:MRBrewOperationUpdate formula:nil parameters:nil];
 }
 
-+ (id)listOperation
++ (instancetype)listOperation
 {
     return [[self alloc] initWithType:MRBrewOperationList formula:nil parameters:nil];
 }
 
-+ (id)searchOperation
++ (instancetype)searchOperation
 {
     return [[self alloc] initWithType:MRBrewOperationSearch formula:nil parameters:nil];
 }
 
-+ (id)searchOperation:(MRBrewFormula *)formula
++ (instancetype)searchOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithType:MRBrewOperationSearch formula:formula parameters:nil];
 }
 
-+ (id)installOperation:(MRBrewFormula *)formula
++ (instancetype)installOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithType:MRBrewOperationInstall formula:formula parameters:nil];
 }
 
-+ (id)infoOperation:(MRBrewFormula *)formula
++ (instancetype)infoOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithType:MRBrewOperationInfo formula:formula parameters:nil];
 }
 
-+ (id)removeOperation:(MRBrewFormula *)formula
++ (instancetype)removeOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithType:MRBrewOperationRemove formula:formula parameters:nil];
 }
 
-+ (id)optionsOperation:(MRBrewFormula *)formula
++ (instancetype)optionsOperation:(MRBrewFormula *)formula
 {
     return [[self alloc] initWithType:MRBrewOperationOptions formula:formula parameters:nil];
 }
 
-+ (id)outdatedOperation
++ (instancetype)outdatedOperation
 {
     return [[self alloc] initWithType:MRBrewOperationOutdated formula:nil parameters:nil];
 }

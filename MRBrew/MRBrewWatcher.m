@@ -47,11 +47,11 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)init {
+- (instancetype)init {
     return [self initWithLocation:(MRBrewWatcherLocation)0 delegate:nil];
 }
 
-- (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
+- (instancetype)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
 {
     self = [super init];
     
@@ -92,7 +92,7 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return self;
 }
 
-- (id)initWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate
+- (instancetype)initWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate
 {
     self = [super init];
     
@@ -105,7 +105,7 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return self;
 }
 
-+ (id)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
++ (instancetype)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate
 {
     return [[self alloc] initWithLocation:location delegate:delegate];
 }

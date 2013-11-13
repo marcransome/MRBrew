@@ -31,7 +31,7 @@
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
+- (instancetype)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
     if (self = [super init]) {
         _name = [name copy];
@@ -42,7 +42,7 @@
     return self;
 }
 
-+ (id)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
++ (instancetype)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {
     return [[self alloc] initWithName:name description:description selected:selected];
 }

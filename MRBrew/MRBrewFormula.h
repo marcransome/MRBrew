@@ -52,7 +52,7 @@
  * @param name The name of the formula.
  * @return A formula with the specified name.
  */
-- (id)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name;
 
 /** Returns an initialized `MRBrewFormula` object with the specified name,
  * isNew, isUpdated, and isInstalled properties.
@@ -64,7 +64,7 @@
  * installed.
  * @return A formula with the specified properties.
  */
-- (id)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
+- (instancetype)initWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
 
 /**-----------------------------------------------------------------------------
  * @name Creating a Formula
@@ -76,7 +76,7 @@
  * @param name The name of the formula.
  * @return A formula with the specified name.
  */
-+ (id)formulaWithName:(NSString *)name;
++ (instancetype)formulaWithName:(NSString *)name;
 
 /** Returns a formula with the specified name and status.
  *
@@ -87,7 +87,7 @@
  * installed.
  * @return A formula with the specified properties.
  */
-+ (id)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
++ (instancetype)formulaWithName:(NSString *)name isNew:(BOOL)isNew isUpdated:(BOOL)isUpdated isInstalled:(BOOL)isInstalled;
 
 /** Compares the receiver to another formula.
  *

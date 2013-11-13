@@ -94,7 +94,7 @@ typedef enum {
  * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-- (id)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
+- (instancetype)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Returns an initialized `MRBrewOperation` object with the specified name,
  * formula, and and parameters.
@@ -109,7 +109,7 @@ typedef enum {
  * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-- (id)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
+- (instancetype)initWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /**-----------------------------------------------------------------------------
  * @name Creating an Operation
@@ -128,7 +128,7 @@ typedef enum {
  * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-+ (id)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (instancetype)operationWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Returns an operation with the specified type, formula, and parameters.
  *
@@ -142,49 +142,49 @@ typedef enum {
  * required or accepted for the operation type (see _man brew_ for details).
  * @return An operation with the specified type, formula, and parameters.
  */
-+ (id)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (instancetype)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
 
 /** Returns an update operation. */
-+ (id)updateOperation;
++ (instancetype)updateOperation;
 
 /** Returns a list operation. */
-+ (id)listOperation;
++ (instancetype)listOperation;
 
 /** Returns a search operation. */
-+ (id)searchOperation;
++ (instancetype)searchOperation;
 
 /** Returns a search operation with the specified formula.
  *
  * @param formula The formula.
  */
-+ (id)searchOperation:(MRBrewFormula *)formula;
++ (instancetype)searchOperation:(MRBrewFormula *)formula;
 
 /** Returns an install operation with the specified formula.
  *
  * @param formula The formula.
  */
-+ (id)installOperation:(MRBrewFormula *)formula;
++ (instancetype)installOperation:(MRBrewFormula *)formula;
 
 /** Returns an info operation with the specified formula.
  *
  * @param formula The formula.
  */
-+ (id)infoOperation:(MRBrewFormula *)formula;
++ (instancetype)infoOperation:(MRBrewFormula *)formula;
 
 /** Returns a remove operation with the specified formula.
  *
  * @param formula The formula.
  */
-+ (id)removeOperation:(MRBrewFormula *)formula;
++ (instancetype)removeOperation:(MRBrewFormula *)formula;
 
 /** Returns an options operation with the specified formula.
  *
  * @param formula The formula.
  */
-+ (id)optionsOperation:(MRBrewFormula *)formula;
++ (instancetype)optionsOperation:(MRBrewFormula *)formula;
 
 /** Returns an outdated operation. */
-+ (id)outdatedOperation;
++ (instancetype)outdatedOperation;
 
 /** Compares the receiver to another operation.
  *

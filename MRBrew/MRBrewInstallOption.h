@@ -53,7 +53,7 @@
  * selected.
  * @return An install option with the specified properties.
  */
-- (id)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
+- (instancetype)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
 
 /**-----------------------------------------------------------------------------
  * @name Creating an Install Option
@@ -69,6 +69,6 @@
  * selected.
  * @return An install option with the specified properties.
  */
-+ (id)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
++ (instancetype)installOptionWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected;
 
 @end

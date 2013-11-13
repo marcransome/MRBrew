@@ -94,7 +94,7 @@ typedef enum {
  * receive a message when file system events occur at the specified location.
  * @return A watcher with the specified location and delegate.
  */
-- (id)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
+- (instancetype)initWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
 /** Returns an initialized `MRBrewWatcher` object with the specified path
  * and delegate.
@@ -104,7 +104,7 @@ typedef enum {
  * receive a message when file system events occur at the specified path.
  * @return A watcher with the specified path and delegate.
  */
-- (id)initWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate;
+- (instancetype)initWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate;
 
 /**-----------------------------------------------------------------------------
  * @name Creating a Watcher
@@ -120,7 +120,7 @@ typedef enum {
  * receive a message when file system events occur at the specified location.
  * @return A watcher with the specified location and delegate.
  */
-+ (id)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
++ (instancetype)watcherWithLocation:(MRBrewWatcherLocation)location delegate:(id<MRBrewWatcherDelegate>)delegate;
 
 /** Returns a watcher with the specified path and delegate.
  *
@@ -129,7 +129,7 @@ typedef enum {
  * receive a message when file system events occur at the specified path.
  * @return A watcher with the specified path and delegate.
  */
-+ (id)watcherWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate;
++ (instancetype)watcherWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate;
 
 /**-----------------------------------------------------------------------------
  * @name Starting and Stopping a Watcher
