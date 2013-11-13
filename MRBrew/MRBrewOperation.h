@@ -60,6 +60,15 @@ typedef enum {
  NSString representing the operation, regardless of how it was created (i.e. the
  MRBrewOperationType constants are used for convenience when creating objects of
  this class and are not retained).
+ 
+ For operations that do not require a command, specify `nil` as the operation
+ name. For example:
+ 
+     $ brew --cache
+ 
+ Would be represented by:
+ 
+     [MRBrewOperation operationWithName:nil formula:nil parameters:@"--cache"];
  */
 @interface MRBrewOperation : NSObject <NSCopying>
 
@@ -99,7 +108,7 @@ typedef enum {
 /** Returns an initialized `MRBrewOperation` object with the specified name,
  * formula, and and parameters.
  *
- * @param name The name of the operation.
+ * @param name The name of the operation, or `nil`.
  * @param formula The formula (for operations that accept a formula parameter).
  * Specify `nil` if the operation does not require or accept a formula (see _man
  * brew_ for details).
