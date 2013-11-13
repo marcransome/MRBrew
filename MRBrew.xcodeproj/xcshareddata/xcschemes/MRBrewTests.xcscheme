@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "193A0B5F179D3C6C00C65291"
-               BuildableName = "MRBrewTests.octest"
+               BuildableName = "MRBrewTests.xctest"
                BlueprintName = "MRBrewTests"
                ReferencedContainer = "container:MRBrew.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "193A0B5F179D3C6C00C65291"
-               BuildableName = "MRBrewTests.octest"
+               BuildableName = "MRBrewTests.xctest"
                BlueprintName = "MRBrewTests"
                ReferencedContainer = "container:MRBrew.xcodeproj">
             </BuildableReference>
