@@ -73,7 +73,8 @@ typedef enum {
  */
 @interface MRBrewOperation : NSObject <NSCopying>
 
-/** The operation name. */
+/** The operation name (equivalent to the _command_ in Homebrew terminology).
+ */
 @property (copy) NSString *name;
 
 /** A formula associated with the operation, where a formula is permitted
