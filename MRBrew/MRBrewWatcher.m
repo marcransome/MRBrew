@@ -184,7 +184,7 @@ static void fileSystemEventsCallback(ConstFSEventStreamRef streamRef, void *user
 }
 
 - (BOOL)isWatching {
-    return _eventStream ? YES : NO;
+    return _eventStream != NULL;
 }
 
 @end
