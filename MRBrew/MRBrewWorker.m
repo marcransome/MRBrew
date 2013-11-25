@@ -31,7 +31,7 @@
 
 static NSString* const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
-@interface  MRBrewWorker ()
+@interface MRBrewWorker ()
 {
     NSTask *_task;
     BOOL _executing;
