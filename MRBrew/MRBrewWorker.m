@@ -87,7 +87,7 @@ static NSString* const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     // spin run loop periodically while operation is alive, allowing for task
     // termination notification, and test for cancellation
     while (!self.isFinished) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
         
         if ([self isCancelled] && !_waitingForTaskToExit) {
             _waitingForTaskToExit = YES;
