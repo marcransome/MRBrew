@@ -37,9 +37,15 @@
     #error MRBrew must be built with ARC.
 #endif
 
-static NSString* MRBrewPath = @"/usr/local/bin/brew";
+static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
 
-static NSOperationQueue *backgroundQueue;
+@interface MRBrew ()
+{
+    NSString *_brewPath;
+    NSOperationQueue *_backgroundQueue;
+}
+
+@end
 
 @implementation MRBrew
 {} // allows pragma parser to parse marks before first method
@@ -47,31 +53,48 @@ static NSOperationQueue *backgroundQueue;
 #pragma mark -
 #pragma mark Lifecycle
 
-+ (void)initialize
++ (instancetype)sharedBrew
 {
-    backgroundQueue = [[NSOperationQueue alloc] init];
+    static MRBrew *brew = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        brew = [[MRBrew alloc] init];
+    });
+    
+    return brew;
+}
+
+- (instancetype)init
+{
+    if (self == [super init]) {
+        _backgroundQueue = [[NSOperationQueue alloc] init];
+        _brewPath = MRDefaultBrewPath;
+    }
+    
+    return self;
 }
 
 #pragma mark -
 #pragma mark Brew Path
 
-+ (NSString *)brewPath
+- (NSString *)brewPath
 {
-    return MRBrewPath;
+    return _brewPath;
 }
 
-+ (void)setBrewPath:(NSString *)path
+- (void)setBrewPath:(NSString *)path
 {
     if (path)
-        MRBrewPath = [path copy];
+        _brewPath = [path copy];
     else
-        MRBrewPath = @"/usr/local/bin/brew";
+        _brewPath = @"/usr/local/bin/brew";
 }
 
 #pragma mark -
 #pragma mark Operation Methods
 
-+ (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
+- (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    
     // construct command-line arguments for brew command
     NSMutableArray *arguments = [NSMutableArray array];
@@ -86,17 +109,17 @@ static NSOperationQueue *backgroundQueue;
     [worker setArguments:arguments];
     [worker setOperation:operation];
     [worker setDelegate:delegate];
-    [backgroundQueue addOperation:worker];
+    [_backgroundQueue addOperation:worker];
 }
 
-+ (void)cancelAllOperations
+- (void)cancelAllOperations
 {
-    [backgroundQueue cancelAllOperations];
+    [_backgroundQueue cancelAllOperations];
 }
 
-+ (void)cancelOperation:(MRBrewOperation *)operation
+- (void)cancelOperation:(MRBrewOperation *)operation
 {
-    for (MRBrewWorker *worker in [backgroundQueue operations]) {
+    for (MRBrewWorker *worker in [_backgroundQueue operations]) {
         if ([[worker operation] isEqualToOperation:operation]) {
             [worker cancel];
             break;
@@ -104,9 +127,9 @@ static NSOperationQueue *backgroundQueue;
     }
 }
 
-+ (void)cancelAllOperationsOfType:(MRBrewOperationType)type
+- (void)cancelAllOperationsOfType:(MRBrewOperationType)type
 {
-    if ([backgroundQueue operationCount] > 0) {
+    if ([_backgroundQueue operationCount] > 0) {
         NSString *operationName;
         switch (type) {
             case MRBrewOperationInfo:
@@ -135,7 +158,7 @@ static NSOperationQueue *backgroundQueue;
                 break;
         }
         
-        for (MRBrewWorker *worker in [backgroundQueue operations]) {
+        for (MRBrewWorker *worker in [_backgroundQueue operations]) {
             if ([[[worker operation] name] isEqualToString:operationName]) {
                 [worker cancel];
             }
@@ -143,19 +166,19 @@ static NSOperationQueue *backgroundQueue;
     }
 }
 
-+ (void)concurrentOperations:(BOOL)concurrency
+- (void)concurrentOperations:(BOOL)concurrency
 {
     if (concurrency) {
-        [backgroundQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+        [_backgroundQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
     }
     else {
-        [backgroundQueue setMaxConcurrentOperationCount:1];
+        [_backgroundQueue setMaxConcurrentOperationCount:1];
     }
 }
 
-+ (NSUInteger)operationCount
+- (NSUInteger)operationCount
 {
-    return [backgroundQueue operationCount];
+    return [_backgroundQueue operationCount];
 }
 
 @end

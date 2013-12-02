@@ -56,19 +56,27 @@ enum {
 @interface MRBrew : NSObject
 
 /**-----------------------------------------------------------------------------
+ * @name Accessing the Shared Brew Instance
+ * -----------------------------------------------------------------------------
+ */
+
+/** Returns the shared `MRBrew` instance, creating it if necessary. */
++ (instancetype)sharedBrew;
+
+/**-----------------------------------------------------------------------------
  * @name Modifying the Homebrew path
  * -----------------------------------------------------------------------------
  */
 
 /** Returns the absolute path of the Homebrew executable. */
-+ (NSString *)brewPath;
+- (NSString *)brewPath;
 
 /** Sets the absolute path of the Homebrew executable.
  *
  * @param path The absolute path of the Homebrew executable. If `nil` the
  * default path `/usr/local/bin/brew` will be used.
  */
-+ (void)setBrewPath:(NSString *)path;
+- (void)setBrewPath:(NSString *)path;
 
 /**-----------------------------------------------------------------------------
  * @name Performing an Operation
@@ -86,7 +94,7 @@ enum {
  * receive delegate messages during execution of the operation when output is
  * generated and upon completion or failure of the operation.
  */
-+ (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate;
+- (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate;
 
 /**-----------------------------------------------------------------------------
  * @name Stopping an Operation
@@ -97,7 +105,7 @@ enum {
  *
  * This method has no effect if there are currently no queued operations.
  */
-+ (void)cancelAllOperations;
+- (void)cancelAllOperations;
 
 /** Cancels a queued or executing operation.
  *
@@ -105,7 +113,7 @@ enum {
  *
  * @param operation The operation to cancel.
  */
-+ (void)cancelOperation:(MRBrewOperation *)operation;
+- (void)cancelOperation:(MRBrewOperation *)operation;
 
 /** Cancels all queued and executing operations of the specified type.
  *
@@ -114,7 +122,7 @@ enum {
  *
  * @param type The type of operations to cancel.
  */
-+ (void)cancelAllOperationsOfType:(MRBrewOperationType)type;
+- (void)cancelAllOperationsOfType:(MRBrewOperationType)type;
 
 /**-----------------------------------------------------------------------------
  * @name Managing Operations
@@ -130,13 +138,13 @@ enum {
  * @param concurrency If `YES`, operations are executed concurrently. If `NO`,
  * operations are executed serially.
  */
-+ (void)concurrentOperations:(BOOL)concurrency;
+- (void)concurrentOperations:(BOOL)concurrency;
 
 /** Returns the number of operations queued for execution.
  *
  * The value returned by this method represents the number of operation objects
  * queued for execution and will change as operations are completed.
  */
-+ (NSUInteger)operationCount;
+- (NSUInteger)operationCount;
 
 @end
