@@ -49,7 +49,7 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     // launching an NSTask with a nil path raises an exception so we guard against this
     // by initialising brewPath to the default brew path during +(void)initialize
     
-    XCTAssertTrue([[MRBrew brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
+    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
 }
 
 - (void)testNilBrewPath
@@ -57,22 +57,22 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     // launching an NSTask with a nil path raises an exception so we guard against this
     // by setting brewPath to the default brew path whenever setBrewPath: is passed nil
     
-    [MRBrew setBrewPath:nil];
-    XCTAssertNotNil([MRBrew brewPath], @"Should not equal nil.");
-    XCTAssertTrue([[MRBrew brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Setting path to nil should default instead to %@.", MRBrewTestsDefaultBrewPath);
+    [[MRBrew sharedBrew] setBrewPath:nil];
+    XCTAssertNotNil([[MRBrew sharedBrew] brewPath], @"Should not equal nil.");
+    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Setting path to nil should default instead to %@.", MRBrewTestsDefaultBrewPath);
     
     // cleanup
-    [MRBrew setBrewPath:MRBrewTestsDefaultBrewPath];
+    [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
 - (void)testSetBrewPath
 {
     NSString *path = @"/usr/bin/brew";
-    [MRBrew setBrewPath:path];
-    XCTAssertTrue([[MRBrew brewPath] isEqualToString:@"/usr/bin/brew"], @"Should equal new path %@.", path);
+    [[MRBrew sharedBrew] setBrewPath:path];
+    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:@"/usr/bin/brew"], @"Should equal new path %@.", path);
     
     // cleanup
-    [MRBrew setBrewPath:MRBrewTestsDefaultBrewPath];
+    [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
 @end
