@@ -166,7 +166,7 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
     }
 }
 
-- (void)concurrentOperations:(BOOL)concurrency
+- (void)setConcurrentOperations:(BOOL)concurrency
 {
     if (concurrency) {
         [_backgroundQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];

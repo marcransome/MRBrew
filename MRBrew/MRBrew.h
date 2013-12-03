@@ -43,7 +43,7 @@ enum {
  * calls to performOperation:delegate:.
  *
  * By default, operations are executed concurrently, but this behaviour can be
- * controlled by setting concurrentOperations: to either `YES` or `NO`.
+ * controlled using setConcurrentOperations:.
  *
  * `MRBrew`'s delegate methods—defined by the MRBrewDelegate protocol—allow
  * an object to receive callbacks regarding the success or failure of an
@@ -86,8 +86,8 @@ enum {
 /** Performs an operation.
  *
  * Operations are placed in a queue for execution and will always execute on
- * separate threads. Use concurrentOperations: to control how queued operations
- * are executed (i.e. concurrently, or serially).
+ * separate threads. Use setConcurrentOperations: to control how queued
+ * operations are executed (i.e. concurrently, or serially).
  *
  * @param operation The operation to perform.
  * @param delegate The delegate object for the operation. The delegate will
@@ -138,7 +138,7 @@ enum {
  * @param concurrency If `YES`, operations are executed concurrently. If `NO`,
  * operations are executed serially.
  */
-- (void)concurrentOperations:(BOOL)concurrency;
+- (void)setConcurrentOperations:(BOOL)concurrency;
 
 /** Returns the number of operations queued for execution.
  *
