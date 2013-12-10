@@ -22,7 +22,7 @@ Then install the dependency into your project:
 `$ pod install`
 
 ## Prerequisites
-`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified if the `brew` executable has been moved).  If you don't have Homebrew installed, follow the [official instructions](http://mxcl.github.io/homebrew/) to get brewing.
+`MRBrew` depends on Homebrew for the heavy lifting, and assumes the default installation path of `/usr/local/bin/brew` (though this can be specified if the `brew` executable has been moved).  If you don't have Homebrew installed, follow the [official instructions](http://brew.sh) to get brewing.
 
 ## General Usage
 
