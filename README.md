@@ -50,7 +50,8 @@ For example, the following code would perform a Homebrew `update` operation:
 Operations that require a formula to be specified should be passed an `MRBrewFormula` object, which is just as easy to create. For example:
 
 ```objc
-[[MRBrew sharedBrew] performOperation:[MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"appledoc"]] delegate:nil];
+MRBrewOperation *operation = [MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"appledoc"]];
+[[MRBrew sharedBrew] performOperation:operation delegate:nil];
 ```
 
 Each call to `performOperation:delegate:` spawns a subprocess in a separate thread that won't interrupt processing in the rest of your app.  Multiple operations can be performed by making repeated calls to `performOperation:delegate:`.  Operations are placed into a queue and executed concurrently. If you would prefer operations to execute in series, just call `[MRBrew setConcurrentOperations:NO]`.
@@ -59,7 +60,9 @@ Each call to `performOperation:delegate:` spawns a subprocess in a separate thre
 The convenience methods provided by `MRBrewOperation` cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined, use the following `MRBrewOperation` class method when creating your operation object:
 
 ```objc
-+ (instancetype)operationWithName:(NSString *)name formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters;
++ (instancetype)operationWithName:(NSString *)name
+                          formula:(MRBrewFormula *)formula
+                       parameters:(NSArray *)parameters;
 ```
 
 Specify the operation name exactly as defined by Homebrew (e.g. `@"upgrade"`). Both `formula` and `parameters` may be optional depending upon the operation being performed (see *man brew* for more details).
@@ -130,7 +133,7 @@ If you plan to contribute to the MRBrew project, [fork the repository](https://h
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
 
 ## Caveats
-The source code for `MRBrew` uses Automatic Reference Counting and has only been tested against 10.7-10.9 deployment targets.
+The source code for `MRBrew` uses Automatic Reference Counting and has only been tested against 10.7—10.9 deployment targets.
 
 ## License
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
