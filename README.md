@@ -140,3 +140,7 @@ The source code for `MRBrew` uses Automatic Reference Counting and has only been
 
 ## Contact
 Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or tweet [@marcransome](http://www.twitter.com/marcransome).
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcransome/mrbrew/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
