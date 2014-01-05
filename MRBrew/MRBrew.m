@@ -67,7 +67,7 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
 
 - (instancetype)init
 {
-    if (self == [super init]) {
+    if (self = [super init]) {
         _backgroundQueue = [[NSOperationQueue alloc] init];
         _brewPath = MRDefaultBrewPath;
     }
