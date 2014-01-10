@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.source_files  = "MRBrew/*.{h,m}"
   s.exclude_files = "MRBrew/MRAppDelegate.{h,m}", "MRBrew/main.m"
   s.requires_arc  = true
+  s.social_media_url = "https://twitter.com/marcransome"
 end
