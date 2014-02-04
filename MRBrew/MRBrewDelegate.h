@@ -74,10 +74,9 @@
 - (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error;
 
 /** This method is called when output is received from Homebrew. For
- * `MRBrewOperationInstall` operations this method will be called each time
- * Homebrew generates a single line of output. For other operations this method
- * is called at most once, after an operation has completed and only if output
- * was generated.
+ * `MRBrewOperationInstall` operations this method will be called when output
+ * is made available. For other operations this method is called at most once,
+ * after an operation has completed and only if output was generated.
  *
  * @param operation The type of operation that generated the output.
  * @param output The output string.
