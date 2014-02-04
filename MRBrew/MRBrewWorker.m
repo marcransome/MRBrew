@@ -74,11 +74,9 @@ static NSString* const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
         NSData *data = [file availableData];
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([_delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
-            if (![output isEqualToString:@"\n"]) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [_delegate brewOperation:_operation didGenerateOutput:output];
-                }];
-            }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [_delegate brewOperation:_operation didGenerateOutput:output];
+            }];
         }
     }];
     
