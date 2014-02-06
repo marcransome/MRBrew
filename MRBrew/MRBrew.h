@@ -38,7 +38,7 @@ enum {
  * remain there until they are explicitly cancelled or finish executing.
  *
  * Each call to performOperation:delegate: places an operation into the queue.
- * When an operation starts executing it will spawn a subprocess in a separate
+ * When an operation starts executing it will spawn a subprocess from a separate
  * thread. Multiple operations can be performed by making repeated
  * calls to performOperation:delegate:.
  *
