@@ -50,8 +50,7 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
 @implementation MRBrew
 {} // allows pragma parser to parse marks before first method
 
-#pragma mark -
-#pragma mark Lifecycle
+#pragma mark - Lifecycle
 
 + (instancetype)sharedBrew
 {
@@ -75,8 +74,7 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
     return self;
 }
 
-#pragma mark -
-#pragma mark Brew Path
+#pragma mark - Brew Path
 
 - (NSString *)brewPath
 {
@@ -91,8 +89,7 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
         _brewPath = @"/usr/local/bin/brew";
 }
 
-#pragma mark -
-#pragma mark Operation Methods
+#pragma mark - Operation Methods
 
 - (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
 {    

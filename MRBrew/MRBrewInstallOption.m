@@ -28,8 +28,7 @@
 @implementation MRBrewInstallOption
 {} // allows pragma parser to parse marks before first method
 
-#pragma mark -
-#pragma mark Lifecycle
+#pragma mark - Lifecycle
 
 - (instancetype)initWithName:(NSString *)name description:(NSString *)description selected:(BOOL)selected
 {

@@ -37,16 +37,23 @@
 @end
 
 @implementation MRBrewOutputParser
+{} // allows pragma parser to parse marks before first method
+
+#pragma mark - Lifecycle
 
 + (instancetype)sharedOutputParser
 {
 
 }
 
+#pragma mark - Object Parsing (public)
+
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output
 {
 
 }
+
+#pragma mark - Object Parsing (private)
 
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output
 {

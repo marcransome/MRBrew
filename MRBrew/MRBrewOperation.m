@@ -30,8 +30,7 @@
 @implementation MRBrewOperation
 {} // allows pragma parser to parse marks before first method
 
-#pragma mark -
-#pragma mark Lifecycle
+#pragma mark - Lifecycle
 
 - (instancetype)initWithType:(MRBrewOperationType)type formula:(MRBrewFormula *)formula parameters:(NSArray *)parameters
 {
@@ -135,8 +134,7 @@
     return [[self alloc] initWithType:MRBrewOperationOutdated formula:nil parameters:nil];
 }
 
-#pragma mark -
-#pragma mark Equality
+#pragma mark - Equality
 
 - (BOOL)isEqualToOperation:(MRBrewOperation *)operation
 {
@@ -170,8 +168,7 @@
     return YES;
 }
 
-#pragma mark -
-#pragma mark NSCopying
+#pragma mark - NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone
 {

@@ -28,8 +28,7 @@
 @implementation MRBrewFormula
 {} // allows pragma parser to parse marks before first method
 
-#pragma mark -
-#pragma mark Lifecycle
+#pragma mark - Lifecycle
 
 - (instancetype)init {
     return [self initWithName:nil
@@ -74,8 +73,7 @@
                           isInstalled:isInstalled];
 }
 
-#pragma mark -
-#pragma mark Equality
+#pragma mark - Equality
 
 - (BOOL)isEqualToFormula:(MRBrewFormula *)formula
 {
@@ -97,8 +95,7 @@
     return YES;
 }
 
-#pragma mark -
-#pragma mark NSCopying
+#pragma mark - NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone
 {
