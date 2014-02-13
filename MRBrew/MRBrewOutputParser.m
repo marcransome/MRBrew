@@ -43,7 +43,14 @@
 
 + (instancetype)sharedOutputParser
 {
-
+    static MRBrewOutputParser *outputParser = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        outputParser = [[MRBrewOutputParser alloc] init];
+    });
+    
+    return outputParser;
 }
 
 #pragma mark - Object Parsing (public)
