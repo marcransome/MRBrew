@@ -57,14 +57,31 @@
 
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output
 {
-
+    NSMutableArray *objects = [NSMutableArray array];
+    
+    if ([[operation name] isEqualToString:MRBrewOperationListIdentifier]) {
+        objects = [self parseFormulaeFromOutput:output];
+    }
+    else if ([[operation name] isEqualToString:MRBrewOperationSearchIdentifier]) {
+        objects = [self parseFormulaeFromOutput:output];
+    }
+    
+    return objects;
 }
 
 #pragma mark - Object Parsing (private)
 
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output
 {
-
+    NSMutableArray *objects = [NSMutableArray array];
+    
+    NSArray *names = [output componentsSeparatedByString:@"\n"];
+    
+    for (NSString *name in names) {
+        [objects addObject:[MRBrewFormula formulaWithName:name]];
+    }
+    
+    return objects;
 }
 
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
