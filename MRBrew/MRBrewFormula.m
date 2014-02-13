@@ -26,7 +26,6 @@
 #import "MRBrewFormula.h"
 
 @implementation MRBrewFormula
-{} // allows pragma parser to parse marks before first method
 
 #pragma mark - Lifecycle
 

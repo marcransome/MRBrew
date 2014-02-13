@@ -48,7 +48,6 @@ static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
 @end
 
 @implementation MRBrew
-{} // allows pragma parser to parse marks before first method
 
 #pragma mark - Lifecycle
 

@@ -26,7 +26,6 @@
 #import "MRBrewInstallOption.h"
 
 @implementation MRBrewInstallOption
-{} // allows pragma parser to parse marks before first method
 
 #pragma mark - Lifecycle
 

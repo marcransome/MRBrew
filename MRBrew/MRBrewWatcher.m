@@ -42,7 +42,6 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 @end
 
 @implementation MRBrewWatcher
-{} // allows pragma parser to parse marks before first method
 
 #pragma mark - Lifecycle
 

@@ -28,7 +28,6 @@
 #import "MRBrewConstants.h"
 
 @implementation MRBrewOperation
-{} // allows pragma parser to parse marks before first method
 
 #pragma mark - Lifecycle
 
