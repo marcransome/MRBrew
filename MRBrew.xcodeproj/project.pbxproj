@@ -31,6 +31,7 @@
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
+		19916C1A18AC2E52006AC522 /* MRBrewOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */; };
 		19E91B481832F44B00D7E61F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E91B061832F38C00D7E61F /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
 		197B2F7817D676D1000519BF /* MRBrewWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorker.h; sourceTree = "<group>"; };
 		197B2F7917D676D1000519BF /* MRBrewWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorker.m; sourceTree = "<group>"; };
+		19916C1818AC2E52006AC522 /* MRBrewOutputParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOutputParser.h; sourceTree = "<group>"; };
+		19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOutputParser.m; sourceTree = "<group>"; };
 		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -185,6 +188,8 @@
 				19453D8517901C3700064BC7 /* MRBrewInstallOption.m */,
 				19453D8617901C3700064BC7 /* MRBrewOperation.h */,
 				19453D8717901C3700064BC7 /* MRBrewOperation.m */,
+				19916C1818AC2E52006AC522 /* MRBrewOutputParser.h */,
+				19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */,
 				196FEF1417B0510100E97597 /* MRBrewWatcher.h */,
 				196FEF1517B0510100E97597 /* MRBrewWatcher.m */,
 				197B2F7817D676D1000519BF /* MRBrewWorker.h */,
@@ -334,6 +339,7 @@
 			files = (
 				19453D6F17901C1100064BC7 /* main.m in Sources */,
 				19453D7617901C1100064BC7 /* MRAppDelegate.m in Sources */,
+				19916C1A18AC2E52006AC522 /* MRBrewOutputParser.m in Sources */,
 				19453D8817901C3700064BC7 /* MRBrew.m in Sources */,
 				19453D8917901C3700064BC7 /* MRBrewFormula.m in Sources */,
 				19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */,
