@@ -109,7 +109,7 @@ NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
     return [[self alloc] initWithLocation:location delegate:delegate];
 }
 
-+ (id)watcherWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate
++ (instancetype)watcherWithPath:(NSString *)path delegate:(id<MRBrewWatcherDelegate>)delegate
 {
     return [[self alloc] initWithPath:path delegate:delegate];
 }
