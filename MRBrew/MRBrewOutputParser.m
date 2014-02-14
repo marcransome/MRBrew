@@ -64,6 +64,9 @@
     else if ([[operation name] isEqualToString:MRBrewOperationSearchIdentifier]) {
         objects = [self parseFormulaeFromOutput:output];
     }
+    else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
+        objects = [self parseInstallOptionsFromOutput:output];
+    }
     
     return objects;
 }
@@ -85,7 +88,38 @@
 
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
 {
+    NSMutableArray *objects = [NSMutableArray array];
+
+    NSUInteger optionIndex = 0;
+    NSUInteger descriptionIndex = 1;
     
+    for (NSString *line in [output componentsSeparatedByString:@"\n--"]) {
+        
+        NSMutableArray *optionWithDescription = [[line componentsSeparatedByString:@"\t"] mutableCopy];
+        
+        // TODO assertion - optionWithDescription should contain exactly two elements
+        
+        // replace '--' prefix removed when separating into components
+        if (![[optionWithDescription objectAtIndex:optionIndex] hasPrefix:@"--"]) {
+            [optionWithDescription setObject:[NSString stringWithFormat:@"--%@", [optionWithDescription objectAtIndex:optionIndex]] atIndexedSubscript:optionIndex];
+        }
+        
+        // remove unnecessary line breaks from option string
+        if ([[optionWithDescription objectAtIndex:optionIndex] rangeOfString:@"\n"].location != NSNotFound) {
+            [optionWithDescription setObject:[[optionWithDescription objectAtIndex:optionIndex] stringByReplacingOccurrencesOfString:@"\n" withString:@""] atIndexedSubscript:optionIndex];
+        }
+        
+        // remove unnecessary line breaks from description string
+        if ([[optionWithDescription objectAtIndex:descriptionIndex] rangeOfString:@"\n"].location != NSNotFound) {
+            [optionWithDescription setObject:[[optionWithDescription objectAtIndex:descriptionIndex] stringByReplacingOccurrencesOfString:@"\n" withString:@""] atIndexedSubscript:descriptionIndex];
+        }
+        
+        // instantiate an install option object for each option we encounter
+        MRBrewInstallOption *option = [MRBrewInstallOption installOptionWithName:[optionWithDescription objectAtIndex:optionIndex] description:[optionWithDescription objectAtIndex:descriptionIndex] selected:NO];
+        [objects addObject:option];
+    }
+    
+    return objects;
 }
 
 @end
