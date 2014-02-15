@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1914C99518AFE57800AEC36C /* MRBrewOutputParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */; };
 		193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19453D6217901C1100064BC7 /* Cocoa.framework */; };
 		193A0B69179D3C6C00C65291 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 193A0B67179D3C6C00C65291 /* InfoPlist.strings */; };
 		193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B6B179D3C6C00C65291 /* MRBrewTests.m */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		190B080417B18AAA002F8E20 /* MRBrewWatcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcherDelegate.h; sourceTree = "<group>"; };
+		1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOutputParserTests.m; sourceTree = "<group>"; };
 		193A0B60179D3C6C00C65291 /* MRBrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRBrewTests-Info.plist"; sourceTree = "<group>"; };
 		193A0B68179D3C6C00C65291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				193A0B6B179D3C6C00C65291 /* MRBrewTests.m */,
 				193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */,
 				193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */,
+				1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */,
 				193A0B65179D3C6C00C65291 /* Supporting Files */,
 			);
 			path = MRBrewTests;
@@ -317,6 +320,7 @@
 			files = (
 				197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */,
 				193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */,
+				1914C99518AFE57800AEC36C /* MRBrewOutputParserTests.m in Sources */,
 				193A0B72179D3C7E00C65291 /* MRBrewConstants.m in Sources */,
 				193A0B73179D3C7E00C65291 /* MRBrewFormula.m in Sources */,
 				193A0B74179D3C7E00C65291 /* MRBrewInstallOption.m in Sources */,
