@@ -56,7 +56,7 @@
 
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output
 {
-    NSMutableArray *objects = [NSMutableArray array];
+    NSMutableArray *objects = nil;
     
     if ([[operation name] isEqualToString:MRBrewOperationListIdentifier]) {
         objects = [self parseFormulaeFromOutput:output];
@@ -66,9 +66,6 @@
     }
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
         objects = [self parseInstallOptionsFromOutput:output];
-    }
-    else {
-        objects = nil;
     }
     
     return objects;
