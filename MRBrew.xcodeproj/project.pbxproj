@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1914C99518AFE57800AEC36C /* MRBrewOutputParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */; };
+		1914C99618AFF74400AEC36C /* MRBrewOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */; };
 		193A0B63179D3C6C00C65291 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19453D6217901C1100064BC7 /* Cocoa.framework */; };
 		193A0B69179D3C6C00C65291 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 193A0B67179D3C6C00C65291 /* InfoPlist.strings */; };
 		193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193A0B6B179D3C6C00C65291 /* MRBrewTests.m */; };
@@ -318,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1914C99618AFF74400AEC36C /* MRBrewOutputParser.m in Sources */,
 				197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */,
 				193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */,
 				1914C99518AFE57800AEC36C /* MRBrewOutputParserTests.m in Sources */,
