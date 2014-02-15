@@ -23,8 +23,12 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import "MRBrewTests.h"
+#import <XCTest/XCTest.h>
 #import "MRBrew.h"
+
+@interface MRBrewTests : XCTestCase
+
+@end
 
 @implementation MRBrewTests
 
@@ -33,14 +37,12 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 - (void)setUp
 {
     [super setUp];
-    
-    // Set-up code here.
+    // Put setup code here; it will be run once, before the first test case.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-    
+    // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
 

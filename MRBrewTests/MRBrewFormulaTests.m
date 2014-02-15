@@ -23,22 +23,24 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import "MRBrewFormulaTests.h"
+#import <XCTest/XCTest.h>
 #import "MRBRewFormula.h"
+
+@interface MRBrewFormulaTests : XCTestCase
+
+@end
 
 @implementation MRBrewFormulaTests
 
 - (void)setUp
 {
     [super setUp];
-    
-    // Set-up code here.
+    // Put setup code here; it will be run once, before the first test case.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-    
+    // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
 

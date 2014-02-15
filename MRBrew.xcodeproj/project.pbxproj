@@ -40,12 +40,9 @@
 		193A0B60179D3C6C00C65291 /* MRBrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRBrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		193A0B66179D3C6C00C65291 /* MRBrewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRBrewTests-Info.plist"; sourceTree = "<group>"; };
 		193A0B68179D3C6C00C65291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		193A0B6A179D3C6C00C65291 /* MRBrewTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRBrewTests.h; sourceTree = "<group>"; };
 		193A0B6B179D3C6C00C65291 /* MRBrewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRBrewTests.m; sourceTree = "<group>"; };
 		193A0B6D179D3C6C00C65291 /* MRBrewTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MRBrewTests-Prefix.pch"; sourceTree = "<group>"; };
-		193A0B76179D3F2F00C65291 /* MRBrewOperationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOperationTests.h; sourceTree = "<group>"; };
 		193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperationTests.m; sourceTree = "<group>"; };
-		193A0B79179D3F5900C65291 /* MRBrewFormulaTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewFormulaTests.h; sourceTree = "<group>"; };
 		193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewFormulaTests.m; sourceTree = "<group>"; };
 		19453D5F17901C1100064BC7 /* MRBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MRBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19453D6217901C1100064BC7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -113,11 +110,8 @@
 		193A0B64179D3C6C00C65291 /* MRBrewTests */ = {
 			isa = PBXGroup;
 			children = (
-				193A0B6A179D3C6C00C65291 /* MRBrewTests.h */,
 				193A0B6B179D3C6C00C65291 /* MRBrewTests.m */,
-				193A0B79179D3F5900C65291 /* MRBrewFormulaTests.h */,
 				193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */,
-				193A0B76179D3F2F00C65291 /* MRBrewOperationTests.h */,
 				193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */,
 				193A0B65179D3C6C00C65291 /* Supporting Files */,
 			);
