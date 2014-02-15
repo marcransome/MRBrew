@@ -67,6 +67,9 @@
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
         objects = [self parseInstallOptionsFromOutput:output];
     }
+    else {
+        objects = nil;
+    }
     
     return objects;
 }
