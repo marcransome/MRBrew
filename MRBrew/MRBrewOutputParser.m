@@ -100,7 +100,11 @@
         
         NSMutableArray *optionWithDescription = [[line componentsSeparatedByString:@"\t"] mutableCopy];
         
-        // TODO assertion - optionWithDescription should contain exactly two elements
+        // after separating the components into an array, we expect there to be
+        // precisely two elements -- the option string and description string
+        if ([optionWithDescription count] != 2) {
+            return nil;
+        }
         
         // replace '--' prefix removed when separating into components
         if (![[optionWithDescription objectAtIndex:optionIndex] hasPrefix:@"--"]) {

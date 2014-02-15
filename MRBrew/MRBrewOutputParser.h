@@ -54,12 +54,13 @@
  * @param operation The operation object that generated the output.
  * @param output The output string to parse.
  * @return An array of objects parsed from an operation's output or `nil` if
- * the operation type is either unsupported or parsing failed. For operations
- * whose `name` property matches `MRBrewOperationListIdentifier` or
- * `MRBrewOperationSearchIdentifier`, the returned array may contain one or
- * more `MRBrewFormula` objects. For operations whose `name` property matches
- * `MRBrewOperationOptionsIdentifier`, the returned array may contain one or
- * more `MRBrewInstallOption` objects.
+ * the operation type is either unsupported or if the string could not be
+ * parsed. An empty array may be returned for an output string that was parsed
+ * successfully but yieled no objects. For operations whose `name` property
+ * matches `MRBrewOperationListIdentifier` or `MRBrewOperationSearchIdentifier`,
+ * the returned array may contain one or more `MRBrewFormula` objects. For
+ * operations whose `name` property matches `MRBrewOperationOptionsIdentifier`,
+ * the returned array may contain one or more `MRBrewInstallOption` objects.
  */
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output;
 
