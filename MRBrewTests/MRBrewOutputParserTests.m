@@ -24,11 +24,22 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #include "MRBrewOutputParser.h"
 #include "MRBrewFormula.h"
+#include "MRBrewOperation.h"
 #include "MRBrewInstallOption.h"
+#include "MRBrewConstants.h"
 
 @interface MRBrewOutputParserTests : XCTestCase
+{
+    NSString *_fakeOutputFromListOperation;
+    NSString *_fakeOutputFromSearchOperation;
+    NSString *_fakeOutputFromOptionsOperation;
+    NSUInteger _fakeCountForListOperation;
+    NSUInteger _fakeCountForSearchOperation;
+    NSUInteger _fakeCountForOptionsOperation;
+}
 
 @end
 
@@ -37,13 +48,92 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
+    
+    _fakeOutputFromListOperation = @"test-formula\n";
+    _fakeOutputFromSearchOperation = @"test-formula\n";
+    _fakeOutputFromOptionsOperation = @"--test-option\n\tTest option description\n\n";
+    
+    _fakeCountForListOperation = 1;
+    _fakeCountForSearchOperation = 1;
+    _fakeCountForOptionsOperation = 1;
 }
 
 - (void)tearDown
 {
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
+}
+
+- (void)testParsedObjectArrayForListOperationIsNotNil
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromListOperation];
+    XCTAssertNotNil(objects, @"Nil should not be returned when a valid output string is provided");
+}
+
+- (void)testParsedObjectArrayForListOperationContainsValidObject
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromListOperation];
+    XCTAssertTrue([[objects objectAtIndex:0] isKindOfClass:[MRBrewFormula class]], @"Objects parsed from list operation output should be of class MRBrewFormula");
+}
+
+- (void)testParsedObjectArrayForListOperationContainsCorrectNumberOfObjects
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromListOperation];
+    XCTAssertTrue([objects count] == _fakeCountForListOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string");
+}
+
+- (void)testParsedObjectArrayForSearchOperationIsNotNil
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromSearchOperation];
+    XCTAssertNotNil(objects, @"Nil should not be returned when a valid output string is provided");
+}
+
+- (void)testParsedObjectArrayForSearchOperationContainsValidObject
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromSearchOperation];
+    XCTAssertTrue([[objects objectAtIndex:0] isKindOfClass:[MRBrewFormula class]], @"Objects parsed from search operation output should be of class MRBrewFormula");
+}
+
+- (void)testParsedObjectArrayForSearchOperationContainsCorrectNumberOfObjects
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromSearchOperation];
+    XCTAssertTrue([objects count] == _fakeCountForSearchOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string");
+}
+
+- (void)testParsedObjectArrayForOptionsOperationIsNotNil
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation];
+    XCTAssertNotNil(objects, @"Nil should not be returned when a valid output string is provided");
+}
+
+- (void)testParsedObjectArrayForOptionsOperationContainsValidObject
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation];
+    XCTAssertTrue([[objects objectAtIndex:0] isKindOfClass:[MRBrewInstallOption class]], @"Objects parsed from options operation output should be of class MRBrewFormula");
+}
+
+- (void)testParsedObjectArrayForOptionsOperationContainsCorrectNumberOfObjects
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser sharedOutputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation];
+    XCTAssertTrue([objects count] == _fakeCountForOptionsOperation, @"The number of objects parsed should equal the number of lines in the output string separated by a newline character immediately followed by the string '--'");
 }
 
 @end
