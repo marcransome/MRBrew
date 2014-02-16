@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CEF4F03C-9356-4A65-A78A-C30BED316D8F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MRBrew</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>52DE1BBE-486D-4372-9F11-6D749147F3CA</key>
+		<string>ssh://github.com/marcransome/MRBrew.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MRBrew.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>52DE1BBE-486D-4372-9F11-6D749147F3CA</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/marcransome/MRBrew.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>52DE1BBE-486D-4372-9F11-6D749147F3CA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>52DE1BBE-486D-4372-9F11-6D749147F3CA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MRBrew</string>
+		</dict>
+	</array>
+</dict>
+</plist>
