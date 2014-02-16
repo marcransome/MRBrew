@@ -27,6 +27,10 @@
 
 @class MRBrewOperation;
 
+/** The `MRBrewOutputParser` class provides rudimentary support for parsing
+ * objects from the output generated when performing operations using `MRBrew`'s
+ * `performOperation:delegate:` method.
+ */
 @interface MRBrewOutputParser : NSObject
 
 /**-----------------------------------------------------------------------------
