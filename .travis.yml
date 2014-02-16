@@ -1,2 +1,3 @@
 language: objective-c
-script: xctool -project MRBrew.xcodeproj -scheme 'MRBrew' -configuration Release build test
+before_install: gem install cocoapods
+script: xctool -workspace MRBrew.xcworkspace -scheme 'MRBrew' -configuration Release build test
