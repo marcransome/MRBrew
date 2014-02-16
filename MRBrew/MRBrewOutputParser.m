@@ -80,6 +80,10 @@
     NSArray *names = [output componentsSeparatedByString:@"\n"];
     
     for (NSString *name in names) {
+        if ([name isEqualToString:@""]) {
+            continue;
+        }
+        
         [objects addObject:[MRBrewFormula formulaWithName:name]];
     }
     
