@@ -24,11 +24,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "MRBrewOperation.h"
 #import "MRBrewFormula.h"
 
 @interface MRBrewOperationTests : XCTestCase
-
+{
+    id _stubFormulaNeverEqualToItself;
+    id _stubFormulaAlwaysEqualToItself;
+}
 @end
 
 @implementation MRBrewOperationTests
@@ -36,7 +40,14 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
+    
+    _stubFormulaNeverEqualToItself = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[_stubFormulaNeverEqualToItself stub] andReturnValue:@NO] isEqualToFormula:[OCMArg any]];
+    [[[_stubFormulaNeverEqualToItself stub] andReturn:_stubFormulaNeverEqualToItself] copy];
+    
+    _stubFormulaAlwaysEqualToItself = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[_stubFormulaAlwaysEqualToItself stub] andReturnValue:@YES] isEqualToFormula:[OCMArg any]];
+    [[[_stubFormulaAlwaysEqualToItself stub] andReturn:_stubFormulaAlwaysEqualToItself] copy];
 }
 
 - (void)tearDown
@@ -54,36 +65,31 @@
 
 - (void)testIdenticalOperationsEquality
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
-    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
     
     XCTAssertTrue([operation1 isEqualToOperation:operation2], @"Operations that have the same properties should be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForNameProperty
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
-    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"different" formula:formula parameters:@[]];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"different" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
     
     XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different name property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForFormulaProperty
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula1 parameters:@[]];
-    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula2 parameters:@[]];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaNeverEqualToItself parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaNeverEqualToItself parameters:@[]];
     
     XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForFormulaPropertyOneNilValue
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
     MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
     
     XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different formula property should not be equal.");
@@ -91,18 +97,16 @@
 
 - (void)testDifferentOperationsEqualityForParametersProperty
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
-    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[@"different"]];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[@"different"]];
     
     XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
 
 - (void)testDifferentOperationsEqualityForParametersPropertyOneNilValue
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:@[]];
-    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:formula parameters:nil];
+    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:@[]];
+    MRBrewOperation *operation2 = [MRBrewOperation operationWithName:@"operation" formula:_stubFormulaAlwaysEqualToItself parameters:nil];
     
     XCTAssertFalse([operation1 isEqualToOperation:operation2], @"Operations with different parameters property should not be equal.");
 }
