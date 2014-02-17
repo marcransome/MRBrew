@@ -58,9 +58,9 @@
 
 - (void)testSingleOperationEquality
 {
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:@[]];
     
-    XCTAssertTrue([operation1 isEqualToOperation:operation1], @"Comparison of a operation with itself should be equal.");
+    XCTAssertTrue([operation isEqualToOperation:operation], @"Comparison of a operation with itself should be equal.");
 }
 
 - (void)testIdenticalOperationsEquality
@@ -113,17 +113,17 @@
 
 - (void)testOperationForEqualityWithNil
 {
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
     
-    XCTAssertFalse([operation1 isEqualToOperation:nil], @"Operations can never be equal to nil.");
+    XCTAssertFalse([operation isEqualToOperation:nil], @"Operations can never be equal to nil.");
 }
 
 - (void)testOperationForEqualityWithObjectOfAnotherClass
 {
-    MRBrewOperation *operation1 = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation" formula:nil parameters:nil];
     id string = @"string";
     
-    XCTAssertFalse([operation1 isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
+    XCTAssertFalse([operation isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
 }
 
 @end
