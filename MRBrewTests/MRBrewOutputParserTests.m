@@ -45,6 +45,8 @@
 
 @implementation MRBrewOutputParserTests
 
+#pragma mark - Setup
+
 - (void)setUp
 {
     [super setUp];
@@ -63,6 +65,8 @@
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
+
+#pragma mark - Object Parsing Tests
 
 - (void)testParsedObjectArrayForListOperationIsNotNil
 {

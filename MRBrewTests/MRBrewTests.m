@@ -34,6 +34,8 @@
 
 static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 
+#pragma mark - Setup
+
 - (void)setUp
 {
     [super setUp];
@@ -45,6 +47,8 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
+
+#pragma mark - Brew Path Tests
 
 - (void)testDefaultBrewPath
 {
