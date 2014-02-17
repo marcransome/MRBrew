@@ -34,13 +34,15 @@
 @interface MRBrewOutputParser : NSObject
 
 /**-----------------------------------------------------------------------------
- * @name Accessing the Shared Output Parser
+ * @name Creating an Output Parser
  * -----------------------------------------------------------------------------
  */
 
-/** Returns the shared `MRBrewOutputParser` instance, creating it if necessary.
+/** Creates and returns an output parser.
+ *
+ * @return An initialised output parser.
  */
-+ (instancetype)sharedOutputParser;
++ (instancetype)outputParser;
 
 /**-----------------------------------------------------------------------------
  * @name Parsing Objects

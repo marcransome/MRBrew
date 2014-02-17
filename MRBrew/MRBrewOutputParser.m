@@ -40,16 +40,9 @@
 
 #pragma mark - Lifecycle
 
-+ (instancetype)sharedOutputParser
++ (instancetype)outputParser
 {
-    static MRBrewOutputParser *outputParser = nil;
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        outputParser = [[MRBrewOutputParser alloc] init];
-    });
-    
-    return outputParser;
+    return [[self alloc] init];
 }
 
 #pragma mark - Object Parsing (public)
