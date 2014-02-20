@@ -116,22 +116,22 @@
         NSMutableArray *optionWithDescription = [[line componentsSeparatedByString:@"\t"] mutableCopy];
         
         // after separating the components into an array, we expect there to be
-        // precisely two elements -- the option string and description string
+        // precisely two elements -- the option and description strings
         if ([optionWithDescription count] != 2) {
             return nil;
         }
         
-        // replace '--' prefix removed when separating into components
+        // replace '--' prefix that was removed when separating into components
         if (![[optionWithDescription objectAtIndex:optionIndex] hasPrefix:@"--"]) {
             [optionWithDescription setObject:[NSString stringWithFormat:@"--%@", [optionWithDescription objectAtIndex:optionIndex]] atIndexedSubscript:optionIndex];
         }
         
-        // remove unnecessary line breaks from option string
+        // remove unnecessary line breaks from the option string
         if ([[optionWithDescription objectAtIndex:optionIndex] rangeOfString:@"\n"].location != NSNotFound) {
             [optionWithDescription setObject:[[optionWithDescription objectAtIndex:optionIndex] stringByReplacingOccurrencesOfString:@"\n" withString:@""] atIndexedSubscript:optionIndex];
         }
         
-        // remove unnecessary line breaks from description string
+        // remove unnecessary line breaks from the description string
         if ([[optionWithDescription objectAtIndex:descriptionIndex] rangeOfString:@"\n"].location != NSNotFound) {
             [optionWithDescription setObject:[[optionWithDescription objectAtIndex:descriptionIndex] stringByReplacingOccurrencesOfString:@"\n" withString:@""] atIndexedSubscript:descriptionIndex];
         }
