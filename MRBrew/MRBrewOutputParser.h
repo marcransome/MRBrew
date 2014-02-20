@@ -64,9 +64,11 @@
  * parsed. An empty array may be returned for an output string that was parsed
  * successfully but yielded no objects. For operations whose `name` property
  * matches `MRBrewOperationListIdentifier` or `MRBrewOperationSearchIdentifier`,
- * the returned array may contain one or more `MRBrewFormula` objects. For
- * operations whose `name` property matches `MRBrewOperationOptionsIdentifier`,
- * the returned array may contain one or more `MRBrewInstallOption` objects.
+ * the returned array may contain one or more `MRBrewFormula` objects.
+ * Additionally, for `MRBrewOperationListIdentifier` operations, each operation
+ * object will have its `isInstalled` property set to `YES`. For operations
+ * whose `name` property matches `MRBrewOperationOptionsIdentifier`, the
+ * returned array may contain one or more `MRBrewInstallOption` objects.
  */
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output;
 

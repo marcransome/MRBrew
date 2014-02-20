@@ -32,6 +32,8 @@
 @interface MRBrewOutputParser ()
 
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output;
+- (NSMutableArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output;
+- (NSMutableArray *)parseFormulaeFromListOperationOutput:(NSString *)output;
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output;
 
 @end
@@ -52,10 +54,10 @@
     NSMutableArray *objects = nil;
     
     if ([[operation name] isEqualToString:MRBrewOperationListIdentifier]) {
-        objects = [self parseFormulaeFromOutput:output];
+        objects = [self parseFormulaeFromListOperationOutput:output];
     }
     else if ([[operation name] isEqualToString:MRBrewOperationSearchIdentifier]) {
-        objects = [self parseFormulaeFromOutput:output];
+        objects = [self parseFormulaeFromSearchOperationOutput:output];
     }
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
         objects = [self parseInstallOptionsFromOutput:output];
@@ -66,6 +68,9 @@
 
 #pragma mark - Object Parsing (private)
 
+/* Parse output where each line of the output string is expected to contain the
+ * name of a formula, and return a mutable array of MRBrewFormula objects.
+ */
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output
 {
     NSMutableArray *objects = [NSMutableArray array];
@@ -81,6 +86,22 @@
     }
     
     return objects;
+}
+
+- (NSMutableArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output
+{
+    return [self parseFormulaeFromOutput:output];
+}
+
+- (NSMutableArray *)parseFormulaeFromListOperationOutput:(NSString *)output
+{
+    NSMutableArray *formulae = [self parseFormulaeFromOutput:output];
+    
+    for (MRBrewFormula *formula in formulae) {
+        [formula setIsInstalled:YES];
+    }
+    
+    return formulae;
 }
 
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
