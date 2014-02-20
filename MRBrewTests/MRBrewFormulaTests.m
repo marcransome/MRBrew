@@ -50,9 +50,9 @@
 
 - (void)testSingleFormulaEquality
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
 
-    XCTAssertTrue([formula1 isEqualToFormula:formula1], @"Comparison of a formula with itself should be equal.");
+    XCTAssertTrue([formula isEqualToFormula:formula], @"Comparison of a formula with itself should be equal.");
 }
 
 - (void)testIdenticalFormulaeEquality
@@ -100,17 +100,17 @@
 
 - (void)testFormulaForEqualityWithNil
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
 
-    XCTAssertFalse([formula1 isEqualToFormula:nil], @"Formulae can never be equal to nil.");
+    XCTAssertFalse([formula isEqualToFormula:nil], @"Formulae can never be equal to nil.");
 }
 
 - (void)testFormulaForEqualityWithObjectOfAnotherClass
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
     id string = @"string";
     
-    XCTAssertFalse([formula1 isEqualToFormula:string], @"Formulae can never be equal to objects of another class.");
+    XCTAssertFalse([formula isEqualToFormula:string], @"Formulae can never be equal to objects of another class.");
 }
 
 @end
