@@ -48,25 +48,34 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [super tearDown];
 }
 
+#pragma mark - Initialisation
+
+- (void)testSharedBrewNotNil
+{
+    MRBrew *brew = [MRBrew sharedBrew];
+    XCTAssertNotNil(brew, @"Should not be nil.");
+}
+
+- (void)testSharedBrewReturnsSameInstance
+{
+    MRBrew *brew1 = [MRBrew sharedBrew];
+    MRBrew *brew2 = [MRBrew sharedBrew];
+    XCTAssertEqualObjects(brew1, brew2, @"Should return the same instance.");
+}
+
 #pragma mark - Brew Path Tests
 
 - (void)testDefaultBrewPath
 {
-    // launching an NSTask with a nil path raises an exception so we guard against this
-    // by initialising brewPath to the default brew path during +(void)initialize
-    
-    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
+    NSString *brewPath = [[MRBrew sharedBrew] brewPath];
+    XCTAssertTrue([brewPath isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
 }
 
-- (void)testNilBrewPath
+- (void)testDefaultBrewPathWhenSetToNil
 {
-    // launching an NSTask with a nil path raises an exception so we guard against this
-    // by setting brewPath to the default brew path whenever setBrewPath: is passed nil
-    
     [[MRBrew sharedBrew] setBrewPath:nil];
-    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Setting path to nil should default to %@.", MRBrewTestsDefaultBrewPath);
+    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
     
-    // cleanup
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
@@ -76,7 +85,6 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[MRBrew sharedBrew] setBrewPath:testPath];
     XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:testPath], @"Should equal new path %@.", testPath);
     
-    // cleanup
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
