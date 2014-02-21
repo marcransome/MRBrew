@@ -46,7 +46,17 @@
     [super tearDown];
 }
 
-# pragma mark - Equality Tests
+#pragma mark - Initialisation
+
+- (void)testFactoryMethodReturnsObjectOfCorrectClass
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    Class formulaClass = [MRBrewFormula class];
+    
+    XCTAssertTrue([formula isKindOfClass:[NSObject class]], @"Formula should be of class %@.", NSStringFromClass(formulaClass));
+}
+
+#pragma mark - Equality Tests
 
 - (void)testSingleFormulaEquality
 {
