@@ -130,4 +130,42 @@
     XCTAssertFalse([operation isEqualToOperation:string], @"Operations can never be equal to objects of another class.");
 }
 
+#pragma mark - Description
+
+- (void)testOperationDescriptionWithFormulaAndParameters
+{
+    id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[formula stub] andReturn:@"formula-name"] name];
+    [[[formula stub] andReturn:formula] copy];
+    
+    NSArray *parameters = @[@"param-one", @"param-two"];
+    
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation-name" formula:formula parameters:parameters];
+    XCTAssertTrue([[operation description] isEqualToString:@"operation-name param-one param-two formula-name"], @"Should contain operation name, each parameter in the correct order, then the formula name.");
+}
+
+- (void)testOperationDescriptionWithFormulaAndNilParameters
+{
+    id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[formula stub] andReturn:@"formula-name"] name];
+    [[[formula stub] andReturn:formula] copy];
+    
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation-name" formula:formula parameters:nil];
+    XCTAssertTrue([[operation description] isEqualToString:@"operation-name formula-name"], @"Should contain operation name then formula name.");
+}
+
+- (void)testOperationDescriptionWithParametersAndNilFormula
+{
+    NSArray *parameters = @[@"param-one", @"param-two"];
+    
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation-name" formula:nil parameters:parameters];
+    XCTAssertTrue([[operation description] isEqualToString:@"operation-name param-one param-two"], @"Should contain operation name then each parameter in the correct order.");
+}
+
+- (void)testOperationDescriptionWithNilFormulaAndNilParameters
+{
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation-name" formula:nil parameters:nil];
+    XCTAssertTrue([[operation description] isEqualToString:@"operation-name"], @"Should contain operation name.");
+}
+
 @end
