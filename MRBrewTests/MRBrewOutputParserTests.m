@@ -140,4 +140,13 @@
     XCTAssertTrue([objects count] == _fakeCountForOptionsOperation, @"The number of objects parsed should equal the number of lines in the output string separated by a newline character immediately followed by the string '--'.");
 }
 
+- (void)testParsedObjectArrayForInvalidInstallOperationOutput
+{
+    NSString *invalidOptionsOperationOutput = @"--test-option-without-description";
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSArray *objects = [[MRBrewOutputParser outputParser] objectsForOperation:operation output:invalidOptionsOperationOutput];
+    XCTAssertNil(objects, @"Should equal nil for invalid output string.");
+}
+
 @end
