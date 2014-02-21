@@ -78,7 +78,7 @@
     MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different name property should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different 'name' property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForUpdatedProperty
@@ -87,7 +87,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsUpdated:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different updated property should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different 'updated' property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForNewProperty
@@ -96,7 +96,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsNew:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different new property should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different 'new' property should not be equal.");
 }
 
 - (void)testDifferentFormulaeEqualityForInstalledProperty
@@ -105,7 +105,7 @@
     MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
     [formula2 setIsInstalled:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different installed property should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae with different 'installed' property should not be equal.");
 }
 
 - (void)testFormulaForEqualityWithNil
