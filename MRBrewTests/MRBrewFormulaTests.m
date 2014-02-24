@@ -123,4 +123,14 @@
     XCTAssertFalse([formula isEqualToFormula:string], @"Formulae can never be equal to objects of another class.");
 }
 
+#pragma mark - Copying
+
+-(void)testCopiedFormulaIsEqualToOriginalFormula
+{
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *copy = [formula copy];
+    
+    XCTAssertTrue([copy isEqualToFormula:formula], @"Formula copy should be identical to original formula.");
+}
+
 @end
