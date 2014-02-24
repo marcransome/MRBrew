@@ -168,4 +168,20 @@
     XCTAssertTrue([[operation description] isEqualToString:@"operation-name"], @"Should contain operation name.");
 }
 
+#pragma mark - Copying
+
+-(void)testCopiedOperationIsEqualToOriginalOperation
+{
+    id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[formula stub] andReturn:@"formula-name"] name];
+    [[[formula stub] andReturn:formula] copy];
+    [[[formula stub] andReturn:formula] copyWithZone:[OCMArg anyPointer]];
+    [[[formula stub] andReturnValue:@YES] isEqualToFormula:[OCMArg any]];
+    
+    MRBrewOperation *operation = [MRBrewOperation operationWithName:@"operation-name" formula:formula parameters:@[@"param-one", @"param-two"]];
+    MRBrewOperation *copy = [operation copy];
+    
+    XCTAssertTrue([copy isEqualToOperation:operation], @"Operation copy should be identical to original operation.");
+}
+
 @end
