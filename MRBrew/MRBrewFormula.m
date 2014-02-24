@@ -98,7 +98,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    MRBrewFormula *copy = [[MRBrewFormula alloc] init];
+    MRBrewFormula *copy = [[[self class] allocWithZone:zone] init];
     [copy setName:[[self name] copy]];
     [copy setIsUpdated:[self isUpdated]];
     [copy setIsNew:[self isNew]];

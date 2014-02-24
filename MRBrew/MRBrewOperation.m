@@ -171,7 +171,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    MRBrewOperation *copy = [[MRBrewOperation alloc] init];
+    MRBrewOperation *copy = [[[self class] allocWithZone:zone] init];
     [copy setName:[[self name] copy]];
     [copy setFormula:[[self formula] copy]];
     [copy setParameters:[[self parameters] copy]];
