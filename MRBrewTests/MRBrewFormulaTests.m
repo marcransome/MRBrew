@@ -48,9 +48,9 @@
 
 #pragma mark - Initialisation
 
-- (void)testFactoryMethodReturnsObjectOfCorrectClass
+- (void)testClassOfFormula
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [[MRBrewFormula alloc] init];
     Class formulaClass = [MRBrewFormula class];
     
     XCTAssertTrue([formula isKindOfClass:formulaClass], @"Formula should be kind of class %@.", NSStringFromClass(formulaClass));
@@ -58,76 +58,76 @@
 
 #pragma mark - Equality Tests
 
-- (void)testSingleFormulaEquality
+- (void)testEqualityOfSingleFormula
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula-name"];
 
     XCTAssertTrue([formula isEqualToFormula:formula], @"Formula should be equal to itself.");
 }
 
-- (void)testIdenticalFormulaeEquality
+- (void)testEqualityOfIdenticalFormulae
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula-name"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula-name"];
     
     XCTAssertTrue([formula1 isEqualToFormula:formula2], @"Formulae that have identical properties should be equal.");
 }
 
-- (void)testDifferentFormulaeEqualityForNameProperty
+- (void)testEqualityOfFormulaeWithDifferentNameProperty
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different"];
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula-name"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"different-name"];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have different 'name' properties should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have a different 'name' property should not be equal.");
 }
 
-- (void)testDifferentFormulaeEqualityForUpdatedProperty
+- (void)testEqualityOfFormulaeWithDifferentUpdatedProperty
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula-name"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula-name"];
     [formula2 setIsUpdated:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have different 'updated' properties should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have a different 'updated' property should not be equal.");
 }
 
-- (void)testDifferentFormulaeEqualityForNewProperty
+- (void)testEqualityOfFormulaeWithDifferentNewProperty
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula-name"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula-name"];
     [formula2 setIsNew:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have different 'new' properties should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have a different 'new' property should not be equal.");
 }
 
-- (void)testDifferentFormulaeEqualityForInstalledProperty
+- (void)testEqualityOfFormulaeWithDifferentInstalledProperty
 {
-    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula"];
-    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula1 = [MRBrewFormula formulaWithName:@"formula-name"];
+    MRBrewFormula *formula2 = [MRBrewFormula formulaWithName:@"formula-name"];
     [formula2 setIsInstalled:YES];
     
-    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have different 'installed' properties should not be equal.");
+    XCTAssertFalse([formula1 isEqualToFormula:formula2], @"Formulae that have a different 'installed' property should not be equal.");
 }
 
-- (void)testFormulaForEqualityWithNil
+- (void)testEqualityOfFormulaWithNil
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [[MRBrewFormula alloc] init];
 
-    XCTAssertFalse([formula isEqualToFormula:nil], @"Formulae can never be equal to nil.");
+    XCTAssertFalse([formula isEqualToFormula:nil], @"Formulae should never be equal to nil.");
 }
 
-- (void)testFormulaForEqualityWithObjectOfAnotherClass
+- (void)testEqualityOfFormulaWithObjectOfAnotherClass
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [[MRBrewFormula alloc] init];
     id string = @"string";
     
-    XCTAssertFalse([formula isEqualToFormula:string], @"Formulae can never be equal to objects of another class.");
+    XCTAssertFalse([formula isEqualToFormula:string], @"Formulae should never be equal to objects of another class.");
 }
 
 #pragma mark - Copying
 
 -(void)testCopiedFormulaIsEqualToOriginalFormula
 {
-    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula-name"];
     MRBrewFormula *copy = [formula copy];
     
     XCTAssertTrue([copy isEqualToFormula:formula], @"Formula copy should be identical to original formula.");
