@@ -53,7 +53,7 @@
     MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula"];
     Class formulaClass = [MRBrewFormula class];
     
-    XCTAssertTrue([formula isKindOfClass:[NSObject class]], @"Formula should be of class %@.", NSStringFromClass(formulaClass));
+    XCTAssertTrue([formula isKindOfClass:formulaClass], @"Formula should be kind of class %@.", NSStringFromClass(formulaClass));
 }
 
 #pragma mark - Equality Tests
