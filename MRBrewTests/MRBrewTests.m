@@ -53,7 +53,7 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 - (void)testSharedBrewNotNil
 {
     MRBrew *brew = [MRBrew sharedBrew];
-    XCTAssertNotNil(brew, @"Should not be nil.");
+    XCTAssertNotNil(brew, @"Should not return nil.");
 }
 
 - (void)testSharedBrewReturnsSameInstance
@@ -71,7 +71,7 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     XCTAssertTrue([brewPath isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
 }
 
-- (void)testDefaultBrewPathWhenSetToNil
+- (void)testBrewPathWhenSetToNil
 {
     [[MRBrew sharedBrew] setBrewPath:nil];
     XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
@@ -83,7 +83,7 @@ static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 {
     NSString *testPath = @"/test/path";
     [[MRBrew sharedBrew] setBrewPath:testPath];
-    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:testPath], @"Should equal new path %@.", testPath);
+    XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:testPath], @"Should equal new brew path %@.", testPath);
     
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
