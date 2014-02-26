@@ -51,13 +51,13 @@
 {
     [super setUp];
     
-    _fakeOutputFromListOperation = @"test-formula\n";
-    _fakeOutputFromSearchOperation = @"test-formula\n";
-    _fakeOutputFromOptionsOperation = @"--test-option\n\tTest option description\n\n";
+    _fakeOutputFromListOperation = @"test-formula\ntest-formula-two\n";
+    _fakeOutputFromSearchOperation = @"test-formula\ntest-formula-two\n";
+    _fakeOutputFromOptionsOperation = @"--test-option\n\tTest option description\n--test-option-two\n\tTest option description two\n\n";
     
-    _fakeCountForListOperation = 1;
-    _fakeCountForSearchOperation = 1;
-    _fakeCountForOptionsOperation = 1;
+    _fakeCountForListOperation = 2;
+    _fakeCountForSearchOperation = 2;
+    _fakeCountForOptionsOperation = 2;
 }
 
 - (void)tearDown
