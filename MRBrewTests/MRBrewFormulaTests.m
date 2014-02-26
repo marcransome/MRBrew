@@ -56,6 +56,43 @@
     XCTAssertTrue([formula isKindOfClass:formulaClass], @"Formula should be kind of class %@.", NSStringFromClass(formulaClass));
 }
 
+#pragma mark Factory Method Initialisation
+
+- (void)testFormulaCreatedWithFactoryMethodHasCorrectNameProperty
+{
+    NSString *formulaName = @"formula-name";
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:formulaName isNew:NO isUpdated:NO isInstalled:NO];
+    
+    XCTAssertEqual([formula name], formulaName, @"Formula 'name' property should equal the name object specified in factory method call.");
+}
+
+- (void)testFormulaCreatedWithFactoryMethodHasCorrectNewProperty
+{
+    BOOL newProperty = YES;
+    NSString *formulaName = @"formula-name";
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:formulaName isNew:newProperty isUpdated:NO isInstalled:NO];
+    
+    XCTAssertEqual([formula isNew], newProperty, @"Formula 'isNew' property should equal the boolean value specified in factory method call.");
+}
+
+- (void)testFormulaCreatedWithFactoryMethodHasCorrectUpdatedProperty
+{
+    BOOL updatedProperty = YES;
+    NSString *formulaName = @"formula-name";
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:formulaName isNew:NO isUpdated:updatedProperty isInstalled:NO];
+    
+    XCTAssertEqual([formula isUpdated], updatedProperty, @"Formula 'isUpdated' property should equal the boolean value specified in factory method call.");
+}
+
+- (void)testFormulaCreatedWithFactoryMethodHasCorrectInstalledProperty
+{
+    BOOL installedProperty = YES;
+    NSString *formulaName = @"formula-name";
+    MRBrewFormula *formula = [MRBrewFormula formulaWithName:formulaName isNew:NO isUpdated:NO isInstalled:installedProperty];
+    
+    XCTAssertEqual([formula isInstalled], installedProperty, @"Formula 'isInstalled' property should equal the boolean value specified in factory method call.");
+}
+
 #pragma mark - Equality Tests
 
 - (void)testEqualityOfSingleFormula
