@@ -66,7 +66,7 @@
     [super tearDown];
 }
 
-#pragma mark - Object Parsing Tests
+#pragma mark - List Output Parsing Tests
 
 - (void)testParsedObjectArrayForListOperationIsNotNil
 {
@@ -92,6 +92,17 @@
     XCTAssertTrue([objects count] == _fakeCountForListOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string.");
 }
 
+- (void)testNoErrorIsReturnedForListOperationWithValidOutput
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
+    NSError *error = nil;
+    [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromListOperation error:&error];
+    XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
+}
+
+#pragma mark - Search Output Parsing Tests
+
 - (void)testParsedObjectArrayForSearchOperationIsNotNil
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
@@ -116,6 +127,17 @@
     XCTAssertTrue([objects count] == _fakeCountForSearchOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string.");
 }
 
+- (void)testNoErrorIsReturnedForSearchOperationWithValidOutput
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    NSError *error = nil;
+    [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromSearchOperation error:&error];
+    XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
+}
+
+#pragma mark - Options Output Parsing Tests
+
 - (void)testParsedObjectArrayForOptionsOperationIsNotNil
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
@@ -138,6 +160,15 @@
     [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
     NSArray *objects = [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation error:nil];
     XCTAssertTrue([objects count] == _fakeCountForOptionsOperation, @"The number of objects parsed should equal the number of lines in the output string separated by a newline character immediately followed by the string '--'.");
+}
+
+- (void)testNoErrorIsReturnedForOptionsOperationWithValidOutput
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSError *error = nil;
+    [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation error:nil];
+    XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
 }
 
 @end
