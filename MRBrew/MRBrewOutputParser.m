@@ -104,6 +104,11 @@
     return formulae;
 }
 
+/* Parse output string that is expected to contain two lines of text for each
+ * option defined by homebrew. The first line should begin with the string '--',
+ * and the second should begin with a tab character. Returns nil if the string
+ * parsing was unsuccessful.
+ */
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
 {
     NSMutableArray *objects = [NSMutableArray array];
