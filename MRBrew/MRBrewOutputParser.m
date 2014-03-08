@@ -64,12 +64,19 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
         objects = [self parseInstallOptionsFromOutput:output];
         
+        // if parsing failed (returned nil) and an error pointer was supplied,
+        // instantiate an error object with a suitable error code and description
         if (!objects && error) {
-            *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorSyntax userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Output string did not match expected format.", NSLocalizedDescriptionKey, nil]];
+            *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorSyntax userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Output string did not match the expected format.", NSLocalizedDescriptionKey, nil]];
         }
     }
+    else {
+        // unsupported operation type
+        *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorUnsupportedOperation userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object parsing for this type of operation is not supported.", NSLocalizedDescriptionKey, nil]];
+    }
     
-    return objects;
+    // return nil if an error occured, otherwise return the object array
+    return (error ? nil : objects);
 }
 
 #pragma mark - Object Parsing (private)
