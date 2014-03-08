@@ -29,6 +29,8 @@
 #import "MRBrewFormula.h"
 #import "MRBrewInstallOption.h"
 
+NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
+
 @interface MRBrewOutputParser ()
 
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output;
@@ -49,7 +51,7 @@
 
 #pragma mark - Object Parsing (public)
 
-- (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output
+- (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output error:(NSError * __autoreleasing *)error
 {
     NSMutableArray *objects = nil;
     
@@ -61,6 +63,10 @@
     }
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
         objects = [self parseInstallOptionsFromOutput:output];
+        
+        if (!objects && error) {
+            *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorSyntax userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Output string did not match expected format.", NSLocalizedDescriptionKey, nil]];
+        }
     }
     
     return objects;

@@ -25,6 +25,12 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const MRBrewOutputParserErrorDomain;
+
+enum {
+    MRBrewOutputParserErrorSyntax
+};
+
 @class MRBrewOperation;
 
 /** The `MRBrewOutputParser` class provides rudimentary support for parsing
@@ -59,6 +65,8 @@
  *
  * @param operation The operation object that generated the output.
  * @param output The output string to parse.
+ * @param error A pointer to an error object that is set to an NSError instance
+ * if parsing was unsuccesful. This parameter is optional and can be passed nil.
  * @return An array of objects parsed from an operation's output or `nil` if
  * the operation type is either unsupported or if the string could not be
  * parsed. An empty array may be returned for an output string that was parsed
@@ -70,6 +78,6 @@
  * whose `name` property matches `MRBrewOperationOptionsIdentifier`, the
  * returned array may contain one or more `MRBrewInstallOption` objects.
  */
-- (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output;
+- (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output error:(NSError **)error;
 
 @end
