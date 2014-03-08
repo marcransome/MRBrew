@@ -68,8 +68,8 @@
 
 #pragma mark - Object Parsing (private)
 
-/* Parse output where each line of the output string is expected to contain the
- * name of a formula, and return a mutable array of MRBrewFormula objects.
+/* Parse output string in which each line is expected to contain the name of a
+ * formula, and return a mutable array of zero or more MRBrewFormula objects.
  */
 - (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output
 {
@@ -107,7 +107,8 @@
 /* Parse output string that is expected to contain two lines of text for each
  * option defined by homebrew. The first line should begin with the string '--',
  * and the second should begin with a tab character. Returns nil if the string
- * parsing was unsuccessful.
+ * parsing was unsuccessful, otherwise returns a mutable array of zero or more
+ * MRBrewFormula objects.
  */
 - (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
 {
