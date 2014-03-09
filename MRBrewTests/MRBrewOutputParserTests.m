@@ -92,7 +92,7 @@
     XCTAssertTrue([objects count] == _fakeCountForListOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string.");
 }
 
-- (void)testNoErrorIsReturnedForListOperationWithValidOutput
+- (void)testNoErrorIsInstantiatedForListOperationWithValidOutput
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
@@ -127,7 +127,7 @@
     XCTAssertTrue([objects count] == _fakeCountForSearchOperation, @"The number of objects parsed should equal the number of non-blank lines in the output string.");
 }
 
-- (void)testNoErrorIsReturnedForSearchOperationWithValidOutput
+- (void)testNoErrorIsInstantiatedForSearchOperationWithValidOutput
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
@@ -162,7 +162,7 @@
     XCTAssertTrue([objects count] == _fakeCountForOptionsOperation, @"The number of objects parsed should equal the number of lines in the output string separated by a newline character immediately followed by the string '--'.");
 }
 
-- (void)testNoErrorIsReturnedForOptionsOperationWithValidOutput
+- (void)testNoErrorIsInstantiatedForOptionsOperationWithValidOutput
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
