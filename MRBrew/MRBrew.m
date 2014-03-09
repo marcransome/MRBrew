@@ -37,7 +37,7 @@
     #error MRBrew must be built with ARC.
 #endif
 
-static NSString* MRDefaultBrewPath = @"/usr/local/bin/brew";
+static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 
 @interface MRBrew ()
 {

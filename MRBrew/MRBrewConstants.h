@@ -25,12 +25,12 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* const MRBrewOperationUpdateIdentifier;
-extern NSString* const MRBrewOperationListIdentifier;
-extern NSString* const MRBrewOperationSearchIdentifier;
-extern NSString* const MRBrewOperationInstallIdentifier;
-extern NSString* const MRBrewOperationInfoIdentifier;
-extern NSString* const MRBrewOperationRemoveIdentifier;
-extern NSString* const MRBrewOperationOptionsIdentifier;
-extern NSString* const MRBrewOperationOutdatedIdentifier;
+extern NSString * const MRBrewOperationUpdateIdentifier;
+extern NSString * const MRBrewOperationListIdentifier;
+extern NSString * const MRBrewOperationSearchIdentifier;
+extern NSString * const MRBrewOperationInstallIdentifier;
+extern NSString * const MRBrewOperationInfoIdentifier;
+extern NSString * const MRBrewOperationRemoveIdentifier;
+extern NSString * const MRBrewOperationOptionsIdentifier;
+extern NSString * const MRBrewOperationOutdatedIdentifier;
 

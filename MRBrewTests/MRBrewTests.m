@@ -32,7 +32,7 @@
 
 @implementation MRBrewTests
 
-static NSString* const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
+static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 
 #pragma mark - Setup
 

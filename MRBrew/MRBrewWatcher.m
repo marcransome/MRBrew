@@ -25,12 +25,12 @@
 
 #import "MRBrewWatcher.h"
 
-NSString* const MRBrewLibraryLocationPath = @"/usr/local/Library";
-NSString* const MRBrewFormulaLocationPath = @"/usr/local/Library/Formula";
-NSString* const MRBrewTapsLocationPath = @"/usr/local/Library/Taps";
-NSString* const MRBrewAliasesLocationPath = @"/usr/local/Library/Aliases";
-NSString* const MRBrewLinkedKegsLocationPath = @"/usr/local/Library/LinkedKegs";
-NSString* const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
+NSString * const MRBrewLibraryLocationPath = @"/usr/local/Library";
+NSString * const MRBrewFormulaLocationPath = @"/usr/local/Library/Formula";
+NSString * const MRBrewTapsLocationPath = @"/usr/local/Library/Taps";
+NSString * const MRBrewAliasesLocationPath = @"/usr/local/Library/Aliases";
+NSString * const MRBrewLinkedKegsLocationPath = @"/usr/local/Library/LinkedKegs";
+NSString * const MRBrewPinnedKegsLocationPath = @"/usr/local/Library/PinnedKegs";
 
 @interface MRBrewWatcher ()
 {
