@@ -167,7 +167,7 @@
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
     NSError *error = nil;
-    [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation error:nil];
+    [[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation error:&error];
     XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
 }
 
