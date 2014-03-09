@@ -70,7 +70,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
             *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorSyntax userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Output string did not match the expected format.", NSLocalizedDescriptionKey, nil]];
         }
     }
-    else {
+    else if (error) {
         // unsupported operation type
         *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorUnsupportedOperation userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object parsing for this type of operation is not supported.", NSLocalizedDescriptionKey, nil]];
     }
