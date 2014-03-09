@@ -33,10 +33,10 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 @interface MRBrewOutputParser ()
 
-- (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output;
-- (NSMutableArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output;
-- (NSMutableArray *)parseFormulaeFromListOperationOutput:(NSString *)output;
-- (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output;
+- (NSArray *)parseFormulaeFromOutput:(NSString *)output;
+- (NSArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output;
+- (NSArray *)parseFormulaeFromListOperationOutput:(NSString *)output;
+- (NSArray *)parseInstallOptionsFromOutput:(NSString *)output;
 
 @end
 
@@ -53,7 +53,17 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 - (NSArray *)objectsForOperation:(MRBrewOperation *)operation output:(NSString *)output error:(NSError * __autoreleasing *)error
 {
-    NSMutableArray *objects = nil;
+    // return nil if the output string is empty and instantiate a suitable error
+    // object if an error pointer was supplied
+    if (![output length] > 0) {
+        if (error) {
+            *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorEmptyOutputString userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"The output string was empty.", NSLocalizedDescriptionKey, nil]];
+        }
+        
+        return nil;
+    }
+    
+    NSArray *objects = nil;
     
     if ([[operation name] isEqualToString:MRBrewOperationListIdentifier]) {
         objects = [self parseFormulaeFromListOperationOutput:output];
@@ -71,7 +81,8 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         }
     }
     else if (error) {
-        // unsupported operation type
+        // if an unsupported operation type was specified and an error pointer was
+        // supplied, return an error object with a suitable error code and description
         *error = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:MRBrewOutputParserErrorUnsupportedOperation userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object parsing for this type of operation is not supported.", NSLocalizedDescriptionKey, nil]];
     }
     
@@ -82,9 +93,9 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
 #pragma mark - Object Parsing (private)
 
 /* Parse output string in which each line is expected to contain the name of a
- * formula, and return a mutable array of zero or more MRBrewFormula objects.
+ * formula, and return an array of one or more MRBrewFormula objects.
  */
-- (NSMutableArray *)parseFormulaeFromOutput:(NSString *)output
+- (NSArray *)parseFormulaeFromOutput:(NSString *)output
 {
     NSMutableArray *objects = [NSMutableArray array];
     
@@ -98,32 +109,32 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         [objects addObject:[MRBrewFormula formulaWithName:name]];
     }
     
-    return objects;
+    return [NSArray arrayWithArray:objects];
 }
 
-- (NSMutableArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output
+- (NSArray *)parseFormulaeFromSearchOperationOutput:(NSString *)output
 {
     return [self parseFormulaeFromOutput:output];
 }
 
-- (NSMutableArray *)parseFormulaeFromListOperationOutput:(NSString *)output
+- (NSArray *)parseFormulaeFromListOperationOutput:(NSString *)output
 {
-    NSMutableArray *formulae = [self parseFormulaeFromOutput:output];
+    NSArray *formulae = [self parseFormulaeFromOutput:output];
     
     for (MRBrewFormula *formula in formulae) {
         [formula setIsInstalled:YES];
     }
     
-    return formulae;
+    return [NSArray arrayWithArray:formulae];
 }
 
 /* Parse output string that is expected to contain two lines of text for each
  * option defined by homebrew. The first line should begin with the string '--',
  * and the second should begin with a tab character. Returns nil if the string
- * parsing was unsuccessful, otherwise returns a mutable array of zero or more
- * MRBrewFormula objects.
+ * parsing was unsuccessful, an empty array if the output string if empty, or an
+ * array of one or more MRBrewFormula objects if parsing was successful.
  */
-- (NSMutableArray *)parseInstallOptionsFromOutput:(NSString *)output
+- (NSArray *)parseInstallOptionsFromOutput:(NSString *)output
 {
     NSMutableArray *objects = [NSMutableArray array];
 
@@ -160,7 +171,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         [objects addObject:option];
     }
     
-    return objects;
+    return [NSArray arrayWithArray:objects];
 }
 
 @end
