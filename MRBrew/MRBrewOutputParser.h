@@ -29,13 +29,14 @@ extern NSString * const MRBrewOutputParserErrorDomain;
 
 enum {
     MRBrewOutputParserErrorSyntax,
-    MRBrewOutputParserErrorUnsupportedOperation
+    MRBrewOutputParserErrorUnsupportedOperation,
+    MRBrewOutputParserErrorEmptyOutputString
 };
 
 @class MRBrewOperation;
 
 /** The `MRBrewOutputParser` class provides rudimentary support for parsing
- * objects from the output generated when performing operations using `MRBrew`'s
+ * objects from the output of an operation that was performed using `MRBrew`'s
  * `performOperation:delegate:` method.
  */
 @interface MRBrewOutputParser : NSObject
