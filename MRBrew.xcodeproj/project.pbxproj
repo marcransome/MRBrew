@@ -78,6 +78,7 @@
 		197B2F7917D676D1000519BF /* MRBrewWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorker.m; sourceTree = "<group>"; };
 		19916C1818AC2E52006AC522 /* MRBrewOutputParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOutputParser.h; sourceTree = "<group>"; };
 		19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOutputParser.m; sourceTree = "<group>"; };
+		19CFAD9D18CDC46700A8FEB0 /* MRBrew+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrew+Private.h"; sourceTree = "<group>"; };
 		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MRBrewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFBECD253BB418794CA0830 /* Pods-MRBrewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MRBrewTests.xcconfig"; path = "Pods/Pods-MRBrewTests.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 				19453D7517901C1100064BC7 /* MRAppDelegate.m */,
 				19453D7F17901C3700064BC7 /* MRBrew.h */,
 				19453D8017901C3700064BC7 /* MRBrew.m */,
+				19CFAD9D18CDC46700A8FEB0 /* MRBrew+Private.h */,
 				195EE912179A37A800CB1B04 /* MRBrewConstants.h */,
 				195EE913179A37A800CB1B04 /* MRBrewConstants.m */,
 				19453D8217901C3700064BC7 /* MRBrewFormula.h */,
