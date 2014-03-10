@@ -244,4 +244,13 @@
     XCTAssertTrue([error domain] == MRBrewOutputParserErrorDomain, @"The domain should match the constant MRBrewOutputParserErrorDomain.");
 }
 
+- (void)testNilIsReturnedForSearchOperationThatReturnedNoFormulaNames
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    NSError *error = nil;
+    NSArray *objects = [[MRBrewOutputParser outputParser] objectsForOperation:operation output:@"No formula found" error:&error];
+    XCTAssertNil(objects, @"Nil should be returned when the output string is prefixed with 'No formula found' message.");
+}
+
 @end
