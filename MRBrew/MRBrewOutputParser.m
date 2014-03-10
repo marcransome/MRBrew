@@ -190,38 +190,35 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
  */
 - (void)errorForErrorType:(MRBrewOutputParserError)type usingPointer:(NSError * __autoreleasing *)errorPtr
 {
-    // return immediately if no error pointer was supplied
-    if (!errorPtr) {
-        return;
+    // instantiate an error object using the provided pointer, if one exists
+    if (errorPtr) {
+        MRBrewOutputParserError errorCode;
+        NSString *errorDescription;
+        
+        // determine the error type and set an appropriate error code and description
+        switch (type) {
+            case MRBrewOutputParserErrorEmptyOutputString:
+                errorCode = MRBrewOutputParserErrorEmptyOutputString;
+                errorDescription = @"The output string was empty.";
+                break;
+            case MRBrewOutputParserErrorUnsupportedOperation:
+                errorCode = MRBrewOutputParserErrorUnsupportedOperation;
+                errorDescription = @"Object parsing for this type of operation is not supported.";
+                break;
+                
+            case MRBrewOutputParserErrorNoFormulaForSearchResults:
+                errorCode = MRBrewOutputParserErrorNoFormulaForSearchResults;
+                errorDescription = @"Output string for search operation did not list any formula names.";
+                break;
+                
+            case MRBrewOutputParserErrorSyntax:
+                errorCode = MRBrewOutputParserErrorSyntax;
+                errorDescription = @"Output string was not of the expected format.";
+                break;
+        }
+        
+        *errorPtr = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil]];
     }
-    
-    MRBrewOutputParserError errorCode;
-    NSString *errorDescription;
-    
-    // determine the error type and set an appropriate error code and description
-    switch (type) {
-        case MRBrewOutputParserErrorEmptyOutputString:
-            errorCode = MRBrewOutputParserErrorEmptyOutputString;
-            errorDescription = @"The output string was empty.";
-            break;
-        case MRBrewOutputParserErrorUnsupportedOperation:
-            errorCode = MRBrewOutputParserErrorUnsupportedOperation;
-            errorDescription = @"Object parsing for this type of operation is not supported.";
-            break;
-            
-        case MRBrewOutputParserErrorNoFormulaForSearchResults:
-            errorCode = MRBrewOutputParserErrorNoFormulaForSearchResults;
-            errorDescription = @"Output string for search operation did not list any formula names.";
-            break;
-            
-        case MRBrewOutputParserErrorSyntax:
-            errorCode = MRBrewOutputParserErrorSyntax;
-            errorDescription = @"Output string was not of the expected format.";
-            break;
-    }
-    
-    // instantiate an error object using the provided pointer
-    *errorPtr = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil]];
 }
 
 @end
