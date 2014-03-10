@@ -24,6 +24,7 @@
 //
 
 #import "MRBrew.h"
+#import "MRBrew+Private.h"
 #import "MRBrewDelegate.h"
 #import "MRBrewFormula.h"
 #import "MRBrewConstants.h"
@@ -40,14 +41,12 @@
 static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 
 @interface MRBrew ()
-{
-    NSString *_brewPath;
-    NSOperationQueue *_backgroundQueue;
-}
 
 @end
 
 @implementation MRBrew
+
+@synthesize brewPath = _brewPath;
 
 #pragma mark - Lifecycle
 
@@ -91,7 +90,7 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 #pragma mark - Operation Methods
 
 - (void)performOperation:(MRBrewOperation *)operation delegate:(id<MRBrewDelegate>)delegate
-{    
+{
     // construct command-line arguments for brew command
     NSMutableArray *arguments = [NSMutableArray array];
     if ([operation name])
@@ -105,17 +104,17 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
     [worker setArguments:arguments];
     [worker setOperation:operation];
     [worker setDelegate:delegate];
-    [_backgroundQueue addOperation:worker];
+    [[self backgroundQueue] addOperation:worker];
 }
 
 - (void)cancelAllOperations
 {
-    [_backgroundQueue cancelAllOperations];
+    [[self backgroundQueue] cancelAllOperations];
 }
 
 - (void)cancelOperation:(MRBrewOperation *)operation
 {
-    for (MRBrewWorker *worker in [_backgroundQueue operations]) {
+    for (MRBrewWorker *worker in [[self backgroundQueue] operations]) {
         if ([[worker operation] isEqualToOperation:operation]) {
             [worker cancel];
             break;
@@ -125,7 +124,7 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 
 - (void)cancelAllOperationsOfType:(MRBrewOperationType)type
 {
-    if ([_backgroundQueue operationCount] > 0) {
+    if ([[self backgroundQueue] operationCount] > 0) {
         NSString *operationName;
         switch (type) {
             case MRBrewOperationInfo:
@@ -154,7 +153,7 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
                 break;
         }
         
-        for (MRBrewWorker *worker in [_backgroundQueue operations]) {
+        for (MRBrewWorker *worker in [[self backgroundQueue] operations]) {
             if ([[[worker operation] name] isEqualToString:operationName]) {
                 [worker cancel];
             }
@@ -165,16 +164,16 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 - (void)setConcurrentOperations:(BOOL)concurrency
 {
     if (concurrency) {
-        [_backgroundQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+        [[self backgroundQueue] setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
     }
     else {
-        [_backgroundQueue setMaxConcurrentOperationCount:1];
+        [[self backgroundQueue] setMaxConcurrentOperationCount:1];
     }
 }
 
 - (NSUInteger)operationCount
 {
-    return [_backgroundQueue operationCount];
+    return [[self backgroundQueue] operationCount];
 }
 
 @end
