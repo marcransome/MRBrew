@@ -24,7 +24,10 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "MRBrew.h"
+#import "MRBrew+Private.h"
+#import "MRBrewWorker.h"
 
 @interface MRBrewTests : XCTestCase
 
@@ -86,6 +89,28 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:testPath], @"Should equal new brew path %@.", testPath);
     
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
+}
+
+- (void)testCancellingAllOperations
+{
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[queue expect] cancelAllOperations];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] cancelAllOperations];
+    
+    [queue verify];
+}
+
+- (void)testOperationCount
+{
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[queue expect] operationCount];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] operationCount];
+    
+    [queue verify];
 }
 
 @end
