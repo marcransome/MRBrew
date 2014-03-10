@@ -184,6 +184,15 @@
     XCTAssertTrue([error domain] == MRBrewOutputParserErrorDomain, @"The domain should match the constant MRBrewOutputParserErrorDomain.");
 }
 
+- (void)testNilIsReturnedForUnsupportedOperation
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationInstallIdentifier] name];
+    NSError *error = nil;
+    NSArray *objects =[[MRBrewOutputParser outputParser] objectsForOperation:operation output:_fakeOutputFromOptionsOperation error:&error];
+    XCTAssertNil(objects, @"Nil should be returned for an unsupported operations.");
+}
+
 - (void)testErrorIsInstantiatedForInvalidOptionsOperationOutput
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
@@ -195,6 +204,15 @@
     XCTAssertTrue([error domain] == MRBrewOutputParserErrorDomain, @"The domain should match the constant MRBrewOutputParserErrorDomain.");
 }
 
+- (void)testNilIsReturnedForInvalidOptionsOperationOutput
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationOptionsIdentifier] name];
+    NSError *error = nil;
+    NSArray *objects = [[MRBrewOutputParser outputParser] objectsForOperation:operation output:@"invalid\noutput" error:&error];
+    XCTAssertNil(objects, @"Nil should be returned for an invalid output string.");
+}
+
 - (void)testErrorIsInstantiatedForEmptyOutputString
 {
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
@@ -204,6 +222,15 @@
     XCTAssertTrue([error isKindOfClass:[NSError class]], @"An error object should be returned for an empty output string.");
     XCTAssertTrue([error code] == MRBrewOutputParserErrorEmptyOutputString, @"The error code should match the constant MRBrewOutputParserErrorEmptyOutputString.");
     XCTAssertTrue([error domain] == MRBrewOutputParserErrorDomain, @"The domain should match the constant MRBrewOutputParserErrorDomain.");
+}
+
+- (void)testNilIsReturnedForEmptyOutputString
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationListIdentifier] name];
+    NSError *error = nil;
+    NSArray *objects = [[MRBrewOutputParser outputParser] objectsForOperation:operation output:@"" error:&error];
+    XCTAssertNil(objects, @"Nil should be returned for an empty output string.");
 }
 
 @end
