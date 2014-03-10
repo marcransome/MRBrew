@@ -113,4 +113,26 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [queue verify];
 }
 
+- (void)testSetConcurrentOperationsWillSetBackgroundQueueToMaxConcurrentOperationCount
+{
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[queue expect] setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] setConcurrentOperations:YES];
+    
+    [queue verify];
+}
+
+- (void)testSetConcurrentOperationsWillSetBackgroundQueueToMaxOfOneOperation
+{
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[queue expect] setMaxConcurrentOperationCount:1];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] setConcurrentOperations:NO];
+    
+    [queue verify];
+}
+
 @end
