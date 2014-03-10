@@ -27,11 +27,12 @@
 
 extern NSString * const MRBrewOutputParserErrorDomain;
 
-enum {
+typedef enum {
     MRBrewOutputParserErrorSyntax,
     MRBrewOutputParserErrorUnsupportedOperation,
-    MRBrewOutputParserErrorEmptyOutputString
-};
+    MRBrewOutputParserErrorEmptyOutputString,
+    MRBrewOutputParserErrorNoFormulaForSearchResults
+} MRBrewOutputParserError;
 
 @class MRBrewOperation;
 
@@ -71,9 +72,10 @@ enum {
  * @param error A pointer to an error object that is set to an NSError instance
  * if parsing was unsuccessful. This parameter is optional and can be passed
  * `nil`.
- * @return An array of objects parsed from an operation's output or `nil` if
- * the operation type is unsupported or the string could not be parsed (or is
- * empty). For operations whose `name` property is equal to one of the constants
+ * @return An array of objects parsed from an operation's output. Returns `nil`
+ * if the operation type is unsupported or the string could not be parsed
+ * (i.e. the output string is empty or no yieled no objects). For operations
+ * whose `name` property is equal to one of the constants
  * `MRBrewOperationListIdentifier` or `MRBrewOperationSearchIdentifier`,
  * the returned array will contain one or more `MRBrewFormula` objects.
  * In addition, for `MRBrewOperationListIdentifier` operations, each operation
