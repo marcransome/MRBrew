@@ -138,7 +138,7 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [queue verify];
 }
 
-- (void)testPerformOperationWithDelegateAddsWorkerToQueue
+- (void)testPerformOperationDelegateAddsWorkerToQueue
 {
     id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
     [[[formula stub] andReturn:@"formula-name"] name];
