@@ -28,6 +28,9 @@
 #import "MRBrew.h"
 #import "MRBrew+Private.h"
 #import "MRBrewWorker.h"
+#import "MRBrewFormula.h"
+#import "MRBrewOperation.h"
+#import "MRBrewConstants.h"
 
 @interface MRBrewTests : XCTestCase
 
@@ -131,6 +134,27 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     [[MRBrew sharedBrew] setConcurrentOperations:NO];
+    
+    [queue verify];
+}
+
+- (void)testPerformOperationWithDelegateAddsWorkerToQueue
+{
+    id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
+    [[[formula stub] andReturn:@"formula-name"] name];
+    [[[formula stub] andReturn:formula] copyWithZone:[OCMArg anyPointer]];
+    
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:MRBrewOperationSearchIdentifier] name];
+    [[[operation stub] andReturn:@[]] parameters];
+    [[[operation stub] andReturn:formula] formula];
+    [[[operation stub] andReturn:operation] copyWithZone:[OCMArg anyPointer]];
+    
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[queue expect] addOperation:[OCMArg any]];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] performOperation:operation delegate:nil];
     
     [queue verify];
 }
