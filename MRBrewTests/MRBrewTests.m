@@ -123,6 +123,23 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [worker verify];
 }
 
+- (void)testCancelOperationWillNotCancelUnrelatedWorkerInBackgroundQueue
+{
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturnValue:@NO] isEqualToOperation:[OCMArg any]];
+    
+    id worker = [OCMockObject mockForClass:[MRBrewWorker class]];
+    [[[worker stub] andReturn:operation] operation];
+    
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[[queue stub] andReturn:@[worker]] operations];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    [[MRBrew sharedBrew] cancelOperation:operation];
+    
+    [worker verify];
+}
+
 - (void)testOperationCount
 {
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
