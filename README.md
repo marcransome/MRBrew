@@ -1,4 +1,4 @@
-## MRBrew [![Build Status](https://travis-ci.org/marcransome/MRBrew.png)](https://travis-ci.org/marcransome/MRBrew)
+## MRBrew [![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg)](https://travis-ci.org/marcransome/MRBrew)
 MRBrew is a simple Objective-C wrapper library for the [Homebrew](http://brew.sh) package manager.  It makes performing Homebrew operations from your apps a breeze:
 
 ```objc
