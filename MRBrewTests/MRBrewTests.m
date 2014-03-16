@@ -94,7 +94,7 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
-- (void)testCancellingAllOperations
+- (void)testCancelAllOperationsWillCancelAllWorkersInBackgroundQueue
 {
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] cancelAllOperations];
