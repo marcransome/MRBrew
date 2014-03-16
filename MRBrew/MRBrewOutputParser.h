@@ -67,6 +67,9 @@ typedef enum {
  * matches one of the constants `MRBrewOperationListIdentifier`,
  * `MRBrewOperationSearchIdentifier` or `MRBrewOperationOptionsIdentifier`.
  *
+ * This method blocks execution of the current thread until the receiver has
+ * finished parsing.
+ *
  * @param operation The operation object that generated the output.
  * @param output The output string to parse.
  * @param error A pointer to an error object that is set to an NSError instance
