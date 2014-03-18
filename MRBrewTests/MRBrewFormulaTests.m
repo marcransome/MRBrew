@@ -56,6 +56,17 @@
     XCTAssertTrue([formula isKindOfClass:formulaClass], @"Formula should be kind of class %@.", NSStringFromClass(formulaClass));
 }
 
+- (void)testFormulaCreatedWithInitMethodHasCorrectProperties
+{
+    NSString *formulaName = @"formula-name";
+    MRBrewFormula *formula = [[MRBrewFormula alloc] initWithName:formulaName];
+    
+    XCTAssertEqual([formula name], formulaName, @"Formula 'name' property should equal the name object specified in factory method call.");
+    XCTAssertEqual([formula name], formulaName, @"Formula 'new' property should equal NO.");
+    XCTAssertEqual([formula name], formulaName, @"Formula 'updated' property should equal NO.");
+    XCTAssertEqual([formula name], formulaName, @"Formula 'installed' property should equal NO.");
+}
+
 #pragma mark Factory Method Initialisation
 
 - (void)testFormulaCreatedWithFactoryMethodHasCorrectNameProperty
