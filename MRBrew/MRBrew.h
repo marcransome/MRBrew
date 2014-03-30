@@ -60,7 +60,10 @@ enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Returns the shared `MRBrew` instance, creating it if necessary. */
+/** Returns the shared `MRBrew` instance, creating it if necessary.
+ *
+ * @return The shared `MRBrew` instance.
+ */
 + (instancetype)sharedBrew;
 
 /**-----------------------------------------------------------------------------
@@ -68,7 +71,10 @@ enum {
  * -----------------------------------------------------------------------------
  */
 
-/** Returns the absolute path of the Homebrew executable. */
+/** Returns the absolute path of the Homebrew executable.
+ *
+ * @return The homebrew executable path.
+ */
 - (NSString *)brewPath;
 
 /** Sets the absolute path of the Homebrew executable.
@@ -142,8 +148,9 @@ enum {
 
 /** Returns the number of operations queued for execution.
  *
- * The value returned by this method represents the number of operation objects
- * queued for execution and will change as operations are completed.
+ * The value returned by this method will change as operations are completed.
+ *
+ * @return The number of operations currently queued for execution.
  */
 - (NSUInteger)operationCount;
 
