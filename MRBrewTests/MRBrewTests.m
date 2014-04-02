@@ -58,14 +58,20 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 
 - (void)testSharedBrewNotNil
 {
+    // execute
     MRBrew *brew = [MRBrew sharedBrew];
+    
+    // verify
     XCTAssertNotNil(brew, @"Should not return nil.");
 }
 
 - (void)testSharedBrewReturnsSameInstance
 {
+    // execute
     MRBrew *brew1 = [MRBrew sharedBrew];
     MRBrew *brew2 = [MRBrew sharedBrew];
+    
+    // verify
     XCTAssertEqualObjects(brew1, brew2, @"Should return the same instance.");
 }
 
@@ -73,40 +79,57 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
 
 - (void)testDefaultBrewPath
 {
+    // execute
     NSString *brewPath = [[MRBrew sharedBrew] brewPath];
+    
+    // verify
     XCTAssertTrue([brewPath isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
 }
 
 - (void)testBrewPathWhenSetToNil
 {
+    // execute
     [[MRBrew sharedBrew] setBrewPath:nil];
+    
+    // verify
     XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:MRBrewTestsDefaultBrewPath], @"Should equal default brew path.");
     
+    // cleanup
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
 - (void)testSetBrewPath
 {
+    // setup
     NSString *testPath = @"/test/path";
+    
+    // execute
     [[MRBrew sharedBrew] setBrewPath:testPath];
+    
+    // verify
     XCTAssertTrue([[[MRBrew sharedBrew] brewPath] isEqualToString:testPath], @"Should equal new brew path %@.", testPath);
     
+    // cleanup
     [[MRBrew sharedBrew] setBrewPath:MRBrewTestsDefaultBrewPath];
 }
 
 - (void)testCancelAllOperationsWillCancelAllWorkersInBackgroundQueue
 {
+    // setup
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] cancelAllOperations];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] cancelAllOperations];
     
+    // verify
     [queue verify];
 }
 
 - (void)testCancelOperationWillCancelAssociatedWorkerInBackgroundQueue
 {
+    // setup
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturnValue:@YES] isEqualToOperation:[OCMArg any]];
     
@@ -118,13 +141,16 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[[queue stub] andReturn:@[worker]] operations];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] cancelOperation:operation];
     
+    // verify
     [worker verify];
 }
 
 - (void)testCancelOperationWillNotCancelUnrelatedWorkerInBackgroundQueue
 {
+    // setup
     id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
     [[[operation stub] andReturnValue:@NO] isEqualToOperation:[OCMArg any]];
     
@@ -135,56 +161,73 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[[queue stub] andReturn:@[worker]] operations];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] cancelOperation:operation];
     
+    // verify
     [worker verify];
 }
 
 - (void)testOperationCountReturnsExpectedCount
 {
+    // setup
     NSUInteger fakeCount = 2;
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[[queue stub] andReturnValue:OCMOCK_VALUE(fakeCount)] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
-    XCTAssertTrue([[MRBrew sharedBrew] operationCount] == fakeCount, @"Should return the count of operations currently in the queue.");
+    // execute
+    NSUInteger operationCount = [[MRBrew sharedBrew] operationCount];
+    
+    // verify
+    XCTAssertTrue(operationCount == fakeCount, @"Should return the count of operations currently in the queue.");
 }
 
 - (void)testOperationCountQueriesCountOfOperationQueue
 {
+    // setup
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] operationCount];
     
+    // verify
     [queue verify];
 }
 
 - (void)testSetConcurrentOperationsWillSetBackgroundQueueToMaxConcurrentOperationCount
 {
+    // setup
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] setConcurrentOperations:YES];
     
+    // verify
     [queue verify];
 }
 
 - (void)testSetConcurrentOperationsWillSetBackgroundQueueToMaxOfOneOperation
 {
+    // setup
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] setMaxConcurrentOperationCount:1];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] setConcurrentOperations:NO];
     
+    // verify
     [queue verify];
 }
 
 - (void)testPerformOperationDelegateAddsWorkerToQueue
 {
+    // setup
     id formula = [OCMockObject mockForClass:[MRBrewFormula class]];
     [[[formula stub] andReturn:@"formula-name"] name];
     [[[formula stub] andReturn:formula] copyWithZone:[OCMArg anyPointer]];
@@ -199,8 +242,10 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [[queue expect] addOperation:[OCMArg any]];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
+    // execute
     [[MRBrew sharedBrew] performOperation:operation delegate:nil];
     
+    // verify
     [queue verify];
 }
 
