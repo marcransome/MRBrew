@@ -140,7 +140,17 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [worker verify];
 }
 
-- (void)testOperationCount
+- (void)testOperationCountReturnsExpectedCount
+{
+    NSUInteger fakeCount = 2;
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE(fakeCount)] operationCount];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    XCTAssertTrue([[MRBrew sharedBrew] operationCount] == fakeCount, @"Should return the count of operations currently in the queue.");
+}
+
+- (void)testOperationCountQueriesCountOfOperationQueue
 {
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
     [[queue expect] operationCount];
