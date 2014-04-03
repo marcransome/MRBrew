@@ -35,6 +35,7 @@
 		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 		198A925B18ECC42D00C9749A /* MRBrewCancellationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 198A925A18ECC42D00C9749A /* MRBrewCancellationTests.m */; };
 		19916C1A18AC2E52006AC522 /* MRBrewOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */; };
+		19B7BA5518ED59E400A2644D /* MRBrewInstallOptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */; };
 		19E91B481832F44B00D7E61F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E91B061832F38C00D7E61F /* XCTest.framework */; };
 		C37478D0BAA8462F86DD171C /* libPods-MRBrewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		198A925A18ECC42D00C9749A /* MRBrewCancellationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewCancellationTests.m; sourceTree = "<group>"; };
 		19916C1818AC2E52006AC522 /* MRBrewOutputParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewOutputParser.h; sourceTree = "<group>"; };
 		19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOutputParser.m; sourceTree = "<group>"; };
+		19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewInstallOptionTests.m; sourceTree = "<group>"; };
 		19CFAD9D18CDC46700A8FEB0 /* MRBrew+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrew+Private.h"; sourceTree = "<group>"; };
 		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MRBrewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			children = (
 				193A0B6B179D3C6C00C65291 /* MRBrewTests.m */,
 				198A925A18ECC42D00C9749A /* MRBrewCancellationTests.m */,
+				19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */,
 				193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */,
 				193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */,
 				1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */,
@@ -371,6 +374,7 @@
 				193A0B74179D3C7E00C65291 /* MRBrewInstallOption.m in Sources */,
 				193A0B75179D3C7E00C65291 /* MRBrewOperation.m in Sources */,
 				193A0B6C179D3C6C00C65291 /* MRBrewTests.m in Sources */,
+				19B7BA5518ED59E400A2644D /* MRBrewInstallOptionTests.m in Sources */,
 				193A0B78179D3F2F00C65291 /* MRBrewOperationTests.m in Sources */,
 				193A0B7B179D3F5900C65291 /* MRBrewFormulaTests.m in Sources */,
 				198A925B18ECC42D00C9749A /* MRBrewCancellationTests.m in Sources */,
