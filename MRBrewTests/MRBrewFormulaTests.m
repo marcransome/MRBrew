@@ -201,7 +201,7 @@
 
 -(void)testCopiedFormulaIsEqualToOriginalFormula
 {
-    // setupn
+    // setup
     MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"formula-name"];
     MRBrewFormula *copy = [formula copy];
     
