@@ -50,6 +50,18 @@
 
 - (void)testFormulaCreatedWithInitMethodHasCorrectProperties
 {
+    // execute
+    MRBrewFormula *formula = [[MRBrewFormula alloc] init];
+    
+    // verify
+    XCTAssertNil([formula name], @"Formula 'name' property should be nil.");
+    XCTAssertTrue([formula isNew] == NO, @"Formula 'isNew' property should equal NO.");
+    XCTAssertTrue([formula isUpdated] == NO, @"Formula 'isUpdated' property should equal NO.");
+    XCTAssertTrue([formula isInstalled] == NO, @"Formula 'isInstalled' property should equal NO.");
+}
+
+- (void)testFormulaCreatedWithInitWithNameMethodHasCorrectProperties
+{
     // setup
     NSString *formulaName = @"formula-name";
     
