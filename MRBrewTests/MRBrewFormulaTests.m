@@ -57,10 +57,10 @@
     MRBrewFormula *formula = [[MRBrewFormula alloc] initWithName:formulaName];
     
     // verify
-    XCTAssertEqual([formula name], formulaName, @"Formula 'name' property should equal the name object specified in factory method call.");
-    XCTAssertEqual([formula name], formulaName, @"Formula 'new' property should equal NO.");
-    XCTAssertEqual([formula name], formulaName, @"Formula 'updated' property should equal NO.");
-    XCTAssertEqual([formula name], formulaName, @"Formula 'installed' property should equal NO.");
+    XCTAssertTrue([[formula name] isEqualToString:formulaName], @"Formula 'name' property should equal argument for name parameter.");
+    XCTAssertTrue([formula isNew] == NO, @"Formula 'isNew' property should equal NO.");
+    XCTAssertTrue([formula isUpdated] == NO, @"Formula 'isUpdated' property should equal NO.");
+    XCTAssertTrue([formula isInstalled] == NO, @"Formula 'isInstalled' property should equal NO.");
 }
 
 #pragma mark Factory Method Initialisation
