@@ -29,6 +29,7 @@
 
     _operationIdentifiers = @[MRBrewOperationInfoIdentifier,
                               MRBrewOperationListIdentifier,
+                              MRBrewOperationInstallIdentifier,
                               MRBrewOperationOptionsIdentifier,
                               MRBrewOperationOutdatedIdentifier,
                               MRBrewOperationRemoveIdentifier,
@@ -119,6 +120,24 @@
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationList];
+    
+    // verify
+    for (id worker in _fakeWorkers) {
+        [worker verify];
+    }
+}
+
+- (void)testCancelAllOperationsOfTypeCancelsOnlyInstallOperations
+{
+    // setup
+    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationInstallIdentifier];
+    id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[[queue stub] andReturn:_fakeWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[MRBrew sharedBrew] setBackgroundQueue:queue];
+    
+    // execute
+    [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationInstall];
     
     // verify
     for (id worker in _fakeWorkers) {
