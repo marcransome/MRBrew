@@ -84,6 +84,7 @@
 		19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewInstallOptionTests.m; sourceTree = "<group>"; };
 		19CFAD9D18CDC46700A8FEB0 /* MRBrew+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrew+Private.h"; sourceTree = "<group>"; };
 		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		19EC003E18FDCC1C00222E79 /* MRBrewWorker+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrewWorker+Private.h"; sourceTree = "<group>"; };
 		8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MRBrewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFBECD253BB418794CA0830 /* Pods-MRBrewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MRBrewTests.xcconfig"; path = "Pods/Pods-MRBrewTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +206,7 @@
 				196FEF1417B0510100E97597 /* MRBrewWatcher.h */,
 				196FEF1517B0510100E97597 /* MRBrewWatcher.m */,
 				197B2F7817D676D1000519BF /* MRBrewWorker.h */,
+				19EC003E18FDCC1C00222E79 /* MRBrewWorker+Private.h */,
 				197B2F7917D676D1000519BF /* MRBrewWorker.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				190B080517B1B89C002F8E20 /* Protocols */,

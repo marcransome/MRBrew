@@ -24,6 +24,7 @@
 //
 
 #import "MRBrewWorker.h"
+#import "MRBrewWorker+Private.h"
 #import "MRBrew.h"
 #import "MRBrewOperation.h"
 #import "MRBrewConstants.h"
@@ -31,22 +32,12 @@
 
 static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
-@interface MRBrewWorker ()
-{
-    NSTask *_task;
-    BOOL _executing;
-    BOOL _finished;
-    BOOL _waitingForTaskToExit;
-}
-
-@end
-
 @implementation MRBrewWorker
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        _task = [[NSTask alloc] init];
+        [self setTask:[[NSTask alloc] init]];
     }
     
     return self;
@@ -62,15 +53,15 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     [self changeExecutingState:YES];
     
     // configure and launch a brew task instance
-    [_task setLaunchPath:[[MRBrew sharedBrew] brewPath]];
-    [_task setArguments:_arguments];
-    [_task setStandardOutput:[NSPipe pipe]];
+    [[self task] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
+    [[self task] setArguments:_arguments];
+    [[self task] setStandardOutput:[NSPipe pipe]];
     
     // register for task termination notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskExited:) name:NSTaskDidTerminateNotification object:_task];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskExited:) name:NSTaskDidTerminateNotification object:[self task]];
 
     // read handler for asynchronous brew output
-    [[[_task standardOutput] fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+    [[[[self task] standardOutput] fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([_delegate respondsToSelector:@selector(brewOperation:didGenerateOutput:)]) {
@@ -81,16 +72,16 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     }];
     
     @try {
-        [_task launch];
+        [[self task] launch];
     
         // spin run loop periodically while operation is alive, allowing for task
         // termination notification delivery and testing for cancellation flag
         while (!self.isFinished) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
             
-            if ([self isCancelled] && !_waitingForTaskToExit) {
-                _waitingForTaskToExit = YES;
-                [_task interrupt];
+            if ([self isCancelled] && ![self waitingForTaskToExit]) {
+                [self setWaitingForTaskToExit:YES];
+                [[self task] interrupt];
             }
         }
     }
@@ -106,25 +97,25 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 - (BOOL)isExecuting
 {
-    return _executing;
+    return [self executing];
 }
 
 - (BOOL)isFinished
 {
-    return _finished;
+    return [self finished];
 }
 
 - (void)changeFinishedState:(BOOL)finished
 {
     [self willChangeValueForKey:@"isFinished"];
-    _finished = finished;
+    [self setFinished:finished];
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)changeExecutingState:(BOOL)executing
 {
     [self willChangeValueForKey:@"isExecuting"];
-    _executing = executing;
+    [self setExecuting:executing];
     [self didChangeValueForKey:@"isExecuting"];
 }
 
@@ -132,7 +123,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 {
     NSUInteger cancelledOperation = 130;
     
-    if ([_task terminationStatus] == 0)
+    if ([[self task] terminationStatus] == 0)
     {
         // delegate callback for operation completion
         if ([_delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
@@ -141,7 +132,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
             }];
         }
     }
-    else if ([_task terminationStatus] != cancelledOperation) {
+    else if ([[self task] terminationStatus] != cancelledOperation) {
         // delegate callback for operation failure
         NSInteger errorCode = MRBrewErrorUnknown;
         NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
@@ -153,7 +144,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     }
 
     // stop reading and cleanup file handle's structures
-    [[[_task standardOutput] fileHandleForReading] setReadabilityHandler:nil];
+    [[[[self task] standardOutput] fileHandleForReading] setReadabilityHandler:nil];
     
     // update operation state
     [self changeExecutingState:NO];
@@ -162,7 +153,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:_task];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:[self task]];
 }
 
 @end
