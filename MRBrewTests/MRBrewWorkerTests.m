@@ -76,6 +76,29 @@
     XCTAssertFalse(_delegateReceivedDidFailWithErrorCallback, @"Delegate should not receive brewOperation:didFailWithError: callback when task termination status is 0.");
 }
 
+- (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskTerminatesAbnormally
+{
+    // setup
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
+    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(99)] terminationStatus];
+    [[[fakeTask stub] andReturn:nil] standardOutput];
+    [worker setTask:fakeTask];
+    [worker setDelegate:self];
+    NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
+    
+    // execute
+    [NSThread detachNewThreadSelector:@selector(taskExited:) toTarget:worker withObject:nil];
+    
+    while (!_delegateReceivedDidFailWithErrorCallback && [callbackTimeout timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+    }
+    
+    // verify
+    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should not receive brewOperation:didFailWithError: callback when task termination status is 0.");
+    XCTAssertFalse(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status is 0.");
+}
+
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation
 {
     _delegateReceivedDidFinishCallback = YES;
