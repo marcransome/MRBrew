@@ -95,7 +95,8 @@
     }
     
     // verify
-    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should not receive brewOperation:didFailWithError: callback when task termination status is 0.");
+    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task termination status is 0.");
+    XCTAssertFalse(_delegateReceivedDidFinishCallback, @"Delegate should not receive brewOperationDidFinish: callback when task termination status is 0.");
     XCTAssertFalse(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status is 0.");
 }
 
