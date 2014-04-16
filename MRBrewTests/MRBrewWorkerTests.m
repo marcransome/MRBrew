@@ -24,8 +24,16 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import "MRBrewWorker.h"
+#import "MRBrewWorker+Private.h"
+#import "MRBrewDelegate.h"
 
-@interface MRBrewWorkerTests : XCTestCase
+@interface MRBrewWorkerTests : XCTestCase <MRBrewDelegate> {
+    BOOL _delegateReceivedDidFinishCallback;
+    BOOL _delegateReceivedDidFailWithErrorCallback;
+    BOOL _delegateReceivedDidGenerateOutputCallback;
+}
 
 @end
 
@@ -34,13 +42,53 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    _delegateReceivedDidFinishCallback = NO;
+    _delegateReceivedDidFailWithErrorCallback = NO;
+    _delegateReceivedDidGenerateOutputCallback = NO;
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+- (void)testDelegateReceivesFinishCallbackWhenTaskTerminatesNormally
+{
+    // setup
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
+    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(0)] terminationStatus];
+    [[[fakeTask stub] andReturn:nil] standardOutput];
+    [worker setTask:fakeTask];
+    [worker setDelegate:self];
+    NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
+    
+    // execute
+    [NSThread detachNewThreadSelector:@selector(taskExited:) toTarget:worker withObject:nil];
+    
+    while (!_delegateReceivedDidFinishCallback && [callbackTimeout timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+    }
+    
+    // verify
+    XCTAssertTrue(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status is 0.");
+    XCTAssertFalse(_delegateReceivedDidFailWithErrorCallback, @"Delegate should not receive brewOperation:didFailWithError: callback when task termination status is 0.");
+}
+
+- (void)brewOperationDidFinish:(MRBrewOperation *)operation
+{
+    _delegateReceivedDidFinishCallback = YES;
+}
+
+- (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error
+{
+    _delegateReceivedDidFailWithErrorCallback = YES;
+}
+
+- (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
+{
+    _delegateReceivedDidGenerateOutputCallback = YES;
 }
 
 @end
