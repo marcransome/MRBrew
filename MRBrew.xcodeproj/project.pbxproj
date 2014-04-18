@@ -30,6 +30,8 @@
 		19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8517901C3700064BC7 /* MRBrewInstallOption.m */; };
 		19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
 		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
+		196A8FA81900D3FC004DED44 /* MRBrewWorkerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */; };
+		196A8FA91900D751004DED44 /* MRBrewWorkerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */; };
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
@@ -37,7 +39,7 @@
 		19916C1A18AC2E52006AC522 /* MRBrewOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19916C1918AC2E52006AC522 /* MRBrewOutputParser.m */; };
 		19B7BA5518ED59E400A2644D /* MRBrewInstallOptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */; };
 		19E91B481832F44B00D7E61F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E91B061832F38C00D7E61F /* XCTest.framework */; };
-		19EC003D18FDCB6900222E79 /* MRBrewWorkerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EC003C18FDCB6900222E79 /* MRBrewWorkerTests.m */; };
+		19EC004218FDD4C200222E79 /* MRBrewWorkerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EC004118FDD4C100222E79 /* MRBrewWorkerTests.m */; };
 		C37478D0BAA8462F86DD171C /* libPods-MRBrewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		19453D8717901C3700064BC7 /* MRBrewOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperation.m; sourceTree = "<group>"; };
 		195EE912179A37A800CB1B04 /* MRBrewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewConstants.h; sourceTree = "<group>"; };
 		195EE913179A37A800CB1B04 /* MRBrewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewConstants.m; sourceTree = "<group>"; };
+		196A8FA61900D3FC004DED44 /* MRBrewWorkerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorkerConstants.h; sourceTree = "<group>"; };
+		196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorkerConstants.m; sourceTree = "<group>"; };
 		196FEF1417B0510100E97597 /* MRBrewWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcher.h; sourceTree = "<group>"; };
 		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
 		197B2F7817D676D1000519BF /* MRBrewWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorker.h; sourceTree = "<group>"; };
@@ -85,8 +89,8 @@
 		19B7BA5418ED59E400A2644D /* MRBrewInstallOptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewInstallOptionTests.m; sourceTree = "<group>"; };
 		19CFAD9D18CDC46700A8FEB0 /* MRBrew+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrew+Private.h"; sourceTree = "<group>"; };
 		19E91B061832F38C00D7E61F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		19EC003C18FDCB6900222E79 /* MRBrewWorkerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorkerTests.m; sourceTree = "<group>"; };
 		19EC003E18FDCC1C00222E79 /* MRBrewWorker+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRBrewWorker+Private.h"; sourceTree = "<group>"; };
+		19EC004118FDD4C100222E79 /* MRBrewWorkerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorkerTests.m; sourceTree = "<group>"; };
 		8CFB880EA78A48E79EF03FA5 /* libPods-MRBrewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MRBrewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFBECD253BB418794CA0830 /* Pods-MRBrewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MRBrewTests.xcconfig"; path = "Pods/Pods-MRBrewTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,7 +135,7 @@
 				193A0B7A179D3F5900C65291 /* MRBrewFormulaTests.m */,
 				193A0B77179D3F2F00C65291 /* MRBrewOperationTests.m */,
 				1914C99418AFE57800AEC36C /* MRBrewOutputParserTests.m */,
-				19EC003C18FDCB6900222E79 /* MRBrewWorkerTests.m */,
+				19EC004118FDD4C100222E79 /* MRBrewWorkerTests.m */,
 				193A0B65179D3C6C00C65291 /* Supporting Files */,
 			);
 			path = MRBrewTests;
@@ -211,6 +215,8 @@
 				197B2F7817D676D1000519BF /* MRBrewWorker.h */,
 				19EC003E18FDCC1C00222E79 /* MRBrewWorker+Private.h */,
 				197B2F7917D676D1000519BF /* MRBrewWorker.m */,
+				196A8FA61900D3FC004DED44 /* MRBrewWorkerConstants.h */,
+				196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				190B080517B1B89C002F8E20 /* Protocols */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
@@ -374,7 +380,7 @@
 				197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */,
 				193A0B71179D3C7E00C65291 /* MRBrew.m in Sources */,
 				1914C99518AFE57800AEC36C /* MRBrewOutputParserTests.m in Sources */,
-				19EC003D18FDCB6900222E79 /* MRBrewWorkerTests.m in Sources */,
+				19EC004218FDD4C200222E79 /* MRBrewWorkerTests.m in Sources */,
 				193A0B72179D3C7E00C65291 /* MRBrewConstants.m in Sources */,
 				193A0B73179D3C7E00C65291 /* MRBrewFormula.m in Sources */,
 				193A0B74179D3C7E00C65291 /* MRBrewInstallOption.m in Sources */,
@@ -384,6 +390,7 @@
 				193A0B78179D3F2F00C65291 /* MRBrewOperationTests.m in Sources */,
 				193A0B7B179D3F5900C65291 /* MRBrewFormulaTests.m in Sources */,
 				198A925B18ECC42D00C9749A /* MRBrewCancellationTests.m in Sources */,
+				196A8FA91900D751004DED44 /* MRBrewWorkerConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +406,7 @@
 				19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */,
 				19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */,
 				195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */,
+				196A8FA81900D3FC004DED44 /* MRBrewWorkerConstants.m in Sources */,
 				196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */,
 				197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */,
 			);

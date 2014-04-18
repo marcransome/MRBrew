@@ -29,6 +29,7 @@
 #import "MRBrewOperation.h"
 #import "MRBrewConstants.h"
 #import "MRBrewDelegate.h"
+#import "MRBrewWorkerConstants.h"
 
 static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
@@ -121,9 +122,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 - (void)taskExited:(NSNotification *)notification
 {
-    NSUInteger cancelledOperation = 130;
-    
-    if ([[self task] terminationStatus] == 0)
+    if ([[self task] terminationStatus] == MRBrewWorkerTaskExitedNormally)
     {
         // delegate callback for operation completion
         if ([_delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
@@ -132,7 +131,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
             }];
         }
     }
-    else if ([[self task] terminationStatus] != cancelledOperation) {
+    else if ([[self task] terminationStatus] != MRBrewWorkerTaskCancelled) {
         // delegate callback for operation failure
         NSInteger errorCode = MRBrewErrorUnknown;
         NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
