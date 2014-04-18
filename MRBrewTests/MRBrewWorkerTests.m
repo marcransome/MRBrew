@@ -28,6 +28,7 @@
 #import "MRBrewWorker.h"
 #import "MRBrewWorker+Private.h"
 #import "MRBrewDelegate.h"
+#import "MRBrewWorkerTaskConstants.h"
 
 @interface MRBrewWorkerTests : XCTestCase <MRBrewDelegate> {
     BOOL _delegateReceivedDidFinishCallback;
@@ -58,7 +59,7 @@
     // setup
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(0)] terminationStatus];
+    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskExitedNormally)] terminationStatus];
     [[[fakeTask stub] andReturn:nil] standardOutput];
     [worker setTask:fakeTask];
     [worker setDelegate:self];

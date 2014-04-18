@@ -25,5 +25,5 @@
 
 #import "MRBrewWorkerTaskConstants.h"
 
-NSUInteger const MRBrewWorkerTaskExitedNormally = 0;
-NSUInteger const MRBrewWorkerTaskCancelled = 130;
+int const MRBrewWorkerTaskExitedNormally = 0;
+int const MRBrewWorkerTaskCancelled = 130;

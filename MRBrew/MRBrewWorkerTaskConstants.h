@@ -25,5 +25,5 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSUInteger const MRBrewWorkerTaskExitedNormally;
-extern NSUInteger const MRBrewWorkerTaskCancelled;
+extern int const MRBrewWorkerTaskExitedNormally;
+extern int const MRBrewWorkerTaskCancelled;
