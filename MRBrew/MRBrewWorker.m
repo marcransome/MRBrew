@@ -29,7 +29,7 @@
 #import "MRBrewOperation.h"
 #import "MRBrewConstants.h"
 #import "MRBrewDelegate.h"
-#import "MRBrewWorkerConstants.h"
+#import "MRBrewWorkerTaskConstants.h"
 
 static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
