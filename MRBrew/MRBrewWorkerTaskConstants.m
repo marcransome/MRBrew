@@ -23,7 +23,7 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import "MRBrewWorkerConstants.h"
+#import "MRBrewWorkerTaskConstants.h"
 
 NSUInteger const MRBrewWorkerTaskExitedNormally = 0;
 NSUInteger const MRBrewWorkerTaskCancelled = 130;
