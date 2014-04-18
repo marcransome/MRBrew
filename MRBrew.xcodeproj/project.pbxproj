@@ -30,8 +30,8 @@
 		19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8517901C3700064BC7 /* MRBrewInstallOption.m */; };
 		19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19453D8717901C3700064BC7 /* MRBrewOperation.m */; };
 		195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 195EE913179A37A800CB1B04 /* MRBrewConstants.m */; };
-		196A8FA81900D3FC004DED44 /* MRBrewWorkerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */; };
-		196A8FA91900D751004DED44 /* MRBrewWorkerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */; };
+		196A8FA81900D3FC004DED44 /* MRBrewWorkerTaskConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerTaskConstants.m */; };
+		196A8FA91900D751004DED44 /* MRBrewWorkerTaskConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 196A8FA71900D3FC004DED44 /* MRBrewWorkerTaskConstants.m */; };
 		196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FEF1517B0510100E97597 /* MRBrewWatcher.m */; };
 		197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
 		197B2F7B17D68904000519BF /* MRBrewWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 197B2F7917D676D1000519BF /* MRBrewWorker.m */; };
@@ -77,8 +77,8 @@
 		19453D8717901C3700064BC7 /* MRBrewOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewOperation.m; sourceTree = "<group>"; };
 		195EE912179A37A800CB1B04 /* MRBrewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewConstants.h; sourceTree = "<group>"; };
 		195EE913179A37A800CB1B04 /* MRBrewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewConstants.m; sourceTree = "<group>"; };
-		196A8FA61900D3FC004DED44 /* MRBrewWorkerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorkerConstants.h; sourceTree = "<group>"; };
-		196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorkerConstants.m; sourceTree = "<group>"; };
+		196A8FA61900D3FC004DED44 /* MRBrewWorkerTaskConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorkerTaskConstants.h; sourceTree = "<group>"; };
+		196A8FA71900D3FC004DED44 /* MRBrewWorkerTaskConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWorkerTaskConstants.m; sourceTree = "<group>"; };
 		196FEF1417B0510100E97597 /* MRBrewWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWatcher.h; sourceTree = "<group>"; };
 		196FEF1517B0510100E97597 /* MRBrewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBrewWatcher.m; sourceTree = "<group>"; };
 		197B2F7817D676D1000519BF /* MRBrewWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBrewWorker.h; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 				197B2F7817D676D1000519BF /* MRBrewWorker.h */,
 				19EC003E18FDCC1C00222E79 /* MRBrewWorker+Private.h */,
 				197B2F7917D676D1000519BF /* MRBrewWorker.m */,
-				196A8FA61900D3FC004DED44 /* MRBrewWorkerConstants.h */,
-				196A8FA71900D3FC004DED44 /* MRBrewWorkerConstants.m */,
+				196A8FA61900D3FC004DED44 /* MRBrewWorkerTaskConstants.h */,
+				196A8FA71900D3FC004DED44 /* MRBrewWorkerTaskConstants.m */,
 				19453D7717901C1100064BC7 /* MainMenu.xib */,
 				190B080517B1B89C002F8E20 /* Protocols */,
 				19453D6917901C1100064BC7 /* Supporting Files */,
@@ -390,7 +390,7 @@
 				193A0B78179D3F2F00C65291 /* MRBrewOperationTests.m in Sources */,
 				193A0B7B179D3F5900C65291 /* MRBrewFormulaTests.m in Sources */,
 				198A925B18ECC42D00C9749A /* MRBrewCancellationTests.m in Sources */,
-				196A8FA91900D751004DED44 /* MRBrewWorkerConstants.m in Sources */,
+				196A8FA91900D751004DED44 /* MRBrewWorkerTaskConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +406,7 @@
 				19453D8A17901C3700064BC7 /* MRBrewInstallOption.m in Sources */,
 				19453D8B17901C3700064BC7 /* MRBrewOperation.m in Sources */,
 				195EE914179A37A800CB1B04 /* MRBrewConstants.m in Sources */,
-				196A8FA81900D3FC004DED44 /* MRBrewWorkerConstants.m in Sources */,
+				196A8FA81900D3FC004DED44 /* MRBrewWorkerTaskConstants.m in Sources */,
 				196FEF1617B0510100E97597 /* MRBrewWatcher.m in Sources */,
 				197B2F7A17D676D1000519BF /* MRBrewWorker.m in Sources */,
 			);

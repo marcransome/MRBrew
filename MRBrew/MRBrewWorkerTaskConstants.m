@@ -1,5 +1,5 @@
 //
-//  MRBrewWorkerConstants.m
+//  MRBrewWorkerTaskConstants.m
 //  MRBrew
 //
 //  Copyright (c) 2014 Marc Ransome <marc.ransome@fidgetbox.co.uk>
