@@ -101,6 +101,7 @@
     XCTAssertFalse(_delegateReceivedDidFinishCallback, @"Delegate should not receive brewOperationDidFinish: callback when task termination status is 0.");
 }
 
+// MRBrewDelegate methods
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation
 {
     _delegateReceivedDidFinishCallback = YES;
