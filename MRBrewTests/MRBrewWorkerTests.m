@@ -80,9 +80,10 @@
 - (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskTerminatesAbnormally
 {
     // setup
+    int unknownExitStatus = 99;
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(99)] terminationStatus];
+    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(unknownExitStatus)] terminationStatus];
     [[[fakeTask stub] andReturn:nil] standardOutput];
     [worker setTask:fakeTask];
     [worker setDelegate:self];
