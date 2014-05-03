@@ -118,6 +118,35 @@
     XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorUnknown, @"Delegate should received correct error code when task exits for unknown reason.");
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
+
+- (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskIsCancelled
+{
+    // setup
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    
+    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:fakeOperation];
+    
+    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
+    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskCancelled)] terminationStatus];
+    [[[fakeTask stub] andReturn:nil] standardOutput];
+    [worker setTask:fakeTask];
+    [worker setDelegate:self];
+    
+    NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:1];
+    
+    // execute
+    [NSThread detachNewThreadSelector:@selector(taskExited:) toTarget:worker withObject:nil];
+    
+    while (!_delegateReceivedDidFinishCallback && [callbackTimeout timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+    }
+    
+    // verify
+    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task terminates after manual cancellation.");
+    XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorOperationCancelled, @"Delegate should received correct error code when manually cancelled.");
+    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
 // MRBrewDelegate methods
