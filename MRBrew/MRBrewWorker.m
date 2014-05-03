@@ -131,9 +131,9 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
             }];
         }
     }
-    else if ([[self task] terminationStatus] != MRBrewWorkerTaskCancelled) {
-        // delegate callback for operation failure
-        NSInteger errorCode = MRBrewErrorUnknown;
+    else {
+        // delegate callback for operation failure or cancellation
+        NSInteger errorCode = [[self task] terminationStatus] == MRBrewWorkerTaskCancelled ? MRBrewErrorOperationCancelled : MRBrewErrorUnknown;
         NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
         if ([_delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
