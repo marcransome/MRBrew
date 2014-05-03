@@ -139,7 +139,7 @@
     // execute
     [NSThread detachNewThreadSelector:@selector(taskExited:) toTarget:worker withObject:nil];
     
-    while (!_delegateReceivedDidFinishCallback && [callbackTimeout timeIntervalSinceNow] > 0) {
+    while (!_delegateReceivedDidFailWithErrorCallback && [callbackTimeout timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
     }
     
