@@ -26,8 +26,10 @@
 #import <Cocoa/Cocoa.h>
 #import "MRBrewOperation.h"
 
-enum {
-    MRBrewErrorUnknown = 1
+typedef NS_ENUM(NSInteger, MRBrewError) {
+    MRBrewErrorNone,
+    MRBrewErrorUnknown,
+    MRBrewErrorOperationCancelled
 };
 
 @protocol MRBrewDelegate;
