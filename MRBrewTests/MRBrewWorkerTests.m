@@ -27,6 +27,7 @@
 #import <OCMock/OCMock.h>
 #import "MRBrewWorker.h"
 #import "MRBrewWorker+Private.h"
+#import "MRBrew.h"
 #import "MRBrewDelegate.h"
 #import "MRBrewWorkerTaskConstants.h"
 
@@ -34,6 +35,8 @@
     BOOL _delegateReceivedDidFinishCallback;
     BOOL _delegateReceivedDidFailWithErrorCallback;
     BOOL _delegateReceivedDidGenerateOutputCallback;
+    NSInteger _delegateReceivedErrorCode;
+    MRBrewOperation *_delegateReceivedOperation;
 }
 
 @end
@@ -46,6 +49,8 @@
     _delegateReceivedDidFinishCallback = NO;
     _delegateReceivedDidFailWithErrorCallback = NO;
     _delegateReceivedDidGenerateOutputCallback = NO;
+    _delegateReceivedErrorCode = MRBrewErrorNone;
+    _delegateReceivedOperation = nil;
 }
 
 - (void)tearDown
@@ -58,11 +63,17 @@
 {
     // setup
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    
+    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:fakeOperation];
+    
     id fakeTask = [OCMockObject mockForClass:[NSTask class]];
     [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskExitedNormally)] terminationStatus];
     [[[fakeTask stub] andReturn:nil] standardOutput];
     [worker setTask:fakeTask];
     [worker setDelegate:self];
+    
     NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
     
     // execute
@@ -73,8 +84,8 @@
     }
     
     // verify
-    XCTAssertTrue(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status is 0.");
-    XCTAssertFalse(_delegateReceivedDidFailWithErrorCallback, @"Delegate should not receive brewOperation:didFailWithError: callback when task termination status is 0.");
+    XCTAssertTrue(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status signals success.");
+    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
 - (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskTerminatesAbnormally
@@ -82,11 +93,17 @@
     // setup
     int unknownExitStatus = 99;
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    
+    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:fakeOperation];
+    
     id fakeTask = [OCMockObject mockForClass:[NSTask class]];
     [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(unknownExitStatus)] terminationStatus];
     [[[fakeTask stub] andReturn:nil] standardOutput];
     [worker setTask:fakeTask];
     [worker setDelegate:self];
+    
     NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
     
     // execute
@@ -97,24 +114,30 @@
     }
     
     // verify
-    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task termination status is 0.");
-    XCTAssertFalse(_delegateReceivedDidFinishCallback, @"Delegate should not receive brewOperationDidFinish: callback when task termination status is 0.");
+    XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task terminates with unknown status code.");
+    XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorUnknown, @"Delegate should received correct error code when task exits for unknown reason.");
+    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
+}
 }
 
 // MRBrewDelegate methods
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation
 {
     _delegateReceivedDidFinishCallback = YES;
+    _delegateReceivedOperation = operation;
 }
 
 - (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error
 {
     _delegateReceivedDidFailWithErrorCallback = YES;
+    _delegateReceivedErrorCode = [error code];
+    _delegateReceivedOperation = operation;
 }
 
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
 {
     _delegateReceivedDidGenerateOutputCallback = YES;
+    _delegateReceivedOperation = operation;
 }
 
 @end
