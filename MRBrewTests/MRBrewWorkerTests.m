@@ -134,7 +134,7 @@
     [worker setTask:fakeTask];
     [worker setDelegate:self];
     
-    NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:1];
+    NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
     
     // execute
     [NSThread detachNewThreadSelector:@selector(taskExited:) toTarget:worker withObject:nil];
