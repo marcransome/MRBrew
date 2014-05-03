@@ -48,5 +48,4 @@
     // Called when an operation generates output.  In the case of MRBrewOperationInstall operations this method may be called several times during the lifetime of the operation.
 }
 
-
 @end
