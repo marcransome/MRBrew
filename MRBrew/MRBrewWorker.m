@@ -38,7 +38,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 - (instancetype)init
 {
     if (self = [super init]) {
-        [self setTask:[[NSTask alloc] init]];
+        _task = [[NSTask alloc] init];
     }
     
     return self;
