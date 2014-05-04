@@ -156,8 +156,27 @@ typedef NS_ENUM(NSInteger, MRBrewError) {
  */
 - (NSUInteger)operationCount;
 
+/**-----------------------------------------------------------------------------
+ * @name Managing the Environment
+ * -----------------------------------------------------------------------------
+ */
+
+/** Returns a dictionary of variables for the environment that operations will
+ * execute with.
+ *
+ * @return A dictionary of environment variables whose keys represent variable
+ * names.
+ */
 - (NSDictionary *)environment;
 
+/** Sets the environment for all future operations.
+ *
+ * If this method is never called, operations inherit the environment of the
+ * process that created them.
+ *
+ * @param environment A dictionary of environment variables whose keys represent
+ * variable names.
+ */
 - (void)setEnvironment:(NSDictionary *)environment;
 
 @end
