@@ -171,8 +171,8 @@ typedef NS_ENUM(NSInteger, MRBrewError) {
 
 /** Sets the environment for all future operations.
  *
- * If this method is never called, operations inherit the environment of the
- * process that created them.
+ * If this method is never called, operations will inherit the environment of
+ * the process that launches them.
  *
  * @param environment A dictionary of environment variables whose keys represent
  * variable names.
