@@ -249,4 +249,19 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     [queue verify];
 }
 
+- (void)testEnvironmentVariablesAreRetained
+{
+    // setup
+    NSDictionary *environment = @{@"test_variable":@"test_value", @"test_variable2":@"test_value2"};
+    
+    // execute
+    [[MRBrew sharedBrew] setEnvironment:environment];
+    
+    // verify
+    XCTAssertEqual([[MRBrew sharedBrew] environment], environment, @"Should return a dictionary equal to that which was previously set.");
+    
+    // cleanup
+    [[MRBrew sharedBrew] setEnvironment:nil];
+}
+
 @end
