@@ -156,4 +156,8 @@ typedef NS_ENUM(NSInteger, MRBrewError) {
  */
 - (NSUInteger)operationCount;
 
+- (NSDictionary *)environment;
+
+- (void)setEnvironment:(NSDictionary *)environment;
+
 @end

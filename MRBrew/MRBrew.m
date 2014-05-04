@@ -47,6 +47,7 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 @implementation MRBrew
 
 @synthesize brewPath = _brewPath;
+@synthesize environment = _environment;
 
 #pragma mark - Lifecycle
 
@@ -174,6 +175,16 @@ static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 - (NSUInteger)operationCount
 {
     return [[self backgroundQueue] operationCount];
+}
+
+- (NSDictionary *)environment
+{
+    return _environment;
+}
+
+- (void)setEnvironment:(NSDictionary *)environment;
+{
+    _environment = environment;
 }
 
 @end

@@ -28,6 +28,7 @@
 @interface MRBrew ()
 
 @property (strong) NSString *brewPath;
+@property (strong) NSDictionary *environment;
 @property (strong) NSOperationQueue *backgroundQueue;
 
 @end

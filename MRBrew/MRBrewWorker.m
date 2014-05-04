@@ -58,6 +58,11 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     [[self task] setArguments:_arguments];
     [[self task] setStandardOutput:[NSPipe pipe]];
     
+    NSDictionary *environment = [[MRBrew sharedBrew] environment];
+    if (environment) {
+        [[self task] setEnvironment:environment];
+    }
+
     // register for task termination notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskExited:) name:NSTaskDidTerminateNotification object:[self task]];
 
