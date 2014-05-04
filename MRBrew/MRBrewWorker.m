@@ -38,7 +38,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 - (instancetype)init
 {
     if (self = [super init]) {
-        _task = [[NSTask alloc] init];
+        [self setTask:[[NSTask alloc] init]];
     }
     
     return self;
@@ -57,16 +57,6 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     [[self task] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
     [[self task] setArguments:_arguments];
     [[self task] setStandardOutput:[NSPipe pipe]];
-    
-    
-    NSLog(@"%@", [[self task] environment]);
-    
-    NSDictionary *environment = [[MRBrew sharedBrew] environment];
-    if (environment) {
-        [_task setEnvironment:@{@"shit":@"haha"}];
-    }
-    
-    
     
     // register for task termination notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskExited:) name:NSTaskDidTerminateNotification object:[self task]];
