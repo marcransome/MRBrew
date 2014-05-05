@@ -54,6 +54,10 @@ typedef NS_ENUM(NSInteger, MRBrewError) {
  * @warning Attempting to perform two operations that reference the same formula
  * concurrently may result in the failure of one of those operations. This is
  * the default behaviour for Homebrew.
+ *
+ * @warning All operations performed by the `MRBrew` class inherit the
+ * environment from which those operation were launched. Use `setEnvironment:`
+ * to define your own environment variables.
  */
 @interface MRBrew : NSObject
 
