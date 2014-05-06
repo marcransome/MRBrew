@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -29,7 +29,7 @@
       </header>
       <section>
         <h2>
-<a name="mrbrew-" class="anchor" href="#mrbrew-"><span class="octicon octicon-link"></span></a>MRBrew <a href="https://travis-ci.org/marcransome/MRBrew"><img src="https://travis-ci.org/marcransome/MRBrew.png" alt="Build Status"></a>
+<a name="mrbrew-" class="anchor" href="#mrbrew-"><span class="octicon octicon-link"></span></a>MRBrew <a href="https://travis-ci.org/marcransome/MRBrew"><img src="http://img.shields.io/travis/marcransome/MRBrew.svg" alt="Build Status"></a>
 </h2>
 
 <p>MRBrew is a simple Objective-C wrapper library for the <a href="http://brew.sh">Homebrew</a> package manager.  It makes performing Homebrew operations from your apps a breeze:</p>
@@ -90,6 +90,8 @@
 </pre></div>
 
 <p>Each call to <code>performOperation:delegate:</code> spawns a subprocess in a separate thread that won't interrupt processing in the rest of your app.  Multiple operations can be performed by making repeated calls to <code>performOperation:delegate:</code>.  Operations are placed into a queue and executed concurrently. If you would prefer operations to execute in series, just call <code>[MRBrew setConcurrentOperations:NO]</code>.</p>
+
+<p><strong>Note:</strong> All operations performed by the <code>MRBrew</code> class inherit the environment from which those operation were launched. Use <code>setEnvironment:</code> to define your own environment variables.</p>
 
 <h4>
 <a name="custom-operations" class="anchor" href="#custom-operations"><span class="octicon octicon-link"></span></a>Custom operations</h4>
@@ -195,8 +197,6 @@
 <a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>Email me at <a href="mailto:marc.ransome@fidgetbox.co.uk">marc.ransome@fidgetbox.co.uk</a> or tweet <a href="http://www.twitter.com/marcransome">@marcransome</a>.</p>
-
-<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/marcransome/mrbrew/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/marcransome">marcransome</a></p>
