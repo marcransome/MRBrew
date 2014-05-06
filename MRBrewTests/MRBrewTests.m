@@ -75,6 +75,16 @@ static NSString * const MRBrewTestsDefaultBrewPath = @"/usr/local/bin/brew";
     XCTAssertEqualObjects(brew1, brew2, @"Should return the same instance.");
 }
 
+- (void)testBrewInstanceInstantiatedWithAllocInitIsNotEqualToSharedBrewInstance
+{
+    // execute
+    MRBrew *brew = [[MRBrew alloc] init];
+    MRBrew *sharedBrew = [MRBrew sharedBrew];
+    
+    // verify
+    XCTAssertNotEqual(brew, sharedBrew, @"Should be a distinct instance not equal to that which is returned by +sharedBrew.");
+}
+
 #pragma mark - Brew Path Tests
 
 - (void)testDefaultBrewPath
