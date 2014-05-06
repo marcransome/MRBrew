@@ -56,6 +56,8 @@ MRBrewOperation *operation = [MRBrewOperation installOperation:[MRBrewFormula fo
 
 Each call to `performOperation:delegate:` spawns a subprocess in a separate thread that won't interrupt processing in the rest of your app.  Multiple operations can be performed by making repeated calls to `performOperation:delegate:`.  Operations are placed into a queue and executed concurrently. If you would prefer operations to execute in series, just call `[MRBrew setConcurrentOperations:NO]`.
 
+**Note:** All operations performed by the `MRBrew` class inherit the environment from which those operation were launched. Use `setEnvironment:` to define your own environment variables.
+
 #### Custom operations
 The convenience methods provided by `MRBrewOperation` cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined, use the following `MRBrewOperation` class method when creating your operation object:
 
