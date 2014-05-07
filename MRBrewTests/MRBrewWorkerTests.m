@@ -149,6 +149,15 @@
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
+- (void)testBrewWorkerWillExecuteAsynchronouslyForCurrentThread
+{
+    // setup
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    
+    // verify
+    XCTAssertTrue([worker isConcurrent], @"Should return true, indicating asynchronous execution with respect to current thread.");
+}
+
 // MRBrewDelegate methods
 - (void)brewOperationDidFinish:(MRBrewOperation *)operation
 {
