@@ -34,7 +34,6 @@
 @interface MRBrewWorkerTests : XCTestCase <MRBrewDelegate> {
     BOOL _delegateReceivedDidFinishCallback;
     BOOL _delegateReceivedDidFailWithErrorCallback;
-    BOOL _delegateReceivedDidGenerateOutputCallback;
     NSInteger _delegateReceivedErrorCode;
     MRBrewOperation *_delegateReceivedOperation;
 }
@@ -48,7 +47,6 @@
     [super setUp];
     _delegateReceivedDidFinishCallback = NO;
     _delegateReceivedDidFailWithErrorCallback = NO;
-    _delegateReceivedDidGenerateOutputCallback = NO;
     _delegateReceivedErrorCode = MRBrewErrorNone;
     _delegateReceivedOperation = nil;
 }
@@ -174,7 +172,6 @@
 
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
 {
-    _delegateReceivedDidGenerateOutputCallback = YES;
     _delegateReceivedOperation = operation;
 }
 
