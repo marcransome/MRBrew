@@ -61,7 +61,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
     }
     
     NSArray *objects = nil;
-    BOOL errorOccured = NO;
+    BOOL errorOccurred = NO;
     
     if ([[operation name] isEqualToString:MRBrewOperationListIdentifier]) {
         objects = [self parseFormulaeFromListOperationOutput:output];
@@ -71,7 +71,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         
         if (!objects) {
             [self errorForErrorType:MRBrewOutputParserErrorNoFormulaForSearchResults usingPointer:error];
-            errorOccured = YES;
+            errorOccurred = YES;
         }
     }
     else if ([[operation name] isEqualToString:MRBrewOperationOptionsIdentifier]) {
@@ -79,16 +79,16 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         
         if (!objects) {
             [self errorForErrorType:MRBrewOutputParserErrorSyntax usingPointer:error];
-            errorOccured = YES;
+            errorOccurred = YES;
         }
     }
     else {  // an unsupported operation type was specified
         [self errorForErrorType:MRBrewOutputParserErrorUnsupportedOperation usingPointer:error];
-        errorOccured = YES;
+        errorOccurred = YES;
     }
     
-    // return nil if an error occured, otherwise return the object array
-    return (errorOccured ? nil : objects);
+    // return nil if an error occurred, otherwise return the object array
+    return (errorOccurred ? nil : objects);
 }
 
 #pragma mark - Object Parsing (private)
@@ -217,7 +217,9 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
                 break;
         }
         
-        *errorPtr = [NSError errorWithDomain:MRBrewOutputParserErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil]];
+        *errorPtr = [NSError errorWithDomain:MRBrewOutputParserErrorDomain
+                                        code:errorCode
+                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil]];
     }
 }
 
