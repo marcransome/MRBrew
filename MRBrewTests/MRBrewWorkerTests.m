@@ -147,23 +147,6 @@
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
-- (void)testTaskIsNotStartedIfBrewWorkerIsCancelledBeforeStarting
-{
-    // setup
-    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
-    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[fakeTask expect] description];
-    [worker setTask:fakeTask];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-
-    // execute
-    [worker cancel];
-    [queue addOperation:worker];
-
-    // verify
-    [fakeTask verifyWithDealy:2.0];
-}
-
 - (void)testBrewWorkerWillExecuteAsynchronouslyForCurrentThread
 {
     // setup
