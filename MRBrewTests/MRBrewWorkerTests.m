@@ -158,17 +158,19 @@
     [[fakeTask expect] setEnvironment:environment];
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
-    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:@"" userInfo:nil]] launch];
+    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
 
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     [worker setTask:fakeTask];
     
     [[MRBrew sharedBrew] setEnvironment:environment];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
     // execute
-    [queue addOperations:@[worker] waitUntilFinished:YES];
+    [worker start];
+
+    // verify
+    [fakeTask verify];
+}
 
     // verify
     [fakeTask verify];
