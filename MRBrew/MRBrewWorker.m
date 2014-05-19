@@ -53,7 +53,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     
     [self changeExecutingState:YES];
     
-    // configure and launch a brew task instance
+    // configure the brew task instance
     [[self task] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
     [[self task] setArguments:_arguments];
     [[self task] setStandardOutput:[NSPipe pipe]];
@@ -66,7 +66,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     // register for task termination notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskExited:) name:NSTaskDidTerminateNotification object:[self task]];
 
-    // read handler for asynchronous brew output
+    // configure read handler for asynchronous brew output
     [[[[self task] standardOutput] fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -77,6 +77,11 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
         }
     }];
     
+    [self main];
+}
+
+- (void)main
+{
     @try {
         [[self task] launch];
     
@@ -93,6 +98,10 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     }
     @catch (NSException *exception) {
         NSLog(@"MRBrewWorker: An internal exception was raised (%@: %@)",[exception name], exception);
+        
+        // cleanup
+        [self changeExecutingState:NO];
+        [self changeFinishedState:YES];
     }
 }
 
