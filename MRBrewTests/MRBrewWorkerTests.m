@@ -172,6 +172,21 @@
     [fakeTask verify];
 }
 
+- (void)testTaskEnvironmentIsNotSetIfBrewEnvironmentIsNotSet
+{
+    // setup
+    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[fakeTask reject] setEnvironment:[OCMArg any]];
+    
+    // throw exception to avoid endless loop while spinning runloop for task termination notification
+    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    [worker setTask:fakeTask];
+    
+    // execute
+    [worker start];
+    
     // verify
     [fakeTask verify];
 }
