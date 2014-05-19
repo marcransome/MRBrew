@@ -49,6 +49,8 @@
     _delegateReceivedDidFailWithErrorCallback = NO;
     _delegateReceivedErrorCode = MRBrewErrorNone;
     _delegateReceivedOperation = nil;
+    
+    [[MRBrew sharedBrew] setEnvironment:nil];
 }
 
 - (void)tearDown
@@ -145,6 +147,31 @@
     XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task terminates after manual cancellation.");
     XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorOperationCancelled, @"Delegate should received correct error code when manually cancelled.");
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
+}
+
+- (void)testTaskEnvironmentIsSetIfBrewEnvironmentIsSet
+{
+    // setup
+    NSDictionary *environment = @{@"key": @"object"};
+    
+    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[fakeTask expect] setEnvironment:environment];
+    
+    // throw exception to avoid endless loop while spinning runloop for task termination notification
+    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:@"" userInfo:nil]] launch];
+
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    [worker setTask:fakeTask];
+    
+    [[MRBrew sharedBrew] setEnvironment:environment];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    // execute
+    [queue addOperations:@[worker] waitUntilFinished:YES];
+
+    // verify
+    [fakeTask verify];
 }
 
 - (void)testBrewWorkerWillExecuteAsynchronouslyForCurrentThread
