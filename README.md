@@ -132,11 +132,9 @@ If the `brew` executable has been moved outside of the default `/usr/local/bin/`
 This call only needs to be made once per project.
 
 ## Unit Tests
-Unit tests have been provided as part of the `MRBrewTests` target, and additional tests should be added where required.
+Unit tests have been provided as part of the `MRBrewTests` target, and additional tests should be added where required. [OCMock](http://ocmock.org) is required for running these unit tests and can be installed using the [CocoaPods](http://cocoapods.org) dependency manager.
 
-[OCMock](http://ocmock.org) is required for running unit tests and can be installed using the [CocoaPods](http://cocoapods.org) dependency manager.
-
-With CocoaPods installed, run the following command at the root of your cloned repository to install the dependency:
+With CocoaPods installed, run the following command from the root directory of your cloned repository to install the dependency:
 
     $ pod install
 
