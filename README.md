@@ -8,6 +8,9 @@ MRBrewOperation *operation = [MRBrewOperation installOperation:[MRBrewFormula fo
 
 Now you have a [powerful text editor](http://www.vim.org) installed. :beer:
 
+`MRBrew` uses Automatic Reference Counting and has been tested with OS X versions 10.7—10.9.
+
+
 ## Project integration
 MRBrew can be integrated into an existing project using [CocoaPods](http://cocoapods.org). Simply add the necessary dependency to your `Podfile` as follows:
 
@@ -133,9 +136,6 @@ If you plan to contribute to the MRBrew project, [fork the repository](https://h
 
 ## Documentation
 Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
-
-## Caveats
-The source code for `MRBrew` uses Automatic Reference Counting and has only been tested against 10.7—10.9 deployment targets.
 
 ## License
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
