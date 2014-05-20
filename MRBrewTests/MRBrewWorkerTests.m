@@ -149,6 +149,30 @@
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
+- (void)testTaskEnvironmentIsSetupCorrectly
+{
+    // setup
+    NSArray *arguments = @[@"arg1", @"arg2"];
+    MRBrewWorker *worker = [[MRBrewWorker alloc] init];
+    [worker setArguments:arguments];
+    
+    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[fakeTask expect] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
+    [[fakeTask expect] setArguments:arguments];
+    [[fakeTask expect] setStandardOutput:[OCMArg any]];
+    
+    [worker setTask:fakeTask];
+    
+    // throw exception to avoid endless loop while spinning runloop for task termination notification
+    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    
+    // execute
+    [worker start];
+    
+    // verify
+    [fakeTask verify];
+}
+
 - (void)testTaskEnvironmentIsSetIfBrewEnvironmentIsSet
 {
     // setup
