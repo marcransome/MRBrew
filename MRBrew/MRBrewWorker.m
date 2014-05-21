@@ -136,24 +136,11 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
 - (void)taskExited:(NSNotification *)notification
 {
-    if ([[self task] terminationStatus] == MRBrewWorkerTaskExitedNormally)
-    {
-        // delegate callback for operation completion
-        if ([_delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [_delegate brewOperationDidFinish:_operation];
-            }];
-        }
+    if ([[self task] terminationStatus] == MRBrewWorkerTaskExitedNormally) {
+        [self notifyDelegateOperationCompleted];
     }
     else {
-        // delegate callback for operation failure or cancellation
-        NSInteger errorCode = [[self task] terminationStatus] == MRBrewWorkerTaskCancelled ? MRBrewErrorOperationCancelled : MRBrewErrorUnknown;
-        NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
-        if ([_delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [_delegate brewOperation:_operation didFailWithError:error];
-            }];
-        }
+        [self notifyDelegateOperationFailed];
     }
 
     // stop reading and cleanup file handle's structures
@@ -162,6 +149,24 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
     // update operation state
     [self changeExecutingState:NO];
     [self changeFinishedState:YES];
+}
+
+- (void)notifyDelegateOperationFailed {
+    NSInteger errorCode = [[self task] terminationStatus] == MRBrewWorkerTaskCancelled ? MRBrewErrorOperationCancelled : MRBrewErrorUnknown;
+    NSError *error = [NSError errorWithDomain:MRBrewErrorDomain code:errorCode userInfo:nil];
+    if ([_delegate respondsToSelector:@selector(brewOperation:didFailWithError:)]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [_delegate brewOperation:_operation didFailWithError:error];
+        }];
+    }
+}
+
+- (void)notifyDelegateOperationCompleted {
+    if ([_delegate respondsToSelector:@selector(brewOperationDidFinish:)]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [_delegate brewOperationDidFinish:_operation];
+        }];
+    }
 }
 
 - (void)dealloc
