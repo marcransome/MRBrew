@@ -94,6 +94,9 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
                 [self setWaitingForTaskToExit:YES];
                 [[self task] interrupt];
             }
+
+            // TODO a task that never terminates as the result of being sent an
+            // -interrupt (SIGINT) will result in an infinite polling loop here
         }
     }
     @catch (NSException *exception) {
