@@ -149,7 +149,7 @@
     XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
-- (void)testWorkerReturnsFastIfCancelledLeavingTaskUntouched
+- (void)testWorkerReturnsFastWhenCancelledEarlyLeavingTaskUntouched
 {
     // setup
     id fakeTask = [OCMockObject mockForClass:[NSTask class]];
