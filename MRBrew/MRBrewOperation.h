@@ -27,7 +27,7 @@
 
 @class MRBrewFormula;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, MRBrewOperationType) {
     MRBrewOperationUpdate,
     MRBrewOperationList,
     MRBrewOperationSearch,
@@ -36,7 +36,7 @@ typedef enum {
     MRBrewOperationRemove,
     MRBrewOperationOptions,
     MRBrewOperationOutdated
-} MRBrewOperationType;
+};
 
 /** The `MRBrewOperation` class encapsulates the arguments associated with a
  single Homebrew operation.

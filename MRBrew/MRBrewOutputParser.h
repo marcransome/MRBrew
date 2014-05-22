@@ -27,12 +27,12 @@
 
 extern NSString * const MRBrewOutputParserErrorDomain;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, MRBrewOutputParserError) {
     MRBrewOutputParserErrorSyntax,
     MRBrewOutputParserErrorUnsupportedOperation,
     MRBrewOutputParserErrorEmptyOutputString,
     MRBrewOutputParserErrorNoFormulaForSearchResults
-} MRBrewOutputParserError;
+};
 
 @class MRBrewOperation;
 
