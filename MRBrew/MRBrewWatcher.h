@@ -26,14 +26,14 @@
 #import <Foundation/Foundation.h>
 #import "MRBrewWatcherDelegate.h"
 
-typedef enum {
+typedef NS_OPTIONS(NSInteger, MRBrewWatcherLocation) {
     MRBrewWatcherLibraryLocation    = 1 << 0,
     MRBrewWatcherFormulaLocation    = 1 << 1,
     MRBrewWatcherTapsLocation       = 1 << 2,
     MRBrewWatcherAliasesLocation    = 1 << 3,
     MRBrewWatcherLinkedKegsLocation = 1 << 4,
     MRBrewWatcherPinnedKegsLocation = 1 << 5
-} MRBrewWatcherLocation;
+};
 
 /** An `MRBrewWatcher` waits for a file system event (e.g. file modification,
  deletion or creation) to occur in one or more Homebrew directories and then
