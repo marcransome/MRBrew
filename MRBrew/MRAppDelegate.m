@@ -40,7 +40,7 @@
 
 - (void)brewOperation:(MRBrewOperation *)operation didFailWithError:(NSError *)error
 {
-    // Test the error code against the anonymous enums MRBrewErrorUnknown and MRBrewErrorCancelled and respond accordingly.
+    // Test the error code against the enum constants MRBrewErrorUnknown and MRBrewErrorCancelled and respond accordingly.
 }
 
 - (void)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(NSString *)output
