@@ -46,15 +46,13 @@ typedef NS_OPTIONS(NSInteger, MRBrewWatcherLocation) {
  directories for events, use the initWithLocation:delegate: or
  watcherWithLocation:delegate: methods and specify one of the
  MRBrewWatcherLocation constants as the location to watch for events:
- 
-    typedef enum {
-        MRBrewWatcherLibraryLocation    = 1 << 0,
-        MRBrewWatcherFormulaLocation    = 1 << 1,
-        MRBrewWatcherTapsLocation       = 1 << 2,
-        MRBrewWatcherAliasesLocation    = 1 << 3,
-        MRBrewWatcherLinkedKegsLocation = 1 << 4,
-        MRBrewWatcherPinnedKegsLocation = 1 << 5
-    } MRBrewWatcherLocation;
+
+   MRBrewWatcherLibraryLocation
+   MRBrewWatcherFormulaLocation
+   MRBrewWatcherTapsLocation
+   MRBrewWatcherAliasesLocation
+   MRBrewWatcherLinkedKegsLocation
+   MRBrewWatcherPinnedKegsLocation
  
  These constants represent the default Homebrew paths for the named locations,
  and can be combined using the C-Bitwise OR operator in order to watch multiple
