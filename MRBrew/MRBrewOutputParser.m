@@ -188,7 +188,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
 /* Sets the error pointer (if provided) to a newly instantiated error object
  * with a default error domain and the specified error code.
  */
-- (void)errorForErrorType:(MRBrewOutputParserError)type usingPointer:(NSError * __autoreleasing *)errorPtr
+- (BOOL)errorForErrorType:(MRBrewOutputParserError)type usingPointer:(NSError * __autoreleasing *)errorPtr
 {
     // instantiate an error object using the provided pointer, if one exists
     if (errorPtr) {
@@ -220,7 +220,11 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
         *errorPtr = [NSError errorWithDomain:MRBrewOutputParserErrorDomain
                                         code:errorCode
                                     userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil]];
+        
+        return YES;
     }
+    
+    return NO;
 }
 
 @end
