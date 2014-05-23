@@ -40,10 +40,6 @@
 
 static NSString * MRDefaultBrewPath = @"/usr/local/bin/brew";
 
-@interface MRBrew ()
-
-@end
-
 @implementation MRBrew
 
 @synthesize brewPath = _brewPath;
