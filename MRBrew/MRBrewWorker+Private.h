@@ -25,12 +25,20 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, MRBrewWorkerTaskTerminationMode) {
+    MRBrewWorkerTaskTerminationModeInterrupt,
+    MRBrewWorkerTaskTerminationModeTerminate,
+    MRBrewWorkerTaskTerminationModeKill
+};
+
 @interface MRBrewWorker ()
 
 @property (nonatomic, strong) NSTask *task;
-@property (assign) BOOL executing;
-@property (assign) BOOL finished;
-@property (assign) BOOL waitingForTaskToExit;
+@property (nonatomic, strong) NSDate *taskTerminationTime;
+@property (nonatomic, assign) BOOL executing;
+@property (nonatomic, assign) BOOL finished;
+@property (nonatomic, assign) BOOL waitingForTaskToExit;
+@property (nonatomic, assign) MRBrewWorkerTaskTerminationMode taskTerminationMode;
 
 - (void)changeFinishedState:(BOOL)finished;
 - (void)changeExecutingState:(BOOL)executing;

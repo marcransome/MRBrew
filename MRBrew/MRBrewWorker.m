@@ -32,6 +32,7 @@
 #import "MRBrewWorkerTaskConstants.h"
 
 static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
+static const NSTimeInterval MRBrewWorkerTaskTerminationTimeout = 5.0;
 
 @implementation MRBrewWorker
 
@@ -39,6 +40,7 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 {
     if (self = [super init]) {
         _task = [[NSTask alloc] init];
+        _taskTerminationMode = MRBrewWorkerTaskTerminationModeInterrupt;
     }
     
     return self;
@@ -84,24 +86,47 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 {
     @try {
         [[self task] launch];
-    
-        // spin run loop periodically while operation is alive to allow for delivery
-        // of task termination notification while testing for cancellation flag
-        while (!self.isFinished) {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-            
-            if ([self isCancelled] && ![self waitingForTaskToExit]) {
-                [self setWaitingForTaskToExit:YES];
-                [[self task] interrupt];
-            }
 
-            // TODO a task that never terminates as the result of being sent an
-            // -interrupt (SIGINT) will result in an infinite polling loop here
+        // polling loop for operation cancellation and task termination
+        while ([[self task] isRunning]) {
+
+            // spin run loop to allow for delivery of task termination notification
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+
+            // poll for cancellation status and skip to the next iteration of
+            // the loop unless we have received a cancellation message
+            if (![self isCancelled]) continue;
+
+            // a cancellation message was received so we attempt to terminate the task,
+            // starting with a SIGINT signal and then increasing the severity of the
+            // signal in subsequent attempts if the timeout period has been reached
+            static BOOL taskSentInitialInterrupt = NO;
+            if (!taskSentInitialInterrupt || [[self taskTerminationTime] timeIntervalSinceDate:[NSDate date]] >= MRBrewWorkerTaskTerminationTimeout) {
+                taskSentInitialInterrupt = YES;
+                [self setTaskTerminationTime:[NSDate date]];
+
+                // signal task termination using the current termination mode and increase
+                // the severity to the next level for subsequent attempts (SIGINT->SIGTERM->SIGKILL)
+                switch ([self taskTerminationMode]) {
+                    case MRBrewWorkerTaskTerminationModeInterrupt:
+                        [[self task] interrupt];
+                        [self setTaskTerminationMode:MRBrewWorkerTaskTerminationModeTerminate];
+                        break;
+                    case MRBrewWorkerTaskTerminationModeTerminate:
+                        [[self task] terminate];
+                        [self setTaskTerminationMode:MRBrewWorkerTaskTerminationModeKill];
+                        break;
+                    case MRBrewWorkerTaskTerminationModeKill:
+                        kill([[self task] processIdentifier], SIGKILL);
+                        break;
+                }
+            }
         }
     }
     @catch (NSException *exception) {
         NSLog(@"MRBrewWorker: An internal exception was raised (%@: %@)",[exception name], exception);
-        
+    }
+    @finally {
         // cleanup
         [self changeExecutingState:NO];
         [self changeFinishedState:YES];
@@ -148,10 +173,6 @@ static NSString * const MRBrewErrorDomain = @"uk.co.fidgetbox.MRBrew";
 
     // stop reading and cleanup file handle's structures
     [[[[self task] standardOutput] fileHandleForReading] setReadabilityHandler:nil];
-    
-    // update operation state
-    [self changeExecutingState:NO];
-    [self changeFinishedState:YES];
 }
 
 - (void)notifyDelegateOperationFailed {
