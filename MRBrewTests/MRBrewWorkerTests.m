@@ -159,9 +159,9 @@
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
     [[[mockTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
-    
-    // execute
 
+    // execute
+    [worker start];
     
     // verify
     [mockTask verify];
