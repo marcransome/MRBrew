@@ -64,14 +64,14 @@
     // setup
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     
-    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
-    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
-    [worker setOperation:fakeOperation];
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:operation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:operation];
     
-    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskExitedNormally)] terminationStatus];
-    [[[fakeTask stub] andReturn:nil] standardOutput];
-    [worker setTask:fakeTask];
+    id task = [OCMockObject mockForClass:[NSTask class]];
+    [[[task stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskExitedNormally)] terminationStatus];
+    [[[task stub] andReturn:nil] standardOutput];
+    [worker setTask:task];
     [worker setDelegate:self];
     
     NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -85,7 +85,7 @@
     
     // verify
     XCTAssertTrue(_delegateReceivedDidFinishCallback, @"Delegate should receive brewOperationDidFinish: callback when task termination status signals success.");
-    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
+    XCTAssertEqual(_delegateReceivedOperation, operation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
 - (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskTerminatesAbnormally
@@ -94,14 +94,14 @@
     int unknownExitStatus = 99;
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     
-    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
-    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
-    [worker setOperation:fakeOperation];
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:operation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:operation];
     
-    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(unknownExitStatus)] terminationStatus];
-    [[[fakeTask stub] andReturn:nil] standardOutput];
-    [worker setTask:fakeTask];
+    id task = [OCMockObject mockForClass:[NSTask class]];
+    [[[task stub] andReturnValue:OCMOCK_VALUE(unknownExitStatus)] terminationStatus];
+    [[[task stub] andReturn:nil] standardOutput];
+    [worker setTask:task];
     [worker setDelegate:self];
     
     NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -116,7 +116,7 @@
     // verify
     XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task terminates with unknown status code.");
     XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorUnknown, @"Delegate should received correct error code when task exits for unknown reason.");
-    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
+    XCTAssertEqual(_delegateReceivedOperation, operation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
 - (void)testDelegateReceivesFailedWithErrorCallbackWhenTaskIsCancelled
@@ -124,14 +124,14 @@
     // setup
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     
-    id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
-    [[[fakeOperation stub] andReturn:fakeOperation] copyWithZone:[OCMArg anyPointer]];
-    [worker setOperation:fakeOperation];
+    id operation = [OCMockObject mockForClass:[MRBrewOperation class]];
+    [[[operation stub] andReturn:operation] copyWithZone:[OCMArg anyPointer]];
+    [worker setOperation:operation];
     
-    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
-    [[[fakeTask stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskCancelled)] terminationStatus];
-    [[[fakeTask stub] andReturn:nil] standardOutput];
-    [worker setTask:fakeTask];
+    id task = [OCMockObject mockForClass:[NSTask class]];
+    [[[task stub] andReturnValue:OCMOCK_VALUE(MRBrewWorkerTaskCancelled)] terminationStatus];
+    [[[task stub] andReturn:nil] standardOutput];
+    [worker setTask:task];
     [worker setDelegate:self];
     
     NSDate *callbackTimeout = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -146,25 +146,25 @@
     // verify
     XCTAssertTrue(_delegateReceivedDidFailWithErrorCallback, @"Delegate should receive brewOperation:didFailWithError: callback when task terminates after manual cancellation.");
     XCTAssertTrue(_delegateReceivedErrorCode == MRBrewErrorOperationCancelled, @"Delegate should received correct error code when manually cancelled.");
-    XCTAssertEqual(_delegateReceivedOperation, fakeOperation, @"Delegate should receive reference to operation object held by worker instance.");
+    XCTAssertEqual(_delegateReceivedOperation, operation, @"Delegate should receive reference to operation object held by worker instance.");
 }
 
 - (void)testWorkerReturnsFastWhenCancelledEarlyLeavingTaskUntouched
 {
     // setup
-    id fakeTask = [OCMockObject mockForClass:[NSTask class]];
+    id mockTask = [OCMockObject mockForClass:[NSTask class]];
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
-    [worker setTask:fakeTask];
+    [worker setTask:mockTask];
     [worker cancel];
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
-    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    [[[mockTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
     
     // execute
-    [worker start];
+
     
     // verify
-    [fakeTask verify];
+    [mockTask verify];
 }
 
 - (void)testTaskEnvironmentIsSetupCorrectly
@@ -174,21 +174,21 @@
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
     [worker setArguments:arguments];
     
-    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
-    [[fakeTask expect] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
-    [[fakeTask expect] setArguments:arguments];
-    [[fakeTask expect] setStandardOutput:[OCMArg any]];
-    
-    [worker setTask:fakeTask];
+    id mockTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[mockTask expect] setLaunchPath:[[MRBrew sharedBrew] brewPath]];
+    [[mockTask expect] setArguments:arguments];
+    [[mockTask expect] setStandardOutput:[OCMArg any]];
+
+    [worker setTask:mockTask];
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
-    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    [[[mockTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
     
     // execute
     [worker start];
     
     // verify
-    [fakeTask verify];
+    [mockTask verify];
 }
 
 - (void)testTaskEnvironmentIsSetIfBrewEnvironmentIsSet
@@ -196,41 +196,44 @@
     // setup
     NSDictionary *environment = @{@"key": @"object"};
     
-    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
-    [[fakeTask expect] setEnvironment:environment];
+    id mockTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[mockTask expect] setEnvironment:environment];
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
-    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    [[[mockTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
 
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
-    [worker setTask:fakeTask];
+    [worker setTask:mockTask];
     
     [[MRBrew sharedBrew] setEnvironment:environment];
-    
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
     // execute
-    [worker start];
+    [queue addOperations:@[worker] waitUntilFinished:YES];
+    //[worker cancel];
 
     // verify
-    [fakeTask verify];
+    [mockTask verify];
 }
 
 - (void)testTaskEnvironmentIsNotSetIfBrewEnvironmentIsNotSet
 {
     // setup
-    id fakeTask = [OCMockObject niceMockForClass:[NSTask class]];
-    [[fakeTask reject] setEnvironment:[OCMArg any]];
+    id mockTask = [OCMockObject niceMockForClass:[NSTask class]];
+    [[mockTask reject] setEnvironment:[OCMArg any]];
     
     // throw exception to avoid endless loop while spinning runloop for task termination notification
-    [[[fakeTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
+    [[[mockTask stub] andThrow:[NSException exceptionWithName:NSInvalidArgumentException reason:nil userInfo:nil]] launch];
     
     MRBrewWorker *worker = [[MRBrewWorker alloc] init];
-    [worker setTask:fakeTask];
+    [worker setTask:mockTask];
     
     // execute
     [worker start];
     
     // verify
-    [fakeTask verify];
+    [mockTask verify];
 }
 
 - (void)testBrewWorkerWillExecuteAsynchronouslyForCurrentThread

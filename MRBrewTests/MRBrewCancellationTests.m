@@ -32,7 +32,7 @@
 #import "MRBrew+Private.h"
 
 @interface MRBrewCancellationTests : XCTestCase {
-    NSMutableArray *_fakeWorkers;
+    NSMutableArray *_mockWorkers;
     NSArray *_operationIdentifiers;
 }
 
@@ -56,72 +56,72 @@
 
 - (void)tearDown
 {
-   [_fakeWorkers removeAllObjects];
-   _fakeWorkers = nil;
+   [_mockWorkers removeAllObjects];
+   _mockWorkers = nil;
     
     [super tearDown];
 }
 
-- (void)createFakeWorkersWithSingleMatchingOperation:(NSString *)matchingIdentifier
+- (void)createMockWorkersWithSingleMatchingOperation:(NSString *)matchingIdentifier
 {
-    // create fake operation objects for each identifier
-    NSMutableArray *fakeOperations = [NSMutableArray array];
+    // create mock operation objects for each identifier
+    NSMutableArray *mockOperations = [NSMutableArray array];
     for (NSString *identifier in _operationIdentifiers) {
         
-        // the fake operation object whose -name property equals the matchingIdentifier
+        // the mock operation object whose -name property equals the matchingIdentifier
         // parameter should return YES to isEqualToOperation:, identifying itself as
         // the only object that should be cancelled, all other objects return NO
         BOOL returnValue = (identifier == matchingIdentifier);
         
-        id fakeOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
-        [[[fakeOperation stub] andReturn:identifier] name];
-        [[[fakeOperation stub] andReturnValue:OCMOCK_VALUE(returnValue)] isEqualToOperation:[OCMArg any]];
-        [fakeOperations addObject:fakeOperation];
+        id mockOperation = [OCMockObject mockForClass:[MRBrewOperation class]];
+        [[[mockOperation stub] andReturn:identifier] name];
+        [[[mockOperation stub] andReturnValue:OCMOCK_VALUE(returnValue)] isEqualToOperation:[OCMArg any]];
+        [mockOperations addObject:mockOperation];
     }
     
-    // create fake worker objects for each operation object
-    _fakeWorkers = [NSMutableArray array];
-    for (id operation in fakeOperations) {
-        id fakeWorker = [OCMockObject mockForClass:[MRBrewWorker class]];
-        [[[fakeWorker stub] andReturn:operation] operation];
+    // create mock worker objects for each operation object
+    _mockWorkers = [NSMutableArray array];
+    for (id operation in mockOperations) {
+        id mockWorker = [OCMockObject mockForClass:[MRBrewWorker class]];
+        [[[mockWorker stub] andReturn:operation] operation];
         
         // -cancel should only be called on the worker whose operation object
         // has a name property equal to the matchingIdentifier parameter -- this
         // is the operation we expect to be cancelled
-        if ([[fakeWorker operation] name] == matchingIdentifier) {
-            [[fakeWorker expect] cancel];
+        if ([[mockWorker operation] name] == matchingIdentifier) {
+            [[mockWorker expect] cancel];
         }
         
-        [_fakeWorkers addObject:fakeWorker];
+        [_mockWorkers addObject:mockWorker];
     }
 }
 
-// here we ensure that our helper method for creating fake worker objects does
+// here we ensure that our helper method for creating mock worker objects does
 // indeed create the correct number of objects, this is crucial as the for loop
 // in each remaining test will otherwise iterate 'nil' and cause the tests to pass
-- (void)testFakeWorkerCreation
+- (void)testmockWorkerCreation
 {
     // execute
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationInfoIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationInfoIdentifier];
     
     // verify
-    XCTAssertTrue([_fakeWorkers count] == [_operationIdentifiers count], @"The number of fake worker objects should equal the number of identifiers.");
+    XCTAssertTrue([_mockWorkers count] == [_operationIdentifiers count], @"The number of mock worker objects should equal the number of identifiers.");
 }
 
 - (void)testCancelAllOperationsOfTypeCancelsOnlyInfoOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationInfoIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationInfoIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationInfo];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -129,17 +129,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyListOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationListIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationListIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationList];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -147,17 +147,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyInstallOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationInstallIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationInstallIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationInstall];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -165,17 +165,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyOptionsOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationOptionsIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationOptionsIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationOptions];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -183,17 +183,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyOutdatedOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationOutdatedIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationOutdatedIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationOutdated];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -201,17 +201,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyRemoveOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationRemoveIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationRemoveIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationRemove];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -219,17 +219,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlySearchOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationSearchIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationSearchIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationSearch];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
@@ -237,17 +237,17 @@
 - (void)testCancelAllOperationsOfTypeCancelsOnlyUpdateOperations
 {
     // setup
-    [self createFakeWorkersWithSingleMatchingOperation:MRBrewOperationUpdateIdentifier];
+    [self createMockWorkersWithSingleMatchingOperation:MRBrewOperationUpdateIdentifier];
     id queue = [OCMockObject mockForClass:[NSOperationQueue class]];
-    [[[queue stub] andReturn:_fakeWorkers] operations];
-    [[[queue stub] andReturnValue:OCMOCK_VALUE([_fakeWorkers count])] operationCount];
+    [[[queue stub] andReturn:_mockWorkers] operations];
+    [[[queue stub] andReturnValue:OCMOCK_VALUE([_mockWorkers count])] operationCount];
     [[MRBrew sharedBrew] setBackgroundQueue:queue];
     
     // execute
     [[MRBrew sharedBrew] cancelAllOperationsOfType:MRBrewOperationUpdate];
     
     // verify
-    for (id worker in _fakeWorkers) {
+    for (id worker in _mockWorkers) {
         [worker verify];
     }
 }
