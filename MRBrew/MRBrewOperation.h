@@ -197,6 +197,11 @@ typedef NS_ENUM(NSInteger, MRBrewOperationType) {
 /** Returns an outdated operation. */
 + (instancetype)outdatedOperation;
 
+/**-----------------------------------------------------------------------------
+* @name Comparing Operations
+* -----------------------------------------------------------------------------
+*/
+
 /** Compares the receiver to another operation.
  *
  * @param operation The operation with which to compare the receiver.
