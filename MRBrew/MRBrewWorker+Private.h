@@ -37,7 +37,6 @@ typedef NS_ENUM(NSInteger, MRBrewWorkerTaskTerminationMode) {
 @property (nonatomic, strong) NSDate *taskTerminationTime;
 @property (nonatomic, assign) BOOL executing;
 @property (nonatomic, assign) BOOL finished;
-@property (nonatomic, assign) BOOL waitingForTaskToExit;
 @property (nonatomic, assign) MRBrewWorkerTaskTerminationMode taskTerminationMode;
 
 - (void)changeFinishedState:(BOOL)finished;
