@@ -142,7 +142,11 @@ With CocoaPods installed, run the following command from the root directory of y
 If you plan to contribute to the MRBrew project, [fork the repository](https://help.github.com/articles/fork-a-repo), make your code changes, then submit a pull request with a brief description of your feature or bug fix.  Test suites and unit tests are provided for the `MRBrewTests` target, and additional test methods should be added where necessary.
 
 ## Documentation
-Visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for additional documentation, or alternatively inspect the header files directly.
+If you're using [Dash](http://kapeli.com/dash) (and why wouldn't you be?) documentation can be installed directly from the `Downloads` section. Select `Cocoa Docsets` and perform a search for `mrbrew`:
+
+![Dash docset](http://www.fidgetbox.co.uk/github/mrbrew_docset.png)
+
+Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for access to the documentation online, or inspect the header files directly.
 
 ## License
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
