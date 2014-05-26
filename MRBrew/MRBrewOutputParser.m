@@ -139,7 +139,7 @@ NSString * const MRBrewOutputParserErrorDomain = @"uk.co.fidgetbox.MRBrew";
 }
 
 /* Parse output string that is expected to contain two lines of text for each
- * option defined by homebrew. The first line should begin with the string '--',
+ * option defined by Homebrew. The first line should begin with the string '--',
  * and the second should begin with a tab character. Returns nil if the string
  * parsing was unsuccessful, an empty array if the output string is empty, or an
  * array of one or more MRBrewFormula objects if parsing was successful.

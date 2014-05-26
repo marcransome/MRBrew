@@ -26,9 +26,21 @@
 #import <Cocoa/Cocoa.h>
 #import "MRBrewOperation.h"
 
+/** These constants indicate the type of error that resulted in an operation's
+ * failure.
+ */
 typedef NS_ENUM(NSInteger, MRBrewError) {
+    /** Indicates the absence of an error condition. Used exclusively for unit
+     * testing.
+     */
     MRBrewErrorNone,
+    /** Indicates that an unknown Homebrew error occurred when performing the
+     * operation.
+     */
     MRBrewErrorUnknown,
+    /** Indicates that the operation failed to complete due to a cancellation
+     * message.
+     */
     MRBrewErrorOperationCancelled
 };
 
@@ -79,7 +91,7 @@ typedef NS_ENUM(NSInteger, MRBrewError) {
 
 /** Returns the absolute path of the Homebrew executable.
  *
- * @return The homebrew executable path.
+ * @return The Homebrew executable path.
  */
 - (NSString *)brewPath;
 
