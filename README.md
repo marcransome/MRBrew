@@ -1,4 +1,4 @@
-## MRBrew [![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg)](https://travis-ci.org/marcransome/MRBrew)
+## ![Cheers](http://www.fidgetbox.co.uk/github/mrbrew.png) MRBrew [![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg)](https://travis-ci.org/marcransome/MRBrew)
 MRBrew is a simple Objective-C wrapper library for the [Homebrew](http://brew.sh) package manager.  It makes performing Homebrew operations from your apps a breeze:
 
 ```objc
@@ -154,6 +154,7 @@ Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for acces
 The following libraries were used in the making of `MRBrew`:
 
 * [OCMock](http://ocmock.org) by Mulle Kybernetik
+* [Beer](http://thenounproject.com/term/beer/24239/) icon by [Helen Tseng](http://thenounproject.com/chirp/) from The Noun Project.
 
 ## Contact
 Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or tweet [@marcransome](http://www.twitter.com/marcransome).
