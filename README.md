@@ -151,7 +151,7 @@ Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for acces
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
 
 ## Acknowledgements
-The following libraries were used in the making of `MRBrew`:
+The following libraries and resources were used in the making of `MRBrew`:
 
 * [OCMock](http://ocmock.org) by Mulle Kybernetik
 * [Beer](http://thenounproject.com/term/beer/24239/) icon by [Helen Tseng](http://thenounproject.com/chirp/) from The Noun Project
