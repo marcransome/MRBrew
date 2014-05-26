@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>MRBrew by Marc Ransome</title>
+    <title>MRBrew by marcransome</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -38,7 +38,9 @@
 <span class="p">[[</span><span class="n">MRBrew</span> <span class="n">sharedBrew</span><span class="p">]</span> <span class="n">performOperation</span><span class="o">:</span><span class="n">operation</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
 </pre></div>
 
-<p>Now you have a <a href="http://www.vim.org">powerful text editor</a> installed. <img class="emoji" title=":beer:" alt=":beer:" src="https://github.global.ssl.fastly.net/images/icons/emoji/beer.png" height="20" width="20" align="absmiddle"></p>
+<p>Now you have a <a href="http://www.vim.org">powerful text editor</a> installed. <img class="emoji" title=":beer:" alt=":beer:" src="https://assets-cdn.github.com/images/icons/emoji/beer.png" height="20" width="20" align="absmiddle"></p>
+
+<p><code>MRBrew</code> uses Automatic Reference Counting and has been tested with OS X versions 10.7—10.9.</p>
 
 <h2>
 <a name="project-integration" class="anchor" href="#project-integration"><span class="octicon octicon-link"></span></a>Project integration</h2>
@@ -166,6 +168,16 @@
 <p>This call only needs to be made once per project.</p>
 
 <h2>
+<a name="unit-tests" class="anchor" href="#unit-tests"><span class="octicon octicon-link"></span></a>Unit Tests</h2>
+
+<p>Unit tests have been provided as part of the <code>MRBrewTests</code> target, and additional tests should be added where required. <a href="http://ocmock.org">OCMock</a> is required for running these unit tests and can be installed using the <a href="http://cocoapods.org">CocoaPods</a> dependency manager.</p>
+
+<p>With CocoaPods installed, run the following command from the root directory of your cloned repository to install the dependency:</p>
+
+<pre><code>$ pod install
+</code></pre>
+
+<h2>
 <a name="contributions" class="anchor" href="#contributions"><span class="octicon octicon-link"></span></a>Contributions</h2>
 
 <p>If you plan to contribute to the MRBrew project, <a href="https://help.github.com/articles/fork-a-repo">fork the repository</a>, make your code changes, then submit a pull request with a brief description of your feature or bug fix.  Test suites and unit tests are provided for the <code>MRBrewTests</code> target, and additional test methods should be added where necessary.</p>
@@ -173,12 +185,11 @@
 <h2>
 <a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
-<p>Visit <a href="http://cocoadocs.org/docsets/MRBrew/">CocoaDocs</a> for additional documentation, or alternatively inspect the header files directly.</p>
+<p>If you're using <a href="http://kapeli.com/dash">Dash</a> (and why wouldn't you be?) documentation can be installed directly from the <code>Downloads</code> section. Select <code>Cocoa Docsets</code> and perform a search for <code>mrbrew</code>:</p>
 
-<h2>
-<a name="caveats" class="anchor" href="#caveats"><span class="octicon octicon-link"></span></a>Caveats</h2>
+<p><img src="http://www.fidgetbox.co.uk/github/mrbrew_docset.png" alt="Dash docset"></p>
 
-<p>The source code for <code>MRBrew</code> uses Automatic Reference Counting and has only been tested against 10.7—10.9 deployment targets.</p>
+<p>Alternatively, visit <a href="http://cocoadocs.org/docsets/MRBrew/">CocoaDocs</a> for access to the documentation online, or inspect the header files directly.</p>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
