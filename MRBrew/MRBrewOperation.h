@@ -27,14 +27,24 @@
 
 @class MRBrewFormula;
 
+/** The type of operation to use when creating `MRBrewOperation` objects.
+ */
 typedef NS_ENUM(NSInteger, MRBrewOperationType) {
+    /** An `update` operation. */
     MRBrewOperationUpdate,
+    /** A `list` operation. */
     MRBrewOperationList,
+    /** A `search` operation. */
     MRBrewOperationSearch,
+    /** An `install` operation. */
     MRBrewOperationInstall,
+    /** An `info` operation. */
     MRBrewOperationInfo,
+    /** A `remove` operation. */
     MRBrewOperationRemove,
+    /** An `options` operation. */
     MRBrewOperationOptions,
+    /** An `outdated` operation. */
     MRBrewOperationOutdated
 };
 
