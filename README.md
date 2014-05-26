@@ -154,7 +154,7 @@ Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for acces
 The following libraries were used in the making of `MRBrew`:
 
 * [OCMock](http://ocmock.org) by Mulle Kybernetik
-* [Beer](http://thenounproject.com/term/beer/24239/) icon by [Helen Tseng](http://thenounproject.com/chirp/) from The Noun Project.
+* [Beer](http://thenounproject.com/term/beer/24239/) icon by [Helen Tseng](http://thenounproject.com/chirp/) from The Noun Project
 
 ## Contact
 Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or tweet [@marcransome](http://www.twitter.com/marcransome).
