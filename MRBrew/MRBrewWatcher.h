@@ -26,12 +26,19 @@
 #import <Foundation/Foundation.h>
 #import "MRBrewWatcherDelegate.h"
 
+/** These constants indicate the location to watch for events. */
 typedef NS_OPTIONS(NSInteger, MRBrewWatcherLocation) {
+    /** The Homebrew `Library` path */
     MRBrewWatcherLibraryLocation    = 1 << 0,
+    /** The Homebrew `Formula` path */
     MRBrewWatcherFormulaLocation    = 1 << 1,
+    /** The Homebrew `Taps` path */
     MRBrewWatcherTapsLocation       = 1 << 2,
+    /** The Homebrew `Aliases` path */
     MRBrewWatcherAliasesLocation    = 1 << 3,
+    /** The Homebrew `LinkedKegs` path */
     MRBrewWatcherLinkedKegsLocation = 1 << 4,
+    /** The Homebrew `PinnedKegs` path */
     MRBrewWatcherPinnedKegsLocation = 1 << 5
 };
 
