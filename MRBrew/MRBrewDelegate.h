@@ -38,15 +38,7 @@
  
  The brewOperation:didFailWithError: method is called at most once, if an error
  occurs performing an operation. The NSError object's `code` will correspond
- to a constant declared in MRBrewError.h:
- 
-   MRBrewErrorUnknown
-   MRBrewErrorCancelled
-
- `MRBrewErrorUnknown` - An unknown Homebrew error occurred for which no details
- were provided.
-
- `MRBrewErrorCancelled` - The operation was cancelled.
+ to one of the `MRBrewError` constants.
  
  In all three methods, the MRBrewOperation object's `name` property can be
  compared to the constants defined in MRBrewConstants.h to determine the type
