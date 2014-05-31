@@ -1,2 +1,2 @@
 #!/bin/bash
-appledoc --project-name MRBrew --project-company "Fidgetbox" --company-id uk.co.fidgetbox --no-repeat-first-par --ignore MRAppDelegate.m --ignore MRBrewTests --ignore MRBrew+Private.h --ignore MRBrewWorker+Private.h --output doc-output .
+appledoc --project-name MRBrew --project-company "Fidgetbox" --company-id uk.co.fidgetbox --no-repeat-first-par --ignore MRAppDelegate.m --ignore MRBrewTests --ignore MRBrew+Private.h --ignore MRBrewWorker+Private.h --ignore .m --output doc-output .
