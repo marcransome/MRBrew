@@ -66,7 +66,7 @@
     [super tearDown];
 }
 
-#pragma mark - List Output Parsing Tests
+#pragma mark - Valid List Output Parsing
 
 - (void)testParsedObjectArrayForListOperationIsNotNil
 {
@@ -121,7 +121,7 @@
     XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
 }
 
-#pragma mark - Search Output Parsing Tests
+#pragma mark - Valid Search Output Parsing
 
 - (void)testParsedObjectArrayForSearchOperationIsNotNil
 {
@@ -176,7 +176,7 @@
     XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
 }
 
-#pragma mark - Options Output Parsing Tests
+#pragma mark - Valid Options Output Parsing
 
 - (void)testParsedObjectArrayForOptionsOperationIsNotNil
 {
@@ -231,7 +231,7 @@
     XCTAssertNil(error, @"An error object should not be returned when a valid output string is provided.");
 }
 
-#pragma mark - Error Tests
+#pragma mark Unsupported Operation Parsing
 
 - (void)testErrorIsInstantiatedForUnsupportedOperation
 {
