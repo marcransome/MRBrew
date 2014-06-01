@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, MRBrewOutputParserError) {
     MRBrewOutputParserErrorUnsupportedOperation,
     /** The output string provided was empty. */
     MRBrewOutputParserErrorEmptyOutputString,
-    /** The output string for the search operation yieled no parsable output. */
+    /** The output string for the search operation yieled no parsable objects. */
     MRBrewOutputParserErrorNoFormulaForSearchResults
 };
 
@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger, MRBrewOutputParserError) {
  * `nil`.
  * @return An array of objects parsed from an operation's output. Returns `nil`
  * if the operation type is unsupported or the string could not be parsed
- * (i.e. the output string is empty or no yieled no objects). For operations
+ * (i.e. the output string is empty or yieled no objects). For operations
  * whose `name` property is equal to one of the constants
  * `MRBrewOperationListIdentifier` or `MRBrewOperationSearchIdentifier`,
  * the returned array will contain one or more `MRBrewFormula` objects.
