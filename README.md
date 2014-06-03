@@ -1,4 +1,4 @@
-# <img src="http://www.fidgetbox.co.uk/github/mrbrew_beer.png" width="36" height="37"> MRBrew
+# <img src="https://www.fidgetbox.co.uk/github/mrbrew_beer.png" width="36" height="37"> MRBrew
 
 [![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg?style=flat)](https://travis-ci.org/marcransome/MRBrew) [![Version](https://img.shields.io/cocoapods/v/MRBrew.svg?style=flat)](http://cocoadocs.org/docsets/MRBrew) [![Platform](https://img.shields.io/cocoapods/p/MRBrew.svg?style=flat)](http://cocoadocs.org/docsets/MRBrew)
 
@@ -146,7 +146,7 @@ If you plan to contribute to the MRBrew project, [fork the repository](https://h
 ## Documentation
 If you're using [Dash](http://kapeli.com/dash) (and why wouldn't you be?) documentation can be installed directly from the `Downloads` section. Select `Cocoa Docsets` and perform a search for `mrbrew`:
 
-![Dash docset](http://www.fidgetbox.co.uk/github/mrbrew_docset.png)
+![Dash docset](https://www.fidgetbox.co.uk/github/mrbrew_docset.png)
 
 Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for access to the documentation online, or inspect the header files directly.
 
