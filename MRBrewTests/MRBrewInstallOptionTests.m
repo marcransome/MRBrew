@@ -51,7 +51,7 @@
     
     // verify
     XCTAssertNil([installOption name], @"Install option 'name' property should equal nil.");
-    XCTAssertNil([installOption description], @"Install option 'description' property should equal nil.");
+    XCTAssertNil([installOption optionDescription], @"Install option 'optionDescription' property should equal nil.");
     XCTAssertTrue([installOption selected] == NO, @"Formula 'installed' property should equal NO.");
 }
 
