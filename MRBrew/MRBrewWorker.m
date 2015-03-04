@@ -36,6 +36,9 @@ static const NSTimeInterval MRBrewWorkerTaskTerminationTimeout = 5.0;
 
 @implementation MRBrewWorker
 
+@synthesize executing = _executing;
+@synthesize finished = _finished;
+
 - (instancetype)init
 {
     if (self = [super init]) {
@@ -133,32 +136,32 @@ static const NSTimeInterval MRBrewWorkerTaskTerminationTimeout = 5.0;
     }
 }
 
-- (BOOL)isConcurrent
+- (BOOL)isAsynchronous
 {
     return YES;
 }
 
 - (BOOL)isExecuting
 {
-    return [self executing];
+    return _executing;
 }
 
 - (BOOL)isFinished
 {
-    return [self finished];
+    return _finished;
 }
 
 - (void)changeFinishedState:(BOOL)finished
 {
     [self willChangeValueForKey:@"isFinished"];
-    [self setFinished:finished];
+    _finished = finished;
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)changeExecutingState:(BOOL)executing
 {
     [self willChangeValueForKey:@"isExecuting"];
-    [self setExecuting:executing];
+    _executing = executing;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
