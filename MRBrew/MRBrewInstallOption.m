@@ -33,7 +33,7 @@
 {
     if (self = [super init]) {
         _name = [name copy];
-        _description = [description copy];
+        _optionDescription = [description copy];
         _selected = selected;
     }
     

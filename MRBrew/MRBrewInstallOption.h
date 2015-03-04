@@ -33,8 +33,8 @@
 /** The install option string, as passed to Homebrew (e.g. `--use-clang`). */
 @property (copy) NSString *name;
 
-/** The install option description. */
-@property (copy) NSString *description;
+/** A description of the install option. */
+@property (copy) NSString *optionDescription;
 
 /** A boolean value representing whether the install option is selected. */
 @property (assign) BOOL selected;
