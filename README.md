@@ -11,7 +11,7 @@ MRBrewOperation *operation = [MRBrewOperation installOperation:[MRBrewFormula fo
 
 Now you have a [powerful text editor](http://www.vim.org) installed. :beer:
 
-`MRBrew` uses Automatic Reference Counting and has been tested with OS X versions 10.7—10.9.
+`MRBrew` uses Automatic Reference Counting and has been tested with OS X versions 10.7—10.10.
 
 ## Project integration
 MRBrew can be integrated into an existing project using [CocoaPods](http://cocoapods.org). Simply add the necessary dependency to your `Podfile` as follows:
