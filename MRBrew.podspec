@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "MRBrew"
-  s.version       = "6.3.0"
+  s.version       = "7.0.0"
   s.summary       = "An Objective-C wrapper library for the Homebrew package manager."
   s.homepage      = "https://github.com/marcransome/MRBrew"
   s.license       = { :type => 'MIT', :file => 'LICENSE' }
