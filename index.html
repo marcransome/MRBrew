@@ -36,7 +36,8 @@
 
 <p>MRBrew is a simple Objective-C wrapper library for the <a href="http://brew.sh">Homebrew</a> package manager.  It makes performing Homebrew operations from your apps a breeze:</p>
 
-<div class="highlight highlight-objc"><pre>MRBrewOperation *operation = [MRBrewOperation <span class="pl-s3">installOperation:</span>[MRBrewFormula <span class="pl-s3">formulaWithName:</span><span class="pl-s1"><span class="pl-pds">@"</span>vim<span class="pl-pds">"</span></span>]];
+<div class="highlight highlight-objc"><pre>MRBrewFormula *formula = [MRBrewFormula <span class="pl-s3">formulaWithName:</span><span class="pl-s1"><span class="pl-pds">@"</span>vim<span class="pl-pds">"</span></span>];
+MRBrewOperation *operation = [MRBrewOperation <span class="pl-s3">installOperation:</span>formula];
 [[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">performOperation:</span>operation <span class="pl-s3">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
 
 <p>Now you have a <a href="http://www.vim.org">powerful text editor</a> installed. <img class="emoji" title=":beer:" alt=":beer:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png" height="20" width="20" align="absmiddle"></p>
