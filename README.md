@@ -5,7 +5,8 @@
 MRBrew is a simple Objective-C wrapper library for the [Homebrew](http://brew.sh) package manager.  It makes performing Homebrew operations from your apps a breeze:
 
 ```objc
-MRBrewOperation *operation = [MRBrewOperation installOperation:[MRBrewFormula formulaWithName:@"vim"]];
+MRBrewFormula *formula = [MRBrewFormula formulaWithName:@"vim"];
+MRBrewOperation *operation = [MRBrewOperation installOperation:formula];
 [[MRBrew sharedBrew] performOperation:operation delegate:nil];
 ```
 
