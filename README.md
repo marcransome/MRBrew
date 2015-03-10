@@ -147,7 +147,7 @@ If you plan to contribute to the MRBrew project, [fork the repository](https://h
 ## Documentation
 If you're using [Dash](http://kapeli.com/dash) (and why wouldn't you be?) documentation can be installed directly from the `Downloads` section. Select `Cocoa Docsets` and perform a search for `mrbrew`:
 
-<img src="https://www.fidgetbox.co.uk/github/mrbrew_docset.png" alt="Dash docset" width="820">
+<img src="https://www.fidgetbox.co.uk/github/mrbrew_docs.png" alt="Dash docset" width="820">
 
 Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for access to the documentation online, or inspect the header files directly.
 
