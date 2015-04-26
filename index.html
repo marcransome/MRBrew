@@ -1,34 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>MRBrew by marcransome</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>MRBrew</h1>
-        <p>An Objective-C wrapper library for the Homebrew package manager.</p>
+    <section class="page-header">
+      <h1 class="project-name">MRBrew</h1>
+      <h2 class="project-tagline">An Objective-C wrapper library for the Homebrew package manager.</h2>
+      <a href="https://github.com/marcransome/MRBrew" class="btn">View on GitHub</a>
+      <a href="https://github.com/marcransome/MRBrew/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/marcransome/MRBrew/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <p class="view"><a href="https://github.com/marcransome/MRBrew">View the Project on GitHub <small>marcransome/MRBrew</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/marcransome/MRBrew/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/marcransome/MRBrew/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/marcransome/MRBrew">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="-mrbrew" class="anchor" href="#-mrbrew" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <img src="https://www.fidgetbox.co.uk/github/mrbrew_beer.png" width="36" height="37"> MRBrew</h1>
 
@@ -36,9 +27,9 @@
 
 <p>MRBrew is a simple Objective-C wrapper library for the <a href="http://brew.sh">Homebrew</a> package manager.  It makes performing Homebrew operations from your apps a breeze:</p>
 
-<div class="highlight highlight-objc"><pre>MRBrewFormula *formula = [MRBrewFormula <span class="pl-s3">formulaWithName:</span><span class="pl-s1"><span class="pl-pds">@"</span>vim<span class="pl-pds">"</span></span>];
-MRBrewOperation *operation = [MRBrewOperation <span class="pl-s3">installOperation:</span>formula];
-[[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">performOperation:</span>operation <span class="pl-s3">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
+<div class="highlight highlight-objc"><pre>MRBrewFormula *formula = [MRBrewFormula <span class="pl-c1">formulaWithName:</span><span class="pl-s"><span class="pl-pds">@"</span>vim<span class="pl-pds">"</span></span>];
+MRBrewOperation *operation = [MRBrewOperation <span class="pl-c1">installOperation:</span>formula];
+[[MRBrew <span class="pl-c1">sharedBrew</span>] <span class="pl-c1">performOperation:</span>operation <span class="pl-c1">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
 
 <p>Now you have a <a href="http://www.vim.org">powerful text editor</a> installed. <img class="emoji" title=":beer:" alt=":beer:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png" height="20" width="20" align="absmiddle"></p>
 
@@ -49,8 +40,8 @@ MRBrewOperation *operation = [MRBrewOperation <span class="pl-s3">installOperati
 
 <p>MRBrew can be integrated into an existing project using <a href="http://cocoapods.org">CocoaPods</a>. Simply add the necessary dependency to your <code>Podfile</code> as follows:</p>
 
-<div class="highlight highlight-ruby"><pre>platform <span class="pl-c1">:osx</span>, <span class="pl-s1"><span class="pl-pds">'</span>10.7<span class="pl-pds">'</span></span>
-pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">'</span></span>
+<div class="highlight highlight-ruby"><pre>platform <span class="pl-c1">:osx</span>, <span class="pl-s"><span class="pl-pds">'</span>10.7<span class="pl-pds">'</span></span>
+pod <span class="pl-s"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">'</span></span>
 ...</pre></div>
 
 <p>Then install the dependency into your project:</p>
@@ -72,22 +63,22 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>The <code>MRBrewOperation</code> class provides a number of convenience methods for creating objects that represent common Homebrew operations:</p>
 
-<div class="highlight highlight-objc"><pre>+ (<span class="pl-st">instancetype</span>)updateOperation;
-+ (<span class="pl-st">instancetype</span>)listOperation;
-+ (<span class="pl-st">instancetype</span>)searchOperation:(MRBrewFormula *)formula;
-+ (<span class="pl-st">instancetype</span>)installOperation:(MRBrewFormula *)formula;
-+ (<span class="pl-st">instancetype</span>)infoOperation:(MRBrewFormula *)formula;
-+ (<span class="pl-st">instancetype</span>)removeOperation:(MRBrewFormula *)formula;
-+ (<span class="pl-st">instancetype</span>)optionsOperation:(MRBrewFormula *)formula;</pre></div>
+<div class="highlight highlight-objc"><pre>+ (<span class="pl-k">instancetype</span>)updateOperation;
++ (<span class="pl-k">instancetype</span>)listOperation;
++ (<span class="pl-k">instancetype</span>)searchOperation:(MRBrewFormula *)formula;
++ (<span class="pl-k">instancetype</span>)installOperation:(MRBrewFormula *)formula;
++ (<span class="pl-k">instancetype</span>)infoOperation:(MRBrewFormula *)formula;
++ (<span class="pl-k">instancetype</span>)removeOperation:(MRBrewFormula *)formula;
++ (<span class="pl-k">instancetype</span>)optionsOperation:(MRBrewFormula *)formula;</pre></div>
 
 <p>For example, the following code would perform a Homebrew <code>update</code> operation:</p>
 
-<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">performOperation:</span>[MRBrewOperation <span class="pl-s3">updateOperation</span>] <span class="pl-s3">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
+<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-c1">sharedBrew</span>] <span class="pl-c1">performOperation:</span>[MRBrewOperation <span class="pl-c1">updateOperation</span>] <span class="pl-c1">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
 
 <p>Operations that require a formula to be specified should be passed an <code>MRBrewFormula</code> object, which is just as easy to create. For example:</p>
 
-<div class="highlight highlight-objc"><pre>MRBrewOperation *operation = [MRBrewOperation <span class="pl-s3">installOperation:</span>[MRBrewFormula <span class="pl-s3">formulaWithName:</span><span class="pl-s1"><span class="pl-pds">@"</span>appledoc<span class="pl-pds">"</span></span>]];
-[[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">performOperation:</span>operation <span class="pl-s3">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
+<div class="highlight highlight-objc"><pre>MRBrewOperation *operation = [MRBrewOperation <span class="pl-c1">installOperation:</span>[MRBrewFormula <span class="pl-c1">formulaWithName:</span><span class="pl-s"><span class="pl-pds">@"</span>appledoc<span class="pl-pds">"</span></span>]];
+[[MRBrew <span class="pl-c1">sharedBrew</span>] <span class="pl-c1">performOperation:</span>operation <span class="pl-c1">delegate:</span><span class="pl-c1">nil</span>];</pre></div>
 
 <p>Each call to <code>performOperation:delegate:</code> spawns a subprocess in a separate thread that won't interrupt processing in the rest of your app.  Multiple operations can be performed by making repeated calls to <code>performOperation:delegate:</code>.  Operations are placed into a queue and executed concurrently. If you would prefer operations to execute in series, just call <code>[MRBrew setConcurrentOperations:NO]</code>.</p>
 
@@ -98,9 +89,9 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>The convenience methods provided by <code>MRBrewOperation</code> cover only a small subset of the actual operations supported by Homebrew.  To perform an operation that does not already have an associated convenience method defined, use the following <code>MRBrewOperation</code> class method when creating your operation object:</p>
 
-<div class="highlight highlight-objc"><pre>+ (<span class="pl-st">instancetype</span>)operationWithName:(<span class="pl-s3">NSString</span> *)name
+<div class="highlight highlight-objc"><pre>+ (<span class="pl-k">instancetype</span>)operationWithName:(<span class="pl-c1">NSString</span> *)name
                           formula:(MRBrewFormula *)formula
-                       parameters:(<span class="pl-s3">NSArray</span> *)parameters;</pre></div>
+                       parameters:(<span class="pl-c1">NSArray</span> *)parameters;</pre></div>
 
 <p>Specify the operation name exactly as defined by Homebrew (e.g. <code>@"upgrade"</code>). Both <code>formula</code> and <code>parameters</code> may be optional depending upon the operation being performed (see <em>man brew</em> for more details).</p>
 
@@ -109,22 +100,22 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>You'll probably want to be notified when an operation has finished, failed, or generated output.  This can be achieved using the delegate pattern by implementing the <code>MRBrewDelegate</code> protocol in your controller and specifying the following optional methods:</p>
 
-<div class="highlight highlight-objc"><pre>- (<span class="pl-st">void</span>)brewOperationDidFinish:(MRBrewOperation *)operation;
-- (<span class="pl-st">void</span>)brewOperation:(MRBrewOperation *)operation didFailWithError:(<span class="pl-s3">NSError</span> *)error;
-- (<span class="pl-st">void</span>)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(<span class="pl-s3">NSString</span> *)output;</pre></div>
+<div class="highlight highlight-objc"><pre>- (<span class="pl-k">void</span>)brewOperationDidFinish:(MRBrewOperation *)operation;
+- (<span class="pl-k">void</span>)brewOperation:(MRBrewOperation *)operation didFailWithError:(<span class="pl-c1">NSError</span> *)error;
+- (<span class="pl-k">void</span>)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(<span class="pl-c1">NSString</span> *)output;</pre></div>
 
 <p>Now, whenever you perform an operation with <code>performOperation:delegate:</code>, specify your controller object as the delegate in order to receive callbacks when an operation has finished, failed, or generated output:</p>
 
-<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">performOperation:</span>[MRBrewOperation <span class="pl-s3">updateOperation</span>] <span class="pl-s3">delegate:</span>controller];</pre></div>
+<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-c1">sharedBrew</span>] <span class="pl-c1">performOperation:</span>[MRBrewOperation <span class="pl-c1">updateOperation</span>] <span class="pl-c1">delegate:</span>controller];</pre></div>
 
 <p>If you expect your controller to manage (and therefore receive callbacks for) multiple types of operation, you should inspect the <code>MRBrewOperation</code> object in your delegate methods to determine how to respond to particular types of operation:</p>
 
-<div class="highlight highlight-objc"><pre>- (<span class="pl-st">void</span>)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(<span class="pl-s3">NSString</span> *)output
+<div class="highlight highlight-objc"><pre>- (<span class="pl-k">void</span>)brewOperation:(MRBrewOperation *)operation didGenerateOutput:(<span class="pl-c1">NSString</span> *)output
 {
-    <span class="pl-k">if</span> ([[operation <span class="pl-s3">name</span>] <span class="pl-s3">isEqualToString:</span>MRBrewOperationUpdateIdentifier]) {
+    <span class="pl-k">if</span> ([[operation <span class="pl-c1">name</span>] <span class="pl-c1">isEqualToString:</span>MRBrewOperationUpdateIdentifier]) {
         <span class="pl-c">// an update operation produced output</span>
     }
-    <span class="pl-k">else</span> <span class="pl-k">if</span> ([[operation <span class="pl-s3">name</span>] <span class="pl-s3">isEqualToString:</span>MRBrewOperationInstallIdentifier]) {
+    <span class="pl-k">else</span> <span class="pl-k">if</span> ([[operation <span class="pl-c1">name</span>] <span class="pl-c1">isEqualToString:</span>MRBrewOperationInstallIdentifier]) {
         <span class="pl-c">// an install operation produced output</span>
     }
     ...
@@ -134,7 +125,7 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>If you are responding to a custom operation that does not already have a constant defined, simply provide your own, or use a string literal:</p>
 
-<div class="highlight highlight-objc"><pre><span class="pl-k">if</span> ([[operation <span class="pl-s3">name</span>] <span class="pl-s3">isEqualToString:</span><span class="pl-s1"><span class="pl-pds">@"</span>audit<span class="pl-pds">"</span></span>]) {
+<div class="highlight highlight-objc"><pre><span class="pl-k">if</span> ([[operation <span class="pl-c1">name</span>] <span class="pl-c1">isEqualToString:</span><span class="pl-s"><span class="pl-pds">@"</span>audit<span class="pl-pds">"</span></span>]) {
     <span class="pl-c">// an audit operation produced output</span>
 }</pre></div>
 
@@ -145,16 +136,16 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>Operations can be cancelled using one of the following <code>MRBrew</code> instance methods (remember to obtain a a reference to the shared <code>MRBrew</code> instance using the <code>+sharedBrew</code> class method first):</p>
 
-<div class="highlight highlight-objc"><pre>- (<span class="pl-st">void</span>)cancelAllOperations;
-- (<span class="pl-st">void</span>)cancelOperation:(MRBrewOperation *)operation;
-- (<span class="pl-st">void</span>)cancelAllOperationsOfType:(MRBrewOperationType)type;</pre></div>
+<div class="highlight highlight-objc"><pre>- (<span class="pl-k">void</span>)cancelAllOperations;
+- (<span class="pl-k">void</span>)cancelOperation:(MRBrewOperation *)operation;
+- (<span class="pl-k">void</span>)cancelAllOperationsOfType:(MRBrewOperationType)type;</pre></div>
 
 <h4>
 <a id="miscellaneous" class="anchor" href="#miscellaneous" aria-hidden="true"><span class="octicon octicon-link"></span></a>Miscellaneous</h4>
 
 <p>If the <code>brew</code> executable has been moved outside of the default <code>/usr/local/bin/</code> directory (generally not advisable), specify its location before performing any operations:</p>
 
-<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-s3">sharedBrew</span>] <span class="pl-s3">setBrewPath:</span><span class="pl-s1"><span class="pl-pds">@"</span>/usr/bin/brew<span class="pl-pds">"</span></span>];</pre></div>
+<div class="highlight highlight-objc"><pre>[[MRBrew <span class="pl-c1">sharedBrew</span>] <span class="pl-c1">setBrewPath:</span><span class="pl-s"><span class="pl-pds">@"</span>/usr/bin/brew<span class="pl-pds">"</span></span>];</pre></div>
 
 <p>This call only needs to be made once per project.</p>
 
@@ -178,7 +169,7 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
 <p>If you're using <a href="http://kapeli.com/dash">Dash</a> (and why wouldn't you be?) documentation can be installed directly from the <code>Downloads</code> section. Select <code>Cocoa Docsets</code> and perform a search for <code>mrbrew</code>:</p>
 
-<p><img src="https://www.fidgetbox.co.uk/github/mrbrew_docset.png" alt="Dash docset" width="820"></p>
+<p><img src="https://www.fidgetbox.co.uk/github/mrbrew_docs.png" alt="Dash docset" width="820"></p>
 
 <p>Alternatively, visit <a href="http://cocoadocs.org/docsets/MRBrew/">CocoaDocs</a> for access to the documentation online, or inspect the header files directly.</p>
 
@@ -203,14 +194,16 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 <a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>Email me at <a href="mailto:marc.ransome@fidgetbox.co.uk">marc.ransome@fidgetbox.co.uk</a> or tweet <a href="http://www.twitter.com/marcransome">@marcransome</a>.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/marcransome">marcransome</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/marcransome/MRBrew">MRBrew</a> is maintained by <a href="https://github.com/marcransome">marcransome</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
+
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -223,3 +216,4 @@ pod <span class="pl-s1"><span class="pl-pds">'</span>MRBrew<span class="pl-pds">
 
   </body>
 </html>
+
