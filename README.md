@@ -1,6 +1,6 @@
 # 🍺 MRBrew
 
-[![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg?style=flat)](https://travis-ci.org/marcransome/MRBrew) [![Version](https://img.shields.io/cocoapods/v/MRBrew.svg?style=flat)](http://cocoadocs.org/docsets/MRBrew) [![Platform](https://img.shields.io/cocoapods/p/MRBrew.svg?style=flat)](http://cocoadocs.org/docsets/MRBrew)
+[![Build Status](http://img.shields.io/travis/marcransome/MRBrew.svg?style=flat)](https://travis-ci.org/marcransome/MRBrew)
 
 MRBrew is a simple Objective-C wrapper library for the [Homebrew](http://brew.sh) package manager.  It makes performing Homebrew operations from your apps a breeze:
 
@@ -144,13 +144,6 @@ With CocoaPods installed, run the following command from the root directory of y
 ## Contributions
 If you plan to contribute to the MRBrew project, [fork the repository](https://help.github.com/articles/fork-a-repo), make your code changes, then submit a pull request with a brief description of your feature or bug fix.  Test suites and unit tests are provided for the `MRBrewTests` target, and additional test methods should be added where necessary.
 
-## Documentation
-If you're using [Dash](http://kapeli.com/dash) (and why wouldn't you be?) documentation can be installed directly from the `Downloads` section. Select `Cocoa Docsets` and perform a search for `mrbrew`:
-
-<img src="https://www.fidgetbox.co.uk/github/mrbrew_docs.png" alt="Dash docset" width="820">
-
-Alternatively, visit [CocoaDocs](http://cocoadocs.org/docsets/MRBrew/) for access to the documentation online, or inspect the header files directly.
-
 ## License
 `MRBrew` is provided under the terms of the [MIT License](http://opensource.org/licenses/mit-license.php).
 
@@ -161,4 +154,4 @@ The following libraries and resources were used in the making of `MRBrew`:
 * [Beer](http://thenounproject.com/term/beer/24239/) icon by [Helen Tseng](http://thenounproject.com/chirp/) from The Noun Project
 
 ## Contact
-Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or tweet [@marcransome](http://www.twitter.com/marcransome).
+Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or [create an issue](https://github.com/marcransome/MRBrew/issues).
